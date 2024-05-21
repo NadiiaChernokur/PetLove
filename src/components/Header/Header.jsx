@@ -1,29 +1,29 @@
 import {
+  ButtonLog,
+  ButtonReg,
+  ButtonsDiv,
   HeaderContainer,
   Navigation,
-  StyledLink,
-  IconWrapper,
+  NavigationP,
 } from './Header.styled';
-import sprite from 'assets/sprite.svg';
 
 export const Header = () => {
-
   return (
     <HeaderContainer>
+      <h2>
+        petl
+        <svg width="19" height="17"></svg>
+        ve
+      </h2>
       <Navigation>
-        <StyledLink to="/first">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          First
-        </StyledLink>
-        <StyledLink to="/second">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          Second
-        </StyledLink>
+        <NavigationP>News</NavigationP>
+        <NavigationP>Find pet</NavigationP>
+        <NavigationP>Our friends</NavigationP>
       </Navigation>
+      <ButtonsDiv>
+        <ButtonLog> Log In</ButtonLog>
+        <ButtonReg>Registration</ButtonReg>
+      </ButtonsDiv>
     </HeaderContainer>
   );
 };
