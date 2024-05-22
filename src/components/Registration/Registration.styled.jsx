@@ -1,19 +1,20 @@
 import styled from 'styled-components';
-
+import { Form, Field } from 'formik';
 export const RegistrationContainer = styled.div`
   margin: 32px;
   margin-top: 0;
   display: flex;
   gap: 32px;
   justify-content: space-between;
+  /* justify-content: center; */
 `;
-export const CatSection = styled.section`
+export const CatSection = styled.div`
   border-radius: 60px;
   width: 592px;
   height: 654px;
   background-color: blueviolet;
   position: relative;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 `;
 export const CatDescribe = styled.div`
   border-radius: 20px;
@@ -68,4 +69,67 @@ export const RegistrSection = styled.section`
   width: 592px;
   background: #fff;
   padding: 77px 84px;
+  box-sizing: border-box;
+`;
+
+export const Registr = styled.h3`
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+  color: #262626;
+  margin-bottom: 16px;
+`;
+
+export const Interest = styled.p`
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 122%;
+  letter-spacing: -0.02em;
+  color: #262626;
+  margin-bottom: 32px;
+`;
+
+export const FormContainer = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const FieldFormik = styled(Field)`
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding: 16px;
+`;
+export const RegButton = styled.button`
+  background: #f6b83d;
+  border-radius: 30px;
+  border: none;
+  padding: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+`;
+
+export const HaveAnAccount = styled.p`
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+`;
+export const HaveAnAccountSpan = styled.span`
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #f6b83d;
+`;
+export const ErrorText = styled.div`
+  color: red;
+  font-size: 12px;
+`;
+export const SuccessText = styled.div`
+  color: #08aa83;
+  font-size: 12px;
 `;
