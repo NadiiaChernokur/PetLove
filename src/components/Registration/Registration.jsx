@@ -27,7 +27,7 @@ const schema = yup.object().shape({
     .required('Email is required')
     .matches(
       /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-      'Email is not valid'
+      'Enter a valid Email'
     ),
   password: yup
     .string()
