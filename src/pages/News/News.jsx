@@ -7,31 +7,34 @@ import { getNews } from '../../redux/operation';
 const News = () => {
   const [keyword, setKeyword] = useState('');
   const [news, setNews] = useState([]);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState(false);
   const dispatch = useDispatch();
   const newsArray = useSelector((state) => state.newsArray);
-  console.log(newsArray);
+
   useEffect(() => {
     const fetchNews = async () => {
-      const res = await dispatch(getNews());
-      console.log(res);
+      const res = await dispatch(getNews({ page, keyword }));
       if (res.meta.requestStatus === 'fulfilled') {
-        setNews(newsArray);
+        setNews(res.payload);
+        setSearch(false);
+        return;
       }
+      return;
     };
 
     fetchNews();
-  }, [dispatch, newsArray]);
+  }, [dispatch, keyword, page, search]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // onSubmit(keyword);
-    const res = dispatch(getNews());
-    console.log(res);
-    console.log('888888888');
+
+    setSearch(true);
   };
 
   const handleClear = () => {
     setKeyword('');
+    setSearch(true);
   };
   return (
     <NewsContainer>
