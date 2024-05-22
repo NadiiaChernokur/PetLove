@@ -21,7 +21,6 @@ import {
   HaveAnAccount,
   HaveAnAccountSpan,
   Interest,
-  RegButton,
 } from '../Registration/Registration.styled';
 const schema = yup.object().shape({
   email: yup

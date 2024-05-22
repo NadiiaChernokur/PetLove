@@ -3,6 +3,7 @@ import SharedLayout from 'components/SharedLayout/SharedLayout';
 import { AppWrapper } from './App.styled';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
+import News from './pages/News/News';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/login" element={<Login />}>
             {/* <Route path=":half" element={<HalfPage />} /> */}
           </Route>
+          <Route path="/news" element={<News />}></Route>
           {/* <Route path="*" element={<ErrorPage />} /> */}
         </Route>
       </Routes>
