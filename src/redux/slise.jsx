@@ -31,7 +31,7 @@ const getNewsFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
   console.log(action.payload);
-  state.newsArray = action.payload;
+  state.newsArray = action.payload.results;
 };
 const removeArray = (state, action) => {
   state.campersArray = [];

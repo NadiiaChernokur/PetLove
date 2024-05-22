@@ -13,7 +13,8 @@ export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
     //const respons = await axios.get(`/news?keyword=ukrainian`);
     //const respons = await axios.get(`/news`);
     console.log(respons.data);
-    return respons.data.results;
+    // return respons.data.results;
+    return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

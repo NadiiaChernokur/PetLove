@@ -3,11 +3,13 @@ import { Input, NewsContainer, NewsDiv, Titel } from './News.styled';
 import NewsList from '../../components/NewsList/NewsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNews } from '../../redux/operation';
+import Paginations from '../../components/Pagination/Pagination';
 
 const News = () => {
   const [keyword, setKeyword] = useState('');
   const [news, setNews] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [search, setSearch] = useState(false);
   const dispatch = useDispatch();
   const newsArray = useSelector((state) => state.newsArray);
@@ -15,8 +17,10 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       const res = await dispatch(getNews({ page, keyword }));
+      console.log(res.payload);
       if (res.meta.requestStatus === 'fulfilled') {
-        setNews(res.payload);
+        setNews(res.payload.results);
+        setTotalPages(res.payload.totalPages);
         setSearch(false);
         return;
       }
@@ -28,14 +32,27 @@ const News = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
     setSearch(true);
   };
 
   const handleClear = () => {
     setKeyword('');
+    setPage(1);
     setSearch(true);
   };
+  const addPage = () => {
+    setPage((prev) => prev + 1);
+  };
+  const subtractPage = () => {
+    setPage((prev) => prev - 1);
+  };
+  const firstPage = () => {
+    setPage(1);
+  };
+  const lastPage = () => {
+    setPage(totalPages);
+  };
+
   return (
     <NewsContainer>
       <NewsDiv>
@@ -64,7 +81,15 @@ const News = () => {
         </form>
       </NewsDiv>
       <NewsList list={news} />
+      <Paginations
+        page={page}
+        add={addPage}
+        subtract={subtractPage}
+        first={firstPage}
+        last={lastPage}
+      />
     </NewsContainer>
   );
 };
+
 export default News;
