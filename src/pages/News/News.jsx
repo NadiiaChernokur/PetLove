@@ -87,6 +87,7 @@ const News = () => {
         subtract={subtractPage}
         first={firstPage}
         last={lastPage}
+        total={totalPages}
       />
     </NewsContainer>
   );

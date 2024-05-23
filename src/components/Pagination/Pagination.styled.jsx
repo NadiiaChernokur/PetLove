@@ -5,13 +5,53 @@ export const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  gap: 8px;
 `;
 
 export const PageButton = styled.button`
-  /* margin: 0 5px;
-  padding: 5px 10px;
-  background-color: ${(props) => (props.active ? '#000' : '#fff')};
-  color: ${(props) => (props.active ? '#fff' : '#000')};
-  border: 1px solid #000;
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')}; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+  border: 1px solid rgba(38, 38, 38, 0.2);
+  background: none;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 122%;
+`;
+export const Pages = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 0 16px;
+`;
+
+export const PageSpan = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+  border: 1px solid rgba(38, 38, 38, 0.2);
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 122%;
+`;
+export const PageSpanActiv = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+  border: none;
+  background: #f6b83d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
 `;
