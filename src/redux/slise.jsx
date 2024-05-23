@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {} from './operation';
 import { getNews } from './operation';
+import { getFriends } from './operation';
 
 const initialState = {
   newsArray: [],
-  favoriteArray: [],
+  friendsArray: [],
   totalCampers: [],
   newFilterArray: [],
   isLoading: false,
@@ -36,10 +37,10 @@ const getNewsFulfilled = (state, action) => {
 const removeArray = (state, action) => {
   state.campersArray = [];
 };
-const handleTotalCampers = (state, action) => {
+const getFriendsFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.totalCampers = action.payload;
+  state.friendsArray = action.payload;
 };
 const newFilterArrayCreate = (state, action) => {
   state.newFilterArray = action.payload;
@@ -65,10 +66,10 @@ const petsSlice = createSlice({
     builder
       .addCase(getNews.pending, handlePending)
       .addCase(getNews.fulfilled, getNewsFulfilled)
-      .addCase(getNews.rejected, handleRejected),
-  //   .addCase(totalCampers.pending, handlePendingTotal)
-  //   .addCase(totalCampers.fulfilled, handleTotalCampers)
-  //   .addCase(totalCampers.rejected, handleRejectedTotal)
+      .addCase(getNews.rejected, handleRejected)
+      .addCase(getFriends.pending, handlePendingTotal)
+      .addCase(getFriends.fulfilled, getFriendsFulfilled)
+      .addCase(getFriends.rejected, handleRejectedTotal),
   //   .addCase(addFavorite.pending, handlePending)
   //   .addCase(addFavorite.fulfilled, addFavoriteArrayFulfilled)
   //   .addCase(addFavorite.rejected, handleRejected)

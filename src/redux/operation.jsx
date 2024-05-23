@@ -19,3 +19,12 @@ export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const getFriends = createAsyncThunk('friends', async (_, thunkAPI) => {
+  try {
+    const respons = await axios.get(`/friends`);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

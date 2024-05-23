@@ -4,6 +4,7 @@ import { AppWrapper } from './App.styled';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
 import News from './pages/News/News';
+import Friends from './pages/Friends/Friends';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             {/* <Route path=":half" element={<HalfPage />} /> */}
           </Route>
           <Route path="/news" element={<News />}></Route>
+          <Route path="/friends" element={<Friends />}></Route>
           {/* <Route path="*" element={<ErrorPage />} /> */}
         </Route>
       </Routes>
