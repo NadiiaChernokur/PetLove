@@ -28,3 +28,12 @@ export const getFriends = createAsyncThunk('friends', async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+export const getNotices = createAsyncThunk('notices', async (_, thunkAPI) => {
+  try {
+    const respons = await axios.get(`/notices`);
+    console.log(respons.data);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
