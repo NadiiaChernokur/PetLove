@@ -37,25 +37,47 @@ const Friends = () => {
           <FriendsLi key={item.id}>
             <Time>
               {item.workDays && item.workDays[0]
-                ? `${item.workDays[0].from} - ${item.workDays[0].to}`
+                ? `${
+                    item.workDays[0].isOpen === true
+                      ? item.workDays[0].from
+                      : item.workDays[5].from
+                  } - ${
+                    item.workDays[0].isOpen === true
+                      ? item.workDays[0].to
+                      : item.workDays[5].to
+                  }`
                 : 'Day and night'}
             </Time>
             <FriendInf>
-              <FriendImg src={item.imageUrl} alt={item.title}></FriendImg>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                <FriendImg src={item.imageUrl} alt={item.title}></FriendImg>
+              </a>
               <div>
-                <FriendName>LKP “Lion”</FriendName>
-                <Information>
-                  <InformationSpan>Email: </InformationSpan>
-                  Ikplev@gmail.com
-                </Information>
-                <Information>
-                  <InformationSpan>Address: </InformationSpan>
-                  Promuslova Street,56
-                </Information>
-                <Information>
-                  <InformationSpan>Phone: </InformationSpan>
-                  (032) 293-30-41
-                </Information>
+                <FriendName>{item.title}</FriendName>
+                <a href={`mailto:${item.email}`}>
+                  <Information>
+                    <InformationSpan data-fulltext={item.email}>
+                      Email:
+                    </InformationSpan>
+                    {item.email === null ? 'without information' : item.email}
+                  </Information>
+                </a>
+                <a
+                  href={item.addressUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Information data-fulltext={item.address}>
+                    <InformationSpan>Address:</InformationSpan>
+                    {item.address === null ? 'website only' : item.address}
+                  </Information>
+                </a>
+                <a href={`tel:${item.phone}`}>
+                  <Information>
+                    <InformationSpan>Phone: </InformationSpan>
+                    {item.phone === null ? 'without information' : item.phone}
+                  </Information>
+                </a>
               </div>
             </FriendInf>
           </FriendsLi>

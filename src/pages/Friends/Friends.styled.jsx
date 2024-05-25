@@ -20,8 +20,8 @@ export const FriendsUl = styled.ul`
 `;
 export const FriendsLi = styled.li`
   margin-bottom: 8px;
-  /* background: #fff; */
-  background: pink;
+  background: #fff;
+
   border-radius: 15px;
   width: 371px;
   height: 196px;
@@ -45,6 +45,7 @@ export const FriendInf = styled.div`
 export const FriendImg = styled.img`
   width: 90px;
   height: 90px;
+  cursor: pointer;
 `;
 
 export const FriendName = styled.p`
@@ -57,12 +58,25 @@ export const FriendName = styled.p`
 `;
 
 export const Information = styled.p`
+  width: 236px;
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
   letter-spacing: -0.02em;
   color: #262626;
   margin-bottom: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    overflow: inherit;
+    text-overflow: inherit;
+    white-space: inherit;
+    height: auto;
+  }
 `;
 export const InformationSpan = styled.span`
   color: rgba(38, 38, 38, 0.5);
