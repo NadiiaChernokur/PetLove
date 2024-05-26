@@ -15,7 +15,7 @@ import {
 } from './NoticesItem.styled';
 
 const NoticesItem = ({ array }) => {
-  console.log(array);
+  //   console.log(array);
   return (
     <NoticesItemContainer>
       {array.map((item) => (

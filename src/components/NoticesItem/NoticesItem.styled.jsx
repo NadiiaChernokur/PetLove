@@ -25,7 +25,7 @@ export const NoticesImg = styled.img`
   width: 315px;
   height: 277px;
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

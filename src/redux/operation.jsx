@@ -31,9 +31,36 @@ export const getFriends = createAsyncThunk('friends', async (_, thunkAPI) => {
 export const getNotices = createAsyncThunk('notices', async (_, thunkAPI) => {
   try {
     const respons = await axios.get(`/notices`);
-    console.log(respons.data);
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+export const getNoticesCategories = createAsyncThunk(
+  'categories',
+  async (_, thunkAPI) => {
+    try {
+      const categori = await axios.get(`/notices/categories`);
+      const sex = await axios.get(`/notices/sex`);
+      const species = await axios.get(`/notices/species`);
+      const location = await axios.get(`/cities/`);
+      return {
+        categoris: categori.data,
+        sex: sex.data,
+        species: species.data,
+        location: location.data,
+      };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+// export const getLocation = createAsyncThunk('cities', async (_, thunkAPI) => {
+//   try {
+//     const respons = await axios.get(`/cities/`);
+//     console.log(respons);
+//     return respons.data;
+//   } catch (error) {
+//     return thunkAPI.rejectWithValue(error.message);
+//   }
+// });
