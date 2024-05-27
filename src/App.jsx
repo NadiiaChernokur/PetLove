@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import News from './pages/News/News';
 import Friends from './pages/Friends/Friends';
 import Notices from './pages/Notices/Notices';
+import LearnMoreModal from './components/Modals/LearnMoreModal';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/news" element={<News />}></Route>
           <Route path="/friends" element={<Friends />}></Route>
           <Route path="/notices" element={<Notices />}></Route>
+          {/* <Route path="/notices" element={<LearnMoreModal />}></Route> */}
           {/* <Route path="*" element={<ErrorPage />} /> */}
         </Route>
       </Routes>

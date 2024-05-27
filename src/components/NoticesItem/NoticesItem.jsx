@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   AnimalInformation,
   AnimalInformationAbout,
@@ -13,9 +14,20 @@ import {
   NoticesItemImg,
   NoticesItemList,
 } from './NoticesItem.styled';
+import LearnMoreModal from '../Modals/LearnMoreModal';
+import AttentionModal from '../Modals/AttentionModal';
 
 const NoticesItem = ({ array }) => {
-  //   console.log(array);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [pet, setPet] = useState([]);
+
+  const showModal = (item) => {
+    setIsShowModal(true);
+    setPet(item);
+  };
+  const closeModal = () => {
+    setIsShowModal(false);
+  };
   return (
     <NoticesItemContainer>
       {array.map((item) => (
@@ -54,11 +66,13 @@ const NoticesItem = ({ array }) => {
           </AnimalInformation>
           <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
           <Buttons>
-            <LearnMore>Learn more</LearnMore>
+            <LearnMore onClick={() => showModal(item)}>Learn more</LearnMore>
             <LikeButton></LikeButton>
           </Buttons>
         </NoticesItemList>
       ))}
+      {/* {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />} */}
+      {isShowModal && <AttentionModal close={closeModal} />}
     </NoticesItemContainer>
   );
 };
