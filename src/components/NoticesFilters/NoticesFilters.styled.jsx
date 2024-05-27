@@ -32,3 +32,28 @@ export const NoticesField = styled(Field)`
   background: #fff;
   border: none;
 `;
+export const CheckDiv = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+export const CheckboxInput = styled.input`
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+`;
+export const CheckboxLabel = styled.label`
+  cursor: pointer;
+  position: relative;
+  display: block;
+  border: 1px solid rgba(16, 24, 40, 0.2);
+  border-radius: 30px;
+  padding: 14px;
+  background: #fff;
+  text-align: center;
+
+  ${CheckboxInput}:checked + & {
+    background-color: green;
+    mix-blend-mode: multiply;
+  }
+`;

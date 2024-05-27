@@ -4,6 +4,7 @@ import { getNews } from './operation';
 import { getFriends } from './operation';
 import { getNotices } from './operation';
 import { getNoticesCategories } from './operation';
+import { getNoticesResponse } from './operation';
 // import { getLocation } from './operation';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   noticesArray: [],
   categoriesArray: [],
   location: [],
+  noticesResponse: [],
   isLoading: false,
   error: null,
 };
@@ -46,20 +48,18 @@ const getNoticesFulfilled = (state, action) => {
   state.error = null;
   state.noticesArray = action.payload;
 };
-const getLocationFulfilled = (state, action) => {
+// const getLocationFulfilled = (state, action) => {
+//   state.isLoading = false;
+//   state.error = null;
+//   console.log(action.payload);
+//   state.location = action.payload;
+// };
+const getNoticesResponseFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
   console.log(action.payload);
-  state.location = action.payload;
+  state.noticesResponse = action.payload;
 };
-// const removeFavoriteArrayFulfilled = (state, action) => {
-//   state.isLoading = false;
-//   state.error = null;
-
-//   state.favoriteArray = state.favoriteArray.filter(
-//     (auto) => auto._id !== action.payload
-//   );
-// };
 
 const petsSlice = createSlice({
   name: 'pets',
@@ -77,10 +77,10 @@ const petsSlice = createSlice({
       .addCase(getNotices.rejected, handleRejected)
       .addCase(getNoticesCategories.pending, handlePending)
       .addCase(getNoticesCategories.fulfilled, getNoticesCategoriesFulfilled)
-      .addCase(getNoticesCategories.rejected, handleRejected),
-  //   .addCase(getLocation.pending, handlePending)
-  //   .addCase(getLocation.fulfilled, getLocationFulfilled)
-  //   .addCase(getLocation.rejected, handleRejected),
+      .addCase(getNoticesCategories.rejected, handleRejected)
+      .addCase(getNoticesResponse.pending, handlePending)
+      .addCase(getNoticesResponse.fulfilled, getNoticesResponseFulfilled)
+      .addCase(getNoticesResponse.rejected, handleRejected),
 });
 
 export const petsReducer = petsSlice.reducer;

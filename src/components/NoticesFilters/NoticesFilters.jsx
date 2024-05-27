@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
 import {
+  CheckDiv,
+  CheckboxInput,
+  CheckboxLabel,
   NoticesField,
   NoticesFiltersContainer,
   NoticesForm,
-  ResetButton,
 } from './NoticesFilters.styled';
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import Select from 'react-select';
 import SearchField from '../SearchField/SearchField';
 import { useDispatch } from 'react-redux';
-import { getNoticesCategories } from '../../redux/operation';
+import {
+  getNoticesCategories,
+  getNoticesResponse,
+} from '../../redux/operation';
 const customStyles = {
   control: (provided) => ({
     ...provided,
@@ -38,12 +43,13 @@ const customStyles = {
   }),
 };
 
-const NoticesFilters = () => {
+const NoticesFilters = ({ arrayByCategory }) => {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [petTypes, setPetTypes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [cities, setCities] = useState([]);
+  const [check, setCheck] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -67,13 +73,21 @@ const NoticesFilters = () => {
 
   const getCiti = (inputValue) => {
     try {
-      console.log(inputValue);
-      console.log(cities);
-      const loc = cities.filter((location) => {
+      const copyArray = JSON.parse(JSON.stringify(cities));
+      console.log(copyArray);
+      if (!Array.isArray(copyArray) || copyArray.length === 0) {
+        console.error('Cities array is empty or not an array');
+        return;
+      }
+      const loc = copyArray.filter((location) => {
+        const cityEn = location.cityEn || '';
+        const countyEn = location.countyEn || '';
+        const stateEn = location.stateEn || '';
+
         return (
-          location.cityEn.toLowerCase().includes(inputValue.toLowerCase()) ||
-          location.countyEn.toLowerCase().includes(inputValue.toLowerCase()) ||
-          location.stateEn.toLowerCase().includes(inputValue.toLowerCase())
+          cityEn.toLowerCase().includes(inputValue.toLowerCase()) ||
+          countyEn.toLowerCase().includes(inputValue.toLowerCase()) ||
+          stateEn.toLowerCase().includes(inputValue.toLowerCase())
         );
       });
 
@@ -81,10 +95,38 @@ const NoticesFilters = () => {
         label: `${l.cityEn}, ${l.countyEn}, ${l.stateEn}`,
         value: l._id,
       }));
-      console.log(val);
+      setLocations(val);
     } catch (error) {
       console.error('Error fetching locations', error);
     }
+  };
+  //   const handleChange = async () => {
+  //     try {
+  //       const objektCategor = {
+  //         categories,
+  //         genders,
+  //         petTypes,
+  //         locations,
+  //         check,
+  //       };
+  //       console.log(objektCategor);
+  //       const array = await dispatch(getNoticesResponse(objektCategor));
+  //       console.log(array);
+  //     } catch (error) {
+  //       console.error('Error fetching locations', error);
+  //     }
+  //   };
+  const handleSelectChange = async (field, value, setFieldValue, values) => {
+    console.log(field);
+    console.log(value);
+    console.log(setFieldValue);
+    console.log(values);
+    setFieldValue(field, value);
+    const updatedValues = { ...values, [field]: value };
+    console.log(updatedValues);
+    const response = await dispatch(getNoticesResponse(updatedValues));
+    console.log(response);
+    arrayByCategory(response.payload.results);
   };
 
   return (
@@ -98,19 +140,43 @@ const NoticesFilters = () => {
           location: '',
           sortBy: '',
         }}
-        onSubmit={(values) => {
-          //   onFilterChange(values);
+        onSubmit={async (values) => {
+          //   console.log(values);
+          //   const array = await dispatch(getNoticesResponse(initialValues));
+          //   console.log(array);
         }}
       >
-        {({ setFieldValue }) => (
+        {({ setFieldValue, values }) => (
           <NoticesForm>
             <SearchField
               name="keyword"
               placeholder="Search..."
-              onChange={(e) => setFieldValue('keyword', e.target.value)}
+              //   onChange={(e) => setFieldValue('keyword', e.target.value)}
+              onChange={async (e) => {
+                const value = e.target.value;
+                console.log(value);
+                await handleSelectChange(
+                  'keyword',
+                  value,
+                  setFieldValue,
+                  values
+                );
+              }}
             />
 
-            <NoticesField as="select" name="category">
+            <NoticesField
+              as="select"
+              name="category"
+              onChange={async (e) => {
+                const value = e.target.value;
+                await handleSelectChange(
+                  'category',
+                  value,
+                  setFieldValue,
+                  values
+                );
+              }}
+            >
               <option value="">Category</option>
               {categories.map((category, index) => (
                 <option key={index} value={category}>
@@ -119,7 +185,19 @@ const NoticesFilters = () => {
               ))}
             </NoticesField>
 
-            <NoticesField as="select" name="gender">
+            <NoticesField
+              as="select"
+              name="gender"
+              onChange={async (e) => {
+                const value = e.target.value;
+                await handleSelectChange(
+                  'gender',
+                  value,
+                  setFieldValue,
+                  values
+                );
+              }}
+            >
               <option value="">By gender</option>
               {genders.map((gender, index) => (
                 <option key={index} value={gender}>
@@ -127,7 +205,19 @@ const NoticesFilters = () => {
                 </option>
               ))}
             </NoticesField>
-            <NoticesField as="select" name="petType">
+            <NoticesField
+              as="select"
+              name="petType"
+              onChange={async (e) => {
+                const value = e.target.value;
+                await handleSelectChange(
+                  'petType',
+                  value,
+                  setFieldValue,
+                  values
+                );
+              }}
+            >
               <option value="">By type</option>
               {petTypes.map((petType, index) => (
                 <option key={index} value={petType}>
@@ -141,32 +231,113 @@ const NoticesFilters = () => {
               options={locations}
               styles={customStyles}
               onInputChange={getCiti}
-              onChange={(selectedOption) => {
-                console.log(selectedOption);
-                setLocations(selectedOption);
-              }}
+              //   onChange={(selectedOption) => {
+              //     console.log(selectedOption);
+              //     // setLocations(selectedOption);
+              //   }}
               placeholder="Location"
+              onChange={async (selectedOption) => {
+                console.log(selectedOption);
+                const value = selectedOption;
+                // const value = e.target.value;
+                await handleSelectChange(
+                  'location',
+                  value.value,
+                  setFieldValue,
+                  values
+                );
+              }}
             />
-            <div>
-              <label>
-                <Field type="radio" name="sortBy" value="popularity" />
+            <CheckDiv>
+              <CheckboxLabel
+                style={check === 'popularity' ? { background: 'blue' } : {}}
+              >
+                <CheckboxInput
+                  type="radio"
+                  name="sortBy"
+                  value="popularity"
+                  checked={check === 'popularity'}
+                  //   onChange={() => setCheck('popularity')}
+                  onChange={async (e) => {
+                    setCheck('popularity');
+                    const value = e.target.value;
+                    await handleSelectChange(
+                      'sortBy',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                />
                 Popular
-              </label>
-              <label>
-                <Field type="radio" name="sortBy" value="unpopular" />
+              </CheckboxLabel>
+              <CheckboxLabel
+                style={check === 'unpopular' ? { background: 'blue' } : {}}
+              >
+                <CheckboxInput
+                  type="radio"
+                  name="sortBy"
+                  value="unpopular"
+                  checked={check === 'unpopular'}
+                  //   onChange={() => setCheck('unpopular')}
+                  onChange={async (e) => {
+                    setCheck('unpopular');
+                    const value = e.target.value;
+                    await handleSelectChange(
+                      'sortBy',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                />
                 Unpopular
-              </label>
-              <label>
-                <Field type="radio" name="sortBy" value="cheap" />
+              </CheckboxLabel>
+              <CheckboxLabel
+                style={check === 'cheap' ? { background: 'blue' } : {}}
+              >
+                <CheckboxInput
+                  type="radio"
+                  name="sortBy"
+                  value="cheap"
+                  checked={check === 'cheap'}
+                  //   onChange={() => setCheck('cheap')}
+                  onChange={async (e) => {
+                    setCheck('cheap');
+                    const value = e.target.value;
+                    await handleSelectChange(
+                      'sortBy',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                />
                 Cheap
-              </label>
-              <label>
-                <Field type="radio" name="sortBy" value="expensive" />
+              </CheckboxLabel>
+              <CheckboxLabel
+                style={check === 'expensive' ? { background: 'blue' } : {}}
+              >
+                <CheckboxInput
+                  type="radio"
+                  name="sortBy"
+                  value="expensive"
+                  checked={check === 'expensive'}
+                  //   onChange={() => setCheck('expensive')}
+                  onChange={async (e) => {
+                    setCheck('expensive');
+                    const value = e.target.value;
+                    await handleSelectChange(
+                      'sortBy',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                />
                 Expensive
-              </label>
-            </div>
-
-            <ResetButton type="reset">Reset</ResetButton>
+              </CheckboxLabel>
+            </CheckDiv>
           </NoticesForm>
         )}
       </Formik>

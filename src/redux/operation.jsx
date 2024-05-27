@@ -55,12 +55,22 @@ export const getNoticesCategories = createAsyncThunk(
     }
   }
 );
-// export const getLocation = createAsyncThunk('cities', async (_, thunkAPI) => {
-//   try {
-//     const respons = await axios.get(`/cities/`);
-//     console.log(respons);
-//     return respons.data;
-//   } catch (error) {
-//     return thunkAPI.rejectWithValue(error.message);
-//   }
-// });
+export const getNoticesResponse = createAsyncThunk(
+  'noticesResponse',
+  async (data, thunkAPI) => {
+    try {
+      const { category, gender, keyword, location, petType, sortBy } = data;
+      console.log(keyword);
+      //   const respons = await axios.get(
+      //     `/notices?keyword=${keyword}&category=${category}&species=${petType}&sex=${gender}&locationId=${location}&by${sortBy}=true`
+      //   );
+      const respons = await axios.get(
+        `/notices?keyword=${keyword}&category=${category}&species=${petType}&locationId=${location}&by${sortBy}=true&sex=${gender}&page=1`
+      );
+      console.log(respons.data);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

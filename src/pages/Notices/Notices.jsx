@@ -8,7 +8,11 @@ import { getNotices } from '../../redux/operation';
 
 const Notices = () => {
   const [noticesArray, setNoticesArray] = useState([]);
+  const [newArray, setNewArray] = useState([]);
+  const [schowNewArray, setSchowNewArray] = useState(false);
   const dispatch = useDispatch();
+  console.log('8888888888888');
+  console.log(newArray);
   useEffect(() => {
     const getArray = async () => {
       try {
@@ -24,11 +28,22 @@ const Notices = () => {
     };
     getArray();
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log('555555555');
+    if (newArray.length !== 0) {
+      setSchowNewArray(true);
+    }
+  }, [newArray.length]);
+
+  const getResponseArray = (newArray) => {
+    setNewArray(newArray);
+  };
   return (
     <NoticesContainer>
       <NoticesTitel>Find your favorite pet</NoticesTitel>
-      <NoticesFilters />
-      <NoticesItem array={noticesArray} />
+      <NoticesFilters arrayByCategory={getResponseArray} />
+      <NoticesItem array={schowNewArray ? newArray : noticesArray} />
       <Paginations />
     </NoticesContainer>
   );
