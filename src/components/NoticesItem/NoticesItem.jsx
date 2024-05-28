@@ -16,6 +16,9 @@ import {
 } from './NoticesItem.styled';
 import LearnMoreModal from '../Modals/LearnMoreModal';
 import AttentionModal from '../Modals/AttentionModal';
+import CongratsModal from '../Modals/CongratsModal';
+import LeavingModal from '../Modals/LeavingModal';
+import EditInformationModal from '../Modals/EditInformationModal';
 
 const NoticesItem = ({ array }) => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -72,7 +75,9 @@ const NoticesItem = ({ array }) => {
         </NoticesItemList>
       ))}
       {/* {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />} */}
-      {isShowModal && <AttentionModal close={closeModal} />}
+      {/* {isShowModal && <AttentionModal close={closeModal} />} */}
+      {isShowModal && <EditInformationModal close={closeModal} />}
+      {/* {isShowModal && <CongratsModal close={closeModal} />} */}
     </NoticesItemContainer>
   );
 };

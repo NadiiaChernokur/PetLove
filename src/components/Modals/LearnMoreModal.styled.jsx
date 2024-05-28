@@ -15,11 +15,9 @@ export const ModalContainer = styled.div`
   background: #fff;
   border-radius: 30px;
   width: 473px;
-  height: 476px;
-  /* top: 50%;
-  left: 50%; */
+  /* height: 476px; */
   margin: 10% auto;
-  padding: 40px;
+  padding: 40px 55px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -7,12 +7,14 @@ import News from './pages/News/News';
 import Friends from './pages/Friends/Friends';
 import Notices from './pages/Notices/Notices';
 import LearnMoreModal from './components/Modals/LearnMoreModal';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
     <AppWrapper>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route path="/home" element={<Home />} />
           <Route path="/registr" element={<Registration />} />
           <Route path="/login" element={<Login />}>
             {/* <Route path=":half" element={<HalfPage />} /> */}

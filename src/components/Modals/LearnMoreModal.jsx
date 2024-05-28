@@ -12,7 +12,7 @@ import {
   ModalContainer,
 } from './LearnMoreModal.styled';
 
-const LearnMoreModal = ({ pet }) => {
+const LearnMoreModal = ({ pet, close }) => {
   console.log(pet);
   return (
     <ModalBackground>

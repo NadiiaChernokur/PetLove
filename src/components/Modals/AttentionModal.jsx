@@ -1,24 +1,35 @@
-import { ModalBackground } from './LearnMoreModal.styled';
+import {
+  AttentionModalContainer,
+  AttentionModalImg,
+  AttentionModalText,
+  AttentionModalTitel,
+} from './AttentionModal.styled';
+import {
+  LearnMoreModalAdd,
+  LearnMoreModalButton,
+  ModalBackground,
+  ModalContainer,
+} from './LearnMoreModal.styled';
 
-const AttentionModal = () => {
+const AttentionModal = ({ close }) => {
   return (
     <ModalBackground>
-      <div>
-        <div>
+      <AttentionModalContainer>
+        <AttentionModalImg>
           <svg></svg>
-        </div>
-        <p>Attention</p>
-        <p>
+        </AttentionModalImg>
+        <AttentionModalTitel>Attention</AttentionModalTitel>
+        <AttentionModalText>
           We would like to remind you that certain functionality is available
           only to authorized users.If you have an account, please log in with
           your credentials. If you do not already have an account, you must
           register to access these features.
-        </p>
+        </AttentionModalText>
         <div>
-          <button>Log In</button>
-          <button>Registration</button>
+          <LearnMoreModalAdd>Log In</LearnMoreModalAdd>
+          <LearnMoreModalButton>Registration</LearnMoreModalButton>
         </div>
-      </div>
+      </AttentionModalContainer>
     </ModalBackground>
   );
 };
