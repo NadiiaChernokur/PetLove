@@ -12,11 +12,7 @@ import {
 export const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/home';
-  if (isHomePage) {
-    console.log('99999999');
-  } else {
-    console.log('555555555');
-  }
+
   return (
     <HeaderContainer>
       <HeaderLogo isHomePage={isHomePage}>
@@ -36,8 +32,12 @@ export const Header = () => {
         </NavLink>
       </Navigation>
       <ButtonsDiv>
-        <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
-        <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
+        <NavLink to="/login">
+          <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
+        </NavLink>
+        <NavLink to="/register">
+          <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
+        </NavLink>
       </ButtonsDiv>
     </HeaderContainer>
   );

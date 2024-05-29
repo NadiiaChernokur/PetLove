@@ -8,6 +8,7 @@ import Friends from './pages/Friends/Friends';
 import Notices from './pages/Notices/Notices';
 import LearnMoreModal from './components/Modals/LearnMoreModal';
 import Home from './pages/Home/Home';
+import AddPet from './pages/AddPet/AddPet';
 
 function App() {
   return (
@@ -15,13 +16,15 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/registr" element={<Registration />} />
+          <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />}>
             {/* <Route path=":half" element={<HalfPage />} /> */}
           </Route>
           <Route path="/news" element={<News />}></Route>
           <Route path="/friends" element={<Friends />}></Route>
           <Route path="/notices" element={<Notices />}></Route>
+          <Route path="/friends" element={<Friends />}></Route>
+          <Route path="/add-pet" element={<AddPet />}></Route>
           {/* <Route path="/notices" element={<LearnMoreModal />}></Route> */}
           {/* <Route path="*" element={<ErrorPage />} /> */}
         </Route>
