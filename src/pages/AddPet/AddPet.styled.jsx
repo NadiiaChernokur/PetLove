@@ -112,7 +112,7 @@ export const AddPetRadioMultipleLabel = styled.label`
 `;
 export const AddPetPhoto = styled.img`
   border-radius: 100px;
-  padding: 10px;
+
   width: 86px;
   height: 86px;
   margin: auto;
@@ -137,13 +137,18 @@ export const CustomButton = styled.button`
   border: none;
   white-space: nowrap;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #262626;
 `;
 
 export const FormInputFile = styled.input`
   border: 1px solid #f6b83d;
   border-radius: 30px;
   padding: 12px 16px;
-  /* width: 432px; */
+  width: 278px;
 `;
 export const FormInput = styled.input`
   border: 1px solid #f6b83d;
@@ -163,4 +168,34 @@ export const BirthdayDiv = styled.div`
   display: flex;
   gap: 12px;
   margin-bottom: 18px;
+`;
+export const AddPetButtonsDiv = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+`;
+export const BackButton = styled.button`
+  border-radius: 30px;
+  border: none;
+  padding: 14px;
+  width: 170px;
+  background: rgba(38, 38, 38, 0.05);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  color: #262626;
+`;
+export const SubmitButton = styled.button`
+  border-radius: 30px;
+  border: none;
+  padding: 14px;
+  width: 170px;
+  height: 48px;
+  background: #f6b83d;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  color: #fff;
 `;

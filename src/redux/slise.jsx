@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {} from './operation';
+import { addPet } from './operation';
 import { getNews } from './operation';
 import { getFriends } from './operation';
 import { getNotices } from './operation';
@@ -14,6 +14,7 @@ const initialState = {
   categoriesArray: [],
   location: [],
   noticesResponse: [],
+  newPet: [],
   isLoading: false,
   error: null,
 };
@@ -48,6 +49,11 @@ const getNoticesFulfilled = (state, action) => {
   state.error = null;
   state.noticesArray = action.payload;
 };
+const addPetFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.newPet = action.payload;
+};
 // const getLocationFulfilled = (state, action) => {
 //   state.isLoading = false;
 //   state.error = null;
@@ -80,7 +86,10 @@ const petsSlice = createSlice({
       .addCase(getNoticesCategories.rejected, handleRejected)
       .addCase(getNoticesResponse.pending, handlePending)
       .addCase(getNoticesResponse.fulfilled, getNoticesResponseFulfilled)
-      .addCase(getNoticesResponse.rejected, handleRejected),
+      .addCase(getNoticesResponse.rejected, handleRejected)
+      .addCase(addPet.pending, handlePending)
+      .addCase(addPet.fulfilled, addPetFulfilled)
+      .addCase(addPet.rejected, handleRejected),
 });
 
 export const petsReducer = petsSlice.reducer;

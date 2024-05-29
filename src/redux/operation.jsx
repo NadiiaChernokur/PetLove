@@ -74,3 +74,13 @@ export const getNoticesResponse = createAsyncThunk(
     }
   }
 );
+
+export const addPet = createAsyncThunk('addPet', async (data, thunkAPI) => {
+  try {
+    const respons = await axios.post(`/users/current/pets/add`, data);
+    console.log(respons.data);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

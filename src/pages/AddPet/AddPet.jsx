@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
   AddPetAddPhoto,
+  AddPetButtonsDiv,
   AddPetContsiner,
   AddPetFormContainer,
   AddPetFormTitel,
@@ -14,6 +15,7 @@ import {
   AddPetRadioFemaleLabel,
   AddPetRadioMaleLabel,
   AddPetRadioMultipleLabel,
+  BackButton,
   BirthdayDiv,
   CustomButton,
   DownloadPhotoDiv,
@@ -21,16 +23,22 @@ import {
   Form,
   FormInput,
   FormInputFile,
+  SubmitButton,
 } from './AddPet.styled';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPet } from '../../redux/operation';
 
 const schema = yup.object().shape({
   title: yup.string().required('Title is required'),
   name: yup.string().required('Name is required'),
   imgUrl: yup
     .string()
-    .matches(/^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/, 'Invalid URL')
+    .matches(
+      /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp))|^(blob:)/,
+      'Invalid URL'
+    )
     .required('Image URL is required'),
   species: yup.string().required('Species is required'),
   birthday: yup
@@ -42,10 +50,12 @@ const schema = yup.object().shape({
 
 const AddPet = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -56,6 +66,8 @@ const AddPet = () => {
   const onSubmit = async (data) => {
     try {
       console.log(data);
+      const res = dispatch(addPet(data));
+      console.log(res);
     } catch (error) {
       alert('Error: ' + error.message);
     }
@@ -66,7 +78,14 @@ const AddPet = () => {
   };
 
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const file = event.target.files[0];
+    console.log(URL.createObjectURL(file));
+
+    if (file) {
+      const blobUrl = URL.createObjectURL(file);
+      setSelectedFile(blobUrl);
+      setValue('imgUrl', blobUrl);
+    }
   };
 
   const handleButtonClick = () => {
@@ -123,9 +142,9 @@ const AddPet = () => {
             </AddPetRadioContainer>
             {errors.sex && <ErrorMessage>{errors.sex.message}</ErrorMessage>}
           </div>
-          <AddPetPhoto></AddPetPhoto>
+          <AddPetPhoto src={selectedFile} alt={'title'}></AddPetPhoto>
           <DownloadPhotoDiv>
-            <FormInputFile />
+            <FormInputFile value={selectedFile} />
             <AddPetAddPhoto
               {...register('imgUrl')}
               id="fileInput"
@@ -169,10 +188,12 @@ const AddPet = () => {
               )}
             </div>
           </BirthdayDiv>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={handleBack}>
-            Back
-          </button>
+          <AddPetButtonsDiv>
+            <BackButton type="button" onClick={handleBack}>
+              Back
+            </BackButton>
+            <SubmitButton type="submit">Submit</SubmitButton>
+          </AddPetButtonsDiv>
         </Form>
       </AddPetFormContainer>
     </AddPetContsiner>
