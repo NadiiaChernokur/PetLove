@@ -28,6 +28,7 @@ import { logOut } from '../../redux/operation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyPetsList from '../MyPets/MyPets';
+import EditInformationModal from '../Modals/EditInformationModal';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -50,6 +51,7 @@ const schema = yup.object().shape({
 
 const ProfileForm = () => {
   const [photo, setPhoto] = useState();
+  const [isUploadUserModal, setIsUploadUserModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -100,6 +102,12 @@ const ProfileForm = () => {
       // navigate('/home');
     }
   };
+  const uploadUserModal = () => {
+    setIsUploadUserModal(true);
+  };
+  const addPetPage = () => {
+    navigate('/add-pet');
+  };
   return (
     <ProfileFormContainer>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
@@ -127,7 +135,7 @@ const ProfileForm = () => {
                 Upload photo
               </UploadPhotoButton>
             </UploadPhotoDiv>
-            <UploadUserButton>
+            <UploadUserButton onClick={uploadUserModal}>
               <svg></svg>
             </UploadUserButton>
           </ProfileFormFirstDiv>
@@ -161,13 +169,14 @@ const ProfileForm = () => {
         </form>
         <MyPetsDiv>
           <MyPets>My pets</MyPets>
-          <AddPetButton>
+          <AddPetButton onClick={addPetPage}>
             Add pet <AddPetButtonSpan>+</AddPetButtonSpan>
           </AddPetButton>
         </MyPetsDiv>
         <MyPetsList />
         <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
+      {isUploadUserModal && <EditInformationModal />}
     </ProfileFormContainer>
   );
 };

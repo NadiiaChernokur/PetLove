@@ -54,6 +54,7 @@ const AddPet = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [option, setOption] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -85,7 +86,7 @@ const AddPet = () => {
   };
 
   const handleBack = () => {
-    history.push('/profile');
+    navigate('/profile');
   };
 
   const handleFileChange = (event) => {
