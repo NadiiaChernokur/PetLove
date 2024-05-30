@@ -9,6 +9,7 @@ import Notices from './pages/Notices/Notices';
 import LearnMoreModal from './components/Modals/LearnMoreModal';
 import Home from './pages/Home/Home';
 import AddPet from './pages/AddPet/AddPet';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
           <Route path="/friends" element={<Friends />}></Route>
           <Route path="/add-pet" element={<AddPet />}></Route>
           {/* <Route path="/notices" element={<LearnMoreModal />}></Route> */}
-          {/* <Route path="*" element={<ErrorPage />} /> */}
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </AppWrapper>
