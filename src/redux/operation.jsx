@@ -93,3 +93,12 @@ export const addPet = createAsyncThunk('addPet', async (data, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+export const logOut = createAsyncThunk('logOut', async (data, thunkAPI) => {
+  try {
+    const respons = await axios.post(`/users/signout`);
+    console.log(respons.data);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

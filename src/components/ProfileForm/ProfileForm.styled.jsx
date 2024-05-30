@@ -132,3 +132,7 @@ export const LogoutButton = styled.button`
   color: #f6b83d;
   margin-top: 80px;
 `;
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+`;

@@ -1,6 +1,7 @@
 import {
   AddPetButton,
   AddPetButtonSpan,
+  ErrorMessage,
   FormInput,
   LogoutButton,
   MyInformation,
@@ -18,16 +19,15 @@ import {
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import styled from 'styled-components';
-import { useState } from 'react';
-const ModalContainer = styled.div`
-  /* стилізація контейнера модального вікна */
-`;
 
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
-`;
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logOut } from '../../redux/operation';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import MyPetsList from '../MyPets/MyPets';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -51,6 +51,8 @@ const schema = yup.object().shape({
 const ProfileForm = () => {
   const [photo, setPhoto] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -89,8 +91,18 @@ const ProfileForm = () => {
       setValue('avatar', blobUrl);
     }
   };
+  const logout = async () => {
+    const res = await dispatch(logOut());
+    console.log(res);
+    if (res.error && res.payload.includes('401')) {
+      toast('You are not authorized');
+    } else {
+      // navigate('/home');
+    }
+  };
   return (
     <ProfileFormContainer>
+      <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ProfileFormFirstDiv>
@@ -146,11 +158,6 @@ const ProfileForm = () => {
           {errors.apiError && (
             <ErrorMessage>{errors.apiError.message}</ErrorMessage>
           )}
-
-          {/* <button type="submit">Save</button> */}
-          {/* <button type="button" onClick={onClose}> */}
-          {/* Cancel
-          </button> */}
         </form>
         <MyPetsDiv>
           <MyPets>My pets</MyPets>
@@ -158,7 +165,8 @@ const ProfileForm = () => {
             Add pet <AddPetButtonSpan>+</AddPetButtonSpan>
           </AddPetButton>
         </MyPetsDiv>
-        <LogoutButton>Log out</LogoutButton>
+        <MyPetsList />
+        <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
     </ProfileFormContainer>
   );
