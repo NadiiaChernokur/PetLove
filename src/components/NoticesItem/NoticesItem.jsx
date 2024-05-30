@@ -33,7 +33,7 @@ const NoticesItem = ({ array }) => {
   };
   return (
     <NoticesItemContainer>
-      {array.map((item) => (
+      {array?.map((item) => (
         <NoticesItemList key={item._id}>
           <NoticesItemImg>
             <NoticesImg src={item.imgURL} alt={item.title}></NoticesImg>
@@ -74,9 +74,9 @@ const NoticesItem = ({ array }) => {
           </Buttons>
         </NoticesItemList>
       ))}
-      {/* {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />} */}
-      {/* {isShowModal && <AttentionModal close={closeModal} />} */}
-      {isShowModal && <EditInformationModal close={closeModal} />}
+      {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />}
+      {/* {isShowModal && <AttentionModal close={closeModal} />}
+      {isShowModal && <EditInformationModal close={closeModal} />} */}
       {/* {isShowModal && <CongratsModal close={closeModal} />} */}
     </NoticesItemContainer>
   );

@@ -3,6 +3,7 @@ export const MyPetsContainer = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-top: 20px;
 `;
 
 export const MyPetsLi = styled.li`

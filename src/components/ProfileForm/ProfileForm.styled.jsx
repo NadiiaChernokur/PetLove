@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ProfileFormContainer = styled.div`
   border-radius: 60px;
   width: 520px;
-  height: 674px;
+
   background: #fff;
   padding: 40px;
 `;
