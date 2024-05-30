@@ -120,11 +120,6 @@ export const AddPetPhoto = styled.img`
   margin-bottom: 12px;
 `;
 export const AddPetAddPhoto = styled.input`
-  /* border-radius: 30px;
-  padding: 12px 16px;
-  width: 146px;
-  height: 42px;
-  background: #fff4df; */
   display: none;
 `;
 
@@ -198,4 +193,12 @@ export const SubmitButton = styled.button`
   line-height: 125%;
   letter-spacing: -0.03em;
   color: #fff;
+`;
+export const AddPetSelect = styled.select`
+  border: 1px solid #f6b83d;
+  border-radius: 30px;
+  padding: 16px;
+  width: 210px;
+  /* width: 100%; */
+  margin-bottom: 18px;
 `;

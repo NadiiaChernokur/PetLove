@@ -15,6 +15,7 @@ import {
   AddPetRadioFemaleLabel,
   AddPetRadioMaleLabel,
   AddPetRadioMultipleLabel,
+  AddPetSelect,
   BackButton,
   BirthdayDiv,
   CustomButton,
@@ -26,9 +27,10 @@ import {
   SubmitButton,
 } from './AddPet.styled';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPet } from '../../redux/operation';
+import { addPet, getSpecies } from '../../redux/operation';
+import Select from 'react-select';
 
 const schema = yup.object().shape({
   title: yup.string().required('Title is required'),
@@ -50,6 +52,7 @@ const schema = yup.object().shape({
 
 const AddPet = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [option, setOption] = useState([]);
   const dispatch = useDispatch();
   const {
     register,
@@ -60,6 +63,14 @@ const AddPet = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  useEffect(() => {
+    const fetchSpecies = async () => {
+      const res = await dispatch(getSpecies());
+      console.log(res);
+      setOption(res.payload);
+    };
+    fetchSpecies();
+  }, [dispatch]);
 
   const history = useNavigate();
 
@@ -162,31 +173,47 @@ const AddPet = () => {
           </DownloadPhotoDiv>
           <div>
             <label></label>
-            <FormInput {...register('title')} />
+            <FormInput {...register('title')} placeholder="Title" />
             {errors.title && (
               <ErrorMessage>{errors.title.message}</ErrorMessage>
             )}
           </div>
           <div>
             <label></label>
-            <FormInput {...register('name')} />
+            <FormInput {...register('name')} placeholder="Pet’s Name" />
             {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
           </div>
           <BirthdayDiv>
             <div>
               <label></label>
-              <FormInput {...register('birthday')} />
+              <FormInput {...register('birthday')} placeholder="0000.00.00" />
               {errors.birthday && (
                 <ErrorMessage>{errors.birthday.message}</ErrorMessage>
               )}
             </div>
-            <div>
+            {/* <div>
               <label></label>
-              <FormInput {...register('species')} />
+              <FormInput {...register('species')} placeholder="Type of pet" />
               {errors.species && (
                 <ErrorMessage>{errors.species.message}</ErrorMessage>
               )}
-            </div>
+            </div> */}
+
+            <AddPetSelect
+              name="species"
+              {...register('species')}
+              onChange={(e) => setValue('species', e.target.value)}
+            >
+              <option value="">Type of pet</option>
+              {option?.map((petType, index) => (
+                <option key={index} value={petType}>
+                  {petType}
+                </option>
+              ))}
+            </AddPetSelect>
+            {errors.species && (
+              <ErrorMessage>{errors.species.message}</ErrorMessage>
+            )}
           </BirthdayDiv>
           <AddPetButtonsDiv>
             <BackButton type="button" onClick={handleBack}>
