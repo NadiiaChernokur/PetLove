@@ -20,11 +20,11 @@ import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '../../redux/operation';
-
+import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
+import sprite from '../../img/sprite.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyPetsList from '../MyPets/MyPets';
@@ -51,6 +51,7 @@ const schema = yup.object().shape({
 
 const ProfileForm = () => {
   const [photo, setPhoto] = useState();
+  const [userData, setUserData] = useState([]);
   const [isUploadUserModal, setIsUploadUserModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
@@ -71,6 +72,25 @@ const ProfileForm = () => {
     //   phone,
     // },
   });
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const storedUserData = localStorage.getItem('petLoveUserData');
+      console.log(storedUserData);
+      if (storedUserData) {
+        const user = JSON.parse(storedUserData);
+        console.log(user.token);
+        safeToken(user.token);
+        const res = await dispatch(getCurrentUser());
+        setUserData(res.payload);
+        console.log(res.payload);
+      } else {
+        navigate('/login');
+      }
+    };
+    fetchUser();
+  }, [dispatch, navigate]);
+
   const onSubmit = async (data) => {
     try {
       console.log(data);
@@ -114,12 +134,17 @@ const ProfileForm = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ProfileFormFirstDiv>
-            <ProfileFormUser>User</ProfileFormUser>
+            <ProfileFormUser>
+              User
+              <svg width="16" height="16">
+                <use href={`${sprite}#user`}></use>
+              </svg>
+            </ProfileFormUser>
             <UploadPhotoDiv>
-              <img src={photo} alt="" />
-              <ProfileFormImg>
-                <svg></svg>
-              </ProfileFormImg>
+              <ProfileFormImg
+                src={userData?.avatar ? userData.avatar : selectedFile}
+                alt="user photo"
+              ></ProfileFormImg>
               <ProfileFormPhotoInput
                 id="avatar"
                 type="file"
@@ -136,20 +161,26 @@ const ProfileForm = () => {
               </UploadPhotoButton>
             </UploadPhotoDiv>
             <UploadUserButton onClick={uploadUserModal}>
-              <svg></svg>
+              <svg width="16" height="16">
+                <use href={`${sprite}#trash`} width="16" height="16"></use>
+              </svg>
             </UploadUserButton>
           </ProfileFormFirstDiv>
           <MyInformation>My information</MyInformation>
 
           <div>
             <label htmlFor="name"></label>
-            <FormInput id="name" {...register('name')} />
+            <FormInput id="name" {...register('name')} value={userData?.name} />
             {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
           </div>
 
           <div>
             <label htmlFor="email"></label>
-            <FormInput id="email" {...register('email')} />
+            <FormInput
+              id="email"
+              {...register('email')}
+              value={userData?.email}
+            />
             {errors.email && (
               <ErrorMessage>{errors.email.message}</ErrorMessage>
             )}
@@ -157,7 +188,7 @@ const ProfileForm = () => {
 
           <div>
             <label htmlFor="phone"></label>
-            <FormInput id="phone" {...register('phone')} />
+            <FormInput id="phone" {...register('phone')} placeholder="+380" />
             {errors.phone && (
               <ErrorMessage>{errors.phone.message}</ErrorMessage>
             )}
@@ -173,7 +204,8 @@ const ProfileForm = () => {
             Add pet <AddPetButtonSpan>+</AddPetButtonSpan>
           </AddPetButton>
         </MyPetsDiv>
-        <MyPetsList />
+        {userData?.pets?.length > 0 && <MyPetsList pets={userData?.pets} />}
+
         <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
       {isUploadUserModal && <EditInformationModal />}

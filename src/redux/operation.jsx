@@ -2,6 +2,49 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 axios.defaults.baseURL = `https://petlove.b.goit.study/api`;
+export const safeToken = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearToken = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+export const logIn = createAsyncThunk('logIn', async (data, thunkAPI) => {
+  try {
+    const respons = await axios.post(`/users/signin`, data);
+    console.log(respons.data);
+    safeToken(respons.data.token);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+export const registration = createAsyncThunk(
+  'registration',
+  async (data, thunkAPI) => {
+    try {
+      const respons = await axios.post(`/users/signup`, data);
+      console.log(respons.data);
+      safeToken(respons.data.token);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const getCurrentUser = createAsyncThunk(
+  'currentUser',
+  async (data, thunkAPI) => {
+    try {
+      const respons = await axios.get(`/users/current/full`);
+      console.log(respons.data);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
   try {
@@ -97,16 +140,7 @@ export const logOut = createAsyncThunk('logOut', async (data, thunkAPI) => {
   try {
     const respons = await axios.post(`/users/signout`);
     console.log(respons.data);
-    return respons.data;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
-
-export const logIn = createAsyncThunk('logIn', async (data, thunkAPI) => {
-  try {
-    const respons = await axios.post(`/users/signin`, data);
-    console.log(respons.data);
+    clearToken();
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

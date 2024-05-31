@@ -82,13 +82,13 @@
       </clipPath>
     </defs>
   </symbol>
-  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="trash-2">
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="trash">
     <path d="M2.25 4.5H3.75H15.75" stroke="#F6B83D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M14.25 4.5V15C14.25 15.3978 14.092 15.7794 13.8107 16.0607C13.5294 16.342 13.1478 16.5 12.75 16.5H5.25C4.85218 16.5 4.47064 16.342 4.18934 16.0607C3.90804 15.7794 3.75 15.3978 3.75 15V4.5M6 4.5V3C6 2.60218 6.15804 2.22064 6.43934 1.93934C6.72065 1.65804 7.10218 1.5 7.5 1.5H10.5C10.8978 1.5 11.2794 1.65804 11.5607 1.93934C11.842 2.22064 12 2.60218 12 3V4.5" stroke="#F6B83D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M7.5 8.25V12.75" stroke="#F6B83D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M10.5 8.25V12.75" stroke="#F6B83D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>
-  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="user-02">
+  <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="user">
     <path d="M11.9999 15C8.82977 15 6.01065 16.5306 4.21585 18.906C3.82956 19.4172 3.63641 19.6728 3.64273 20.0183C3.64761 20.2852 3.81521 20.6219 4.02522 20.7867C4.29704 21 4.67372 21 5.42708 21H18.5726C19.326 21 19.7027 21 19.9745 20.7867C20.1845 20.6219 20.3521 20.2852 20.357 20.0183C20.3633 19.6728 20.1701 19.4172 19.7839 18.906C17.9891 16.5306 15.1699 15 11.9999 15Z" fill="#F6B83D" stroke="#F6B83D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M12 12C14.4853 12 16.5 9.98528 16.5 7.5C16.5 5.01472 14.4853 3 12 3C9.51472 3 7.5 5.01472 7.5 7.5C7.5 9.98528 9.51472 12 12 12Z" fill="#F6B83D" stroke="#F6B83D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>

@@ -9,7 +9,7 @@ import {
   MyPetsTitle,
 } from './MyPets.styled';
 
-const MyPetsList = () => {
+const MyPetsList = ({ pets }) => {
   return (
     <MyPetsContainer>
       <MyPetsLi>

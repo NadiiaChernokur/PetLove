@@ -27,7 +27,7 @@ import {
 import sprite from '/src/img/sprite.svg';
 import photo from '../../img/dog.png';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/operation';
 import { ToastContainer, toast } from 'react-toastify';
@@ -48,9 +48,18 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [password, setPassword] = useState('');
+  // const [userName, setUserName] = useState('');
+  // const [userEmail, setUserEmail] = useState('');
+  // const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const storedUserData = localStorage.getItem('petLoveUserData');
+  //   console.log(storedUserData);
+  //   if (storedUserData) {
+  //     setUserData(JSON.parse(storedUserData));
+  //   }
+  // }, []);
   const handleNavigate = () => {
     navigate('/register');
   };
@@ -61,11 +70,13 @@ const Login = () => {
     const results = await dispatch(logIn(data));
     console.log(results);
     if (
-      results.error.message === 'Rejected' &&
+      results.error?.message === 'Rejected' &&
       results.payload.includes('401')
     ) {
       toast('You are not authorized');
     } else {
+      localStorage.setItem('petLoveUserData', JSON.stringify(results.payload));
+      navigate('/profile');
       console.log(results.payload);
     }
   };

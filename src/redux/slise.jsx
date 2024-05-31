@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addPet, getSpecies, logIn, logOut } from './operation';
+import {
+  addPet,
+  getCurrentUser,
+  getSpecies,
+  logIn,
+  logOut,
+  registration,
+} from './operation';
 import { getNews } from './operation';
 import { getFriends } from './operation';
 import { getNotices } from './operation';
@@ -17,6 +24,8 @@ const initialState = {
   newPet: [],
   species: [],
   logIn: [],
+  registr: [],
+  user: [],
   isLoading: false,
   error: null,
 };
@@ -29,7 +38,7 @@ const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };
-const getNoticesCategoriesFulfilled = (state, action) => {
+const getNoticesCategoriesFulfilled = (state, _) => {
   state.isLoading = false;
   state.error = null;
   //   state.categoriesArray = action.payload;
@@ -70,6 +79,16 @@ const logInFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
   state.logIn = action.payload;
+};
+const registrFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.registr = action.payload;
+};
+const getCurrentUserFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.user = action.payload;
 };
 // const getLocationFulfilled = (state, action) => {
 //   state.isLoading = false;
@@ -115,7 +134,13 @@ const petsSlice = createSlice({
       .addCase(logOut.rejected, handleRejected)
       .addCase(logIn.pending, handlePending)
       .addCase(logIn.fulfilled, logInFulfilled)
-      .addCase(logIn.rejected, handleRejected),
+      .addCase(logIn.rejected, handleRejected)
+      .addCase(registration.pending, handlePending)
+      .addCase(registration.fulfilled, registrFulfilled)
+      .addCase(registration.rejected, handleRejected)
+      .addCase(getCurrentUser.pending, handlePending)
+      .addCase(getCurrentUser.fulfilled, getCurrentUserFulfilled)
+      .addCase(getCurrentUser.rejected, handleRejected),
 });
 
 export const petsReducer = petsSlice.reducer;

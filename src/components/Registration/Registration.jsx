@@ -5,6 +5,7 @@ import {
   CatDiv,
   CatImg,
   CatSection,
+  Div,
   ErrorText,
   FieldFormik,
   FormContainer,
@@ -14,12 +15,23 @@ import {
   Name,
   NameDiv,
   RegButton,
+  RegEye,
   Registr,
   RegistrSection,
   RegistrationContainer,
 } from './Registration.styled';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import { DogDescribeP } from '../Login/Login.styled';
+import photo from '../../img/cat.png';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import sprite from '/src/img/sprite.svg';
+import { registration } from '../../redux/operation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
   email: yup
@@ -40,12 +52,37 @@ const schema = yup.object().shape({
 });
 
 const Registration = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConf, setShowPasswordConf] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const toLogin = () => {
+    navigate('/login');
+  };
+  const fetchRegistration = async (data) => {
+    const results = await dispatch(registration(data));
+    if (results.meta.requestStatus === 'fulfilled') {
+      localStorage.setItem('petLoveUserData', JSON.stringify(results.payload));
+      navigate('/login');
+    } else {
+      if (results.payload.includes('409')) {
+        toast('This email is already registered. log in');
+      }
+    }
+  };
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleShowPasswordConf = () => {
+    setShowPasswordConf(!showPasswordConf);
+  };
   return (
     <RegistrationContainer>
+      <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <CatSection>
         <CatDescribe>
           <CatImg>
-            <svg></svg>
+            <img src={photo} alt="Cat"></img>
           </CatImg>
           <CatDiv>
             <NameDiv>
@@ -55,10 +92,10 @@ const Registration = () => {
                 <BirthdaySpan>18.10.2021</BirthdaySpan>
               </Birthday>
             </NameDiv>
-            <p>
+            <DogDescribeP>
               Jack is a gray Persian cat with green eyes. He loves to be
               pampered and groomed, and enjoys playing with toys.
-            </p>
+            </DogDescribeP>
           </CatDiv>
         </CatDescribe>
       </CatSection>
@@ -72,8 +109,10 @@ const Registration = () => {
             password: '',
             confirmPassword: '',
           }}
-          onSubmit={async (values) => {
-            console.log(values);
+          onSubmit={(values) => {
+            const { confirmPassword, ...rest } = values;
+            fetchRegistration(rest);
+            console.log(rest);
           }}
           validationSchema={schema}
         >
@@ -87,23 +126,46 @@ const Registration = () => {
               type="email"
             />
             <ErrorMessage name="email" component={ErrorText} />
-            <FieldFormik
-              id="password"
-              name="password"
-              placeholder="Password"
-              type="password"
-            />
-            <ErrorMessage name="password" component={ErrorText} />
-            <FieldFormik
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm password"
-            />
-            <ErrorMessage name="confirmPassword" component={ErrorText} />
+            <Div>
+              <FieldFormik
+                id="password"
+                name="password"
+                placeholder="Password"
+                type={showPassword ? 'text' : 'password'}
+              />
+              {showPassword ? (
+                <RegEye width="22" height="22" onClick={toggleShowPassword}>
+                  <use href={`${sprite}#eye`}></use>
+                </RegEye>
+              ) : (
+                <RegEye width="22" height="22" onClick={toggleShowPassword}>
+                  <use href={`${sprite}#eye-off`}></use>
+                </RegEye>
+              )}
+              <ErrorMessage name="password" component={ErrorText} />
+            </Div>
+            <Div>
+              <FieldFormik
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm password"
+                type={showPasswordConf ? 'text' : 'password'}
+              />
+              {showPasswordConf ? (
+                <RegEye width="22" height="22" onClick={toggleShowPasswordConf}>
+                  <use href={`${sprite}#eye`}></use>
+                </RegEye>
+              ) : (
+                <RegEye width="22" height="22" onClick={toggleShowPasswordConf}>
+                  <use href={`${sprite}#eye-off`}></use>
+                </RegEye>
+              )}
+              <ErrorMessage name="confirmPassword" component={ErrorText} />
+            </Div>
             <RegButton type="submit">Registration</RegButton>
             <HaveAnAccount>
               Already have an account?
-              <HaveAnAccountSpan>Login</HaveAnAccountSpan>
+              <HaveAnAccountSpan onClick={toLogin}>Login</HaveAnAccountSpan>
             </HaveAnAccount>
           </FormContainer>
         </Formik>

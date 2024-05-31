@@ -29,9 +29,9 @@ export const ProfileFormUser = styled.div`
   justify-content: center;
 `;
 
-export const ProfileFormImg = styled.div`
+export const ProfileFormImg = styled.img`
   border-radius: 100px;
-  padding: 10px;
+
   width: 110px;
   height: 110px;
   background: #fff4df;
@@ -77,7 +77,7 @@ export const MyInformation = styled.p`
 export const FormInput = styled.input`
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
-  padding: 16px 382px 16px 16px;
+  padding: 16px;
   width: 440px;
   height: 52px;
   margin-bottom: 14px;

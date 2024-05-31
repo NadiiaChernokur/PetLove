@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
+import photo from '../../img/catReg.png';
 export const RegistrationContainer = styled.div`
   margin: 32px;
   margin-top: 0;
@@ -12,9 +13,8 @@ export const CatSection = styled.div`
   border-radius: 60px;
   width: 592px;
   height: 654px;
-  background-color: blueviolet;
+  background-image: url(${photo});
   position: relative;
-  /* box-sizing: border-box; */
 `;
 export const CatDescribe = styled.div`
   border-radius: 20px;
@@ -33,6 +33,9 @@ export const CatImg = styled.div`
   height: 60px;
   border-radius: 100%;
   background: #fff4df;
+  display: flex;
+  align-items: center;
+  padding: 14px;
 `;
 export const NameDiv = styled.div`
   display: flex;
@@ -101,6 +104,7 @@ export const FieldFormik = styled(Field)`
   border-radius: 30px;
   padding: 16px;
   position: relative;
+  width: 424px;
 `;
 export const RegButton = styled.button`
   background: #f6b83d;
@@ -138,4 +142,14 @@ export const ErrorText = styled.div`
 export const SuccessText = styled.div`
   color: #08aa83;
   font-size: 12px;
+`;
+
+export const Div = styled.div`
+  position: relative;
+`;
+
+export const RegEye = styled.svg`
+  position: absolute;
+  top: 16px;
+  right: 42px;
 `;
