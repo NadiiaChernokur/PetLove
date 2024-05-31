@@ -100,6 +100,7 @@ export const FieldFormik = styled(Field)`
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
   padding: 16px;
+  position: relative;
 `;
 export const RegButton = styled.button`
   background: #f6b83d;
@@ -118,6 +119,11 @@ export const HaveAnAccount = styled.p`
   display: inline-block;
   margin: auto;
   text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 143%;
+  letter-spacing: -0.03em;
+  color: rgba(38, 38, 38, 0.5);
 `;
 export const HaveAnAccountSpan = styled.span`
   font-weight: 700;

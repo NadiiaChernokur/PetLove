@@ -102,3 +102,13 @@ export const logOut = createAsyncThunk('logOut', async (data, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const logIn = createAsyncThunk('logIn', async (data, thunkAPI) => {
+  try {
+    const respons = await axios.post(`/users/signin`, data);
+    console.log(respons.data);
+    return respons.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

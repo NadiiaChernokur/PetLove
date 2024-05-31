@@ -11,7 +11,14 @@ export const HeaderContainer = styled.div`
   z-index: 5;
 `;
 export const HeaderLogo = styled.h2`
+  display: flex;
+  align-items: center;
   color: ${({ isHomePage }) => (isHomePage ? '#fff' : '#262626')};
+`;
+export const HeaderLogoSvg = styled.svg`
+  width: 19px;
+  height: 23px;
+  fill: ${({ isHomePage }) => (isHomePage ? '#fff' : '#f6b83d')};
 `;
 
 export const Navigation = styled.nav`

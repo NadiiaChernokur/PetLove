@@ -5,9 +5,11 @@ import {
   ButtonsDiv,
   HeaderContainer,
   HeaderLogo,
+  HeaderLogoSvg,
   Navigation,
   NavigationP,
 } from './Header.styled';
+import sprite from '/src/img/sprite.svg';
 
 export const Header = () => {
   const location = useLocation();
@@ -17,7 +19,10 @@ export const Header = () => {
     <HeaderContainer>
       <HeaderLogo isHomePage={isHomePage}>
         petl
-        <svg width="19" height="17" isHomePage={isHomePage}></svg>
+        <HeaderLogoSvg isHomePage={isHomePage}>
+          <use href={`${sprite}#hart`}></use>
+        </HeaderLogoSvg>
+        {/* <svg width="19" height="17" isHomePage={isHomePage}></svg> */}
         ve
       </HeaderLogo>
       <Navigation>
