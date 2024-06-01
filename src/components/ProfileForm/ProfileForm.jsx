@@ -8,6 +8,7 @@ import {
   MyPets,
   MyPetsDiv,
   ProfileFormContainer,
+  ProfileFormDiv,
   ProfileFormFirstDiv,
   ProfileFormImg,
   ProfileFormPhotoInput,
@@ -50,7 +51,6 @@ const schema = yup.object().shape({
 });
 
 const ProfileForm = () => {
-  const [photo, setPhoto] = useState();
   const [userData, setUserData] = useState([]);
   const [isUploadUserModal, setIsUploadUserModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -83,6 +83,7 @@ const ProfileForm = () => {
         safeToken(user.token);
         const res = await dispatch(getCurrentUser());
         setUserData(res.payload);
+
         console.log(res.payload);
       } else {
         navigate('/login');
@@ -119,7 +120,7 @@ const ProfileForm = () => {
     if (res.error && res.payload.includes('401')) {
       toast('You are not authorized');
     } else {
-      // navigate('/home');
+      navigate('/home');
     }
   };
   const uploadUserModal = () => {
@@ -128,6 +129,7 @@ const ProfileForm = () => {
   const addPetPage = () => {
     navigate('/add-pet');
   };
+
   return (
     <ProfileFormContainer>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
@@ -136,33 +138,41 @@ const ProfileForm = () => {
           <ProfileFormFirstDiv>
             <ProfileFormUser>
               User
-              <svg width="16" height="16">
-                <use href={`${sprite}#user`}></use>
+              <svg width="22" height="22">
+                <use href={`${sprite}#icons8_cat-footprint`}></use>
               </svg>
             </ProfileFormUser>
             <UploadPhotoDiv>
-              <ProfileFormImg
-                src={userData?.avatar ? userData.avatar : selectedFile}
-                alt="user photo"
-              ></ProfileFormImg>
-              <ProfileFormPhotoInput
-                id="avatar"
-                type="file"
-                accept="image/png, image/jpeg, image/gif, image/bmp, image/webp"
-                {...register('avatar')}
-                onChange={handleFileChange}
-              />
-              {errors.avatar && (
-                <ErrorMessage>{errors.avatar.message}</ErrorMessage>
-              )}
+              <ProfileFormDiv>
+                {userData?.avatar ? (
+                  <ProfileFormImg
+                    src={userData.avatar}
+                    alt="user photo"
+                  ></ProfileFormImg>
+                ) : (
+                  <svg width="50" height="50" fill="aqua">
+                    <use href={`${sprite}#user-02`}></use>
+                  </svg>
+                )}
 
+                <ProfileFormPhotoInput
+                  id="avatar"
+                  type="file"
+                  accept="image/png, image/jpeg, image/gif, image/bmp, image/webp"
+                  {...register('avatar')}
+                  onChange={handleFileChange}
+                />
+                {errors.avatar && (
+                  <ErrorMessage>{errors.avatar.message}</ErrorMessage>
+                )}
+              </ProfileFormDiv>
               <UploadPhotoButton type="button" onClick={DownloadImg}>
                 Upload photo
               </UploadPhotoButton>
             </UploadPhotoDiv>
             <UploadUserButton onClick={uploadUserModal}>
               <svg width="16" height="16">
-                <use href={`${sprite}#trash`} width="16" height="16"></use>
+                <use href={`${sprite}#edit`}></use>
               </svg>
             </UploadUserButton>
           </ProfileFormFirstDiv>
@@ -204,11 +214,11 @@ const ProfileForm = () => {
             Add pet <AddPetButtonSpan>+</AddPetButtonSpan>
           </AddPetButton>
         </MyPetsDiv>
-        {userData?.pets?.length > 0 && <MyPetsList pets={userData?.pets} />}
+        {userData?.pets?.length > 0 && <MyPetsList pets={userData.pets} />}
 
         <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
-      {isUploadUserModal && <EditInformationModal />}
+      {isUploadUserModal && <EditInformationModal user={userData} />}
     </ProfileFormContainer>
   );
 };

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   addPet,
+  deletePet,
   getCurrentUser,
   getSpecies,
   logIn,
@@ -65,6 +66,11 @@ const addPetFulfilled = (state, action) => {
   state.error = null;
   state.newPet = action.payload;
 };
+const deletePetFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  // state.newPet = action.payload;
+};
 const getSpeciesFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
@@ -126,6 +132,9 @@ const petsSlice = createSlice({
       .addCase(addPet.pending, handlePending)
       .addCase(addPet.fulfilled, addPetFulfilled)
       .addCase(addPet.rejected, handleRejected)
+      .addCase(deletePet.pending, handlePending)
+      .addCase(deletePet.fulfilled, deletePetFulfilled)
+      .addCase(deletePet.rejected, handleRejected)
       .addCase(getSpecies.pending, handlePending)
       .addCase(getSpecies.fulfilled, getSpeciesFulfilled)
       .addCase(getSpecies.rejected, handleRejected)

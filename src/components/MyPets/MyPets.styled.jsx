@@ -13,6 +13,7 @@ export const MyPetsLi = styled.li`
   height: 130px;
   padding: 20px;
   display: flex;
+  justify-content: space-between;
 `;
 export const MyPetsImg = styled.img`
   border-radius: 100px;

@@ -30,13 +30,27 @@ export const ProfileFormUser = styled.div`
 `;
 
 export const ProfileFormImg = styled.img`
-  border-radius: 100px;
-
+  /* border-radius: 100px;
   width: 110px;
   height: 110px;
   background: #fff4df;
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 8px; */
+`;
+export const ProfileFormDiv = styled.div`
+display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff4df; 
+     border-radius: 100px;
+  width: 110px;
+  height: 110px;
+  /* border-radius: 100px;
+  width: 110px;
+  height: 110px;
+   background: #fff4df; 
+  display: flex;
+  margin-bottom: 8px; 
 `;
 
 export const ProfileFormPhotoInput = styled.input`

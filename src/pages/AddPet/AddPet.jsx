@@ -13,8 +13,6 @@ import {
   AddPetRadio,
   AddPetRadioContainer,
   AddPetRadioFemaleLabel,
-  AddPetRadioMaleLabel,
-  AddPetRadioMultipleLabel,
   AddPetSelect,
   BackButton,
   BirthdayDiv,
@@ -24,23 +22,28 @@ import {
   Form,
   FormInput,
   FormInputFile,
+  PawDiv,
+  SexDiv,
   SubmitButton,
 } from './AddPet.styled';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPet, getSpecies } from '../../redux/operation';
+import { addPet, getSpecies, safeToken } from '../../redux/operation';
 import Select from 'react-select';
+import sprite from '../../img/sprite.svg';
+import sprit from '../../img/svg.svg';
+import spri from '../../img/s.svg';
+import photo from '../../img/dogAddpets.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = yup.object().shape({
   title: yup.string().required('Title is required'),
   name: yup.string().required('Name is required'),
-  imgUrl: yup
+  imgURL: yup
     .string()
-    .matches(
-      /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp))|^(blob:)/,
-      'Invalid URL'
-    )
+    .matches(/^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/, 'Invalid URL')
     .required('Image URL is required'),
   species: yup.string().required('Species is required'),
   birthday: yup
@@ -53,6 +56,7 @@ const schema = yup.object().shape({
 const AddPet = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [option, setOption] = useState([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -66,20 +70,32 @@ const AddPet = () => {
   });
   useEffect(() => {
     const fetchSpecies = async () => {
-      const res = await dispatch(getSpecies());
-      console.log(res);
-      setOption(res.payload);
+      const storedUserData = localStorage.getItem('petLoveUserData');
+
+      if (storedUserData) {
+        const user = JSON.parse(storedUserData);
+
+        safeToken(user.token);
+        const res = await dispatch(getSpecies());
+
+        setOption(res.payload);
+      }
     };
     fetchSpecies();
   }, [dispatch]);
 
-  const history = useNavigate();
-
   const onSubmit = async (data) => {
     try {
-      console.log(data);
-      const res = dispatch(addPet(data));
-      console.log(res);
+      const res = await dispatch(addPet(data));
+
+      if (
+        (res.error && res.payload.includes('401')) ||
+        (res.error && res.payload.includes('400'))
+      ) {
+        toast('You are not authorized');
+      } else {
+        navigate('/profile');
+      }
     } catch (error) {
       alert('Error: ' + error.message);
     }
@@ -89,14 +105,17 @@ const AddPet = () => {
     navigate('/profile');
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    console.log(URL.createObjectURL(file));
 
     if (file) {
       const blobUrl = URL.createObjectURL(file);
+
+      const validUrl = blobUrl.replace('blob:', '');
+      const url = validUrl + '.png';
+
       setSelectedFile(blobUrl);
-      setValue('imgUrl', blobUrl);
+      setValue('imgURL', url);
     }
   };
 
@@ -105,8 +124,9 @@ const AddPet = () => {
   };
   return (
     <AddPetContsiner>
+      <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <div width={592}>
-        <AddPetImg></AddPetImg>
+        <AddPetImg src={photo}></AddPetImg>
       </div>
       <AddPetFormContainer>
         <AddPetFormTitel>
@@ -116,57 +136,87 @@ const AddPet = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <AddPetRadioContainer>
-              <AddPetRadio
-                type="radio"
-                id="female"
-                value="female"
-                {...register('sex')}
-              />
-              <AddPetRadioFemaleLabel
-                htmlFor="female"
-                bgColor="rgba(244, 63, 94, 0.1)"
-                text="F"
-              />
+              <SexDiv>
+                <AddPetRadio
+                  type="radio"
+                  id="female"
+                  value="female"
+                  {...register('sex')}
+                />
 
-              <AddPetRadio
-                type="radio"
-                id="male"
-                value="male"
-                {...register('sex')}
-              />
-              <AddPetRadioFemaleLabel
-                htmlFor="male"
-                bgColor="rgba(84, 173, 255, 0.1)"
-                text="M"
-              />
-
-              <AddPetRadio
-                type="radio"
-                id="multiple"
-                value="multiple"
-                {...register('sex')}
-              />
-              <AddPetRadioFemaleLabel
-                htmlFor="multiple"
-                bgColor="#fff4df"
-                text="X"
-              />
+                <AddPetRadioFemaleLabel
+                  htmlFor="female"
+                  bgColor="rgba(244, 63, 94, 0.1)"
+                  bgrColor=" #f43f5e"
+                >
+                  <svg width="24" height="24">
+                    <use href={`${sprite}#female`}></use>
+                  </svg>
+                </AddPetRadioFemaleLabel>
+              </SexDiv>
+              <SexDiv>
+                <AddPetRadio
+                  type="radio"
+                  id="male"
+                  value="male"
+                  {...register('sex')}
+                />
+                <AddPetRadioFemaleLabel
+                  htmlFor="male"
+                  bgColor="rgba(84, 173, 255, 0.1)"
+                  bgrColor=" #3fd6f4"
+                >
+                  <svg width="24" height="24">
+                    <use href={`${sprite}#male`}></use>
+                  </svg>
+                  {/* <svg width="24" height="24">
+                    <use href={`${spri}#femalew`}></use>
+                  </svg> */}
+                </AddPetRadioFemaleLabel>
+              </SexDiv>
+              <SexDiv>
+                <AddPetRadio
+                  type="radio"
+                  id="multiple"
+                  value="multiple"
+                  {...register('sex')}
+                />
+                <AddPetRadioFemaleLabel
+                  htmlFor="multiple"
+                  bgColor="#fff4df"
+                  bgrColor=" #f7bf4e"
+                >
+                  <svg width="24" height="24">
+                    <use
+                      href={`${sprite}#healthicons_sexual-reproductive-health`}
+                    ></use>
+                  </svg>
+                </AddPetRadioFemaleLabel>
+              </SexDiv>
             </AddPetRadioContainer>
             {errors.sex && <ErrorMessage>{errors.sex.message}</ErrorMessage>}
           </div>
-          <AddPetPhoto src={selectedFile} alt={'title'}></AddPetPhoto>
+          <PawDiv>
+            {selectedFile ? (
+              <AddPetPhoto src={selectedFile} alt={'title'}></AddPetPhoto>
+            ) : (
+              <svg width="86" height="86">
+                <use href={`${sprit}#image`}></use>
+              </svg>
+            )}
+          </PawDiv>
+          {/* <AddPetPhoto src={selectedFile} alt={'title'}></AddPetPhoto> */}
           <DownloadPhotoDiv>
             <FormInputFile value={selectedFile} />
             <AddPetAddPhoto
-              {...register('imgUrl')}
+              {...register('imgURL')}
               id="fileInput"
               type="file"
               accept="image/png, image/jpeg, image/gif, image/bmp, image/webp"
-              {...register('imgUrl')}
               onChange={handleFileChange}
             />
-            {errors.imgUrl && (
-              <ErrorMessage>{errors.imgUrl.message}</ErrorMessage>
+            {errors.imgURL && (
+              <ErrorMessage>{errors.imgURL.message}</ErrorMessage>
             )}
             <CustomButton type="button" onClick={handleButtonClick}>
               Upload Photo

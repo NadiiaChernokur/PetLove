@@ -55,6 +55,7 @@ export const AddPetRadioFemaleLabel = styled.label`
   display: inline-block;
   border: none;
   border-radius: 30px;
+  padding: 6px;
   width: 40px;
   height: 40px;
   background: ${(props) => props.bgColor || 'rgba(244, 63, 94, 0.1)'};
@@ -62,7 +63,8 @@ export const AddPetRadioFemaleLabel = styled.label`
   line-height: 40px;
 
   &:after {
-    content: '${(props) => props.text}';
+    /* content: '${(props) => props.text}'; */
+
     display: block;
     width: 100%;
     height: 100%;
@@ -71,53 +73,53 @@ export const AddPetRadioFemaleLabel = styled.label`
   }
 
   ${AddPetRadio}:checked + & {
-    background: green;
-    mix-blend-mode: multiply;
+    background: ${(props) => props.bgrColor};
+    stroke: #fff;
+    /* mix-blend-mode: multiply; */
   }
 `;
-export const AddPetRadioMaleLabel = styled.label`
-  cursor: pointer;
-  position: relative;
-  display: block;
-  border: none;
-  border-radius: 30px;
-  width: 40px;
-  height: 40px;
-  background: rgba(84, 173, 255, 0.1);
-  text-align: center;
+// export const AddPetRadioMaleLabel = styled.label`
+//   cursor: pointer;
+//   position: relative;
+//   display: block;
+//   border: none;
+//   border-radius: 30px;
+//   width: 40px;
+//   height: 40px;
+//   background: rgba(84, 173, 255, 0.1);
+//   text-align: center;
 
-  ${AddPetRadio}:checked + & {
-    background: green;
-    mix-blend-mode: multiply;
-  }
-`;
+//   ${AddPetRadio}:checked + & {
+//     background: green;
+//     mix-blend-mode: multiply;
+//   }
+// `;
 export const Form = styled.form`
   width: 432px;
 `;
-export const AddPetRadioMultipleLabel = styled.label`
-  cursor: pointer;
-  position: relative;
-  display: block;
-  border: none;
-  border-radius: 30px;
-  width: 40px;
-  height: 40px;
-  background: #fff4df;
-  text-align: center;
+// export const AddPetRadioMultipleLabel = styled.label`
+//   cursor: pointer;
+//   position: relative;
+//   display: block;
+//   border: none;
+//   border-radius: 30px;
+//   width: 40px;
+//   height: 40px;
+//   background: #fff4df;
+//   text-align: center;
 
-  ${AddPetRadio}:checked + & {
-    background: green;
-    mix-blend-mode: multiply;
-  }
-`;
+//   ${AddPetRadio}:checked + & {
+//     background: green;
+//     mix-blend-mode: multiply;
+//   }
+// `;
 export const AddPetPhoto = styled.img`
   border-radius: 100px;
-
   width: 86px;
   height: 86px;
   margin: auto;
   background: pink;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 `;
 export const AddPetAddPhoto = styled.input`
   display: none;
@@ -201,4 +203,13 @@ export const AddPetSelect = styled.select`
   width: 210px;
   /* width: 100%; */
   margin-bottom: 18px;
+`;
+
+export const PawDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+`;
+export const SexDiv = styled.div`
+  display: flex;
 `;
