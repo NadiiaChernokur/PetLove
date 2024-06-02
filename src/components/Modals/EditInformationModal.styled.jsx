@@ -92,6 +92,9 @@ export const UploadPhoto = styled.button`
   letter-spacing: -0.02em;
   color: #262626;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 export const ProfileFormModalDiv = styled.div`
   display: flex;

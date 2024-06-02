@@ -94,29 +94,6 @@
   </symbol>
 
 
-  <!-- <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" id="userW">
-    <g filter="url(#filter0_d_55782_210)">
-      <path d="M11.9999 11.25C9.62233 11.25 7.50799 12.398 6.16188 14.1795C5.87217 14.5629 5.72731 14.7546 5.73205 15.0137C5.73571 15.2139 5.86141 15.4664 6.01891 15.59C6.22278 15.75 6.50529 15.75 7.07031 15.75H16.9295C17.4945 15.75 17.777 15.75 17.9809 15.59C18.1384 15.4664 18.2641 15.2139 18.2677 15.0137C18.2725 14.7546 18.1276 14.5629 17.8379 14.1795C16.4918 12.398 14.3774 11.25 11.9999 11.25Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M12 9C13.864 9 15.375 7.48896 15.375 5.625C15.375 3.76104 13.864 2.25 12 2.25C10.136 2.25 8.625 3.76104 8.625 5.625C8.625 7.48896 10.136 9 12 9Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-    </g>
-    <defs>
-      <filter id="filter0_d_55782_210" x="-1" y="0" width="26" height="26" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-        <feOffset dy="4"></feOffset>
-        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-        <feComposite in2="hardAlpha" operator="out"></feComposite>
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_55782_210"></feBlend>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_55782_210" result="shape"></feBlend>
-      </filter>
-    </defs>
-  </symbol> -->
-
-
-
-
-
 <svg width="0" height="0" class="hidden">
   <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="user-02 (1)">
     <path d="M11.9999 15C8.82977 15 6.01065 16.5306 4.21585 18.906C3.82956 19.4172 3.63641 19.6728 3.64273 20.0183C3.64761 20.2852 3.81521 20.6219 4.02522 20.7867C4.29704 21 4.67372 21 5.42708 21H18.5726C19.326 21 19.7027 21 19.9745 20.7867C20.1845 20.6219 20.3521 20.2852 20.357 20.0183C20.3633 19.6728 20.1701 19.4172 19.7839 18.906C17.9891 16.5306 15.1699 15 11.9999 15Z" fill="#F6B83D" stroke="#F6B83D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

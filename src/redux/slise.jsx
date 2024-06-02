@@ -3,6 +3,7 @@ import {
   addPet,
   deletePet,
   getCurrentUser,
+  getEditUser,
   getSpecies,
   logIn,
   logOut,
@@ -96,6 +97,11 @@ const getCurrentUserFulfilled = (state, action) => {
   state.error = null;
   state.user = action.payload;
 };
+const editUserFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  state.user = action.payload;
+};
 // const getLocationFulfilled = (state, action) => {
 //   state.isLoading = false;
 //   state.error = null;
@@ -149,7 +155,10 @@ const petsSlice = createSlice({
       .addCase(registration.rejected, handleRejected)
       .addCase(getCurrentUser.pending, handlePending)
       .addCase(getCurrentUser.fulfilled, getCurrentUserFulfilled)
-      .addCase(getCurrentUser.rejected, handleRejected),
+      .addCase(getCurrentUser.rejected, handleRejected)
+      .addCase(getEditUser.pending, handlePending)
+      .addCase(getEditUser.fulfilled, editUserFulfilled)
+      .addCase(getEditUser.rejected, handleRejected),
 });
 
 export const petsReducer = petsSlice.reducer;

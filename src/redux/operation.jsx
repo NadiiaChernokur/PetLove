@@ -46,6 +46,19 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
+export const getEditUser = createAsyncThunk(
+  'editUser',
+  async (data, thunkAPI) => {
+    try {
+      const respons = await axios.patch(`/users/current/edit`, data);
+      console.log(respons.data);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
   try {
     console.log(data);

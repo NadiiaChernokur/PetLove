@@ -17,12 +17,14 @@ import {
   Save,
   UploadPhoto,
 } from './EditInformationModal.styled';
-import {
-  ProfileFormImg,
-  ProfileFormPhotoInput,
-} from '../ProfileForm/ProfileForm.styled';
-import sprite from '../../img/sprite.svg';
+import { ProfileFormPhotoInput } from '../ProfileForm/ProfileForm.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import sprsvg from '../../img/sprite2.svg';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getEditUser } from '../../redux/operation';
 const schema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string()
@@ -41,6 +43,8 @@ const schema = Yup.object().shape({
 
 const EditInformationModal = ({ user, onClose }) => {
   const [selectedFile, setSelectedFile] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -49,6 +53,7 @@ const EditInformationModal = ({ user, onClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  console.log('99999999999');
   useEffect(() => {
     if (user?.avatar) {
       setValue('avatar', user.avatar);
@@ -58,33 +63,39 @@ const EditInformationModal = ({ user, onClose }) => {
   const onSubmit = async (data) => {
     try {
       console.log(data);
-      onClose();
+      const res = await dispatch(getEditUser(data));
+      console.log(res);
+      if (res.meta.requestStatus === 'fulfilled') {
+        navigate('/profile');
+      } else {
+        toast('You are not authorized');
+      }
+
+      // onClose();
     } catch (error) {
       alert('Error updating user: ' + error.message);
     }
   };
 
   const handleFileChange = (event) => {
-    console.log('77777777777777');
     const file = event.target.files[0];
-    console.log(file);
 
     if (file) {
       const blobUrl = URL.createObjectURL(file);
-      console.log(blobUrl);
       const validUrl = blobUrl.replace('blob:', '');
       const url = validUrl + '.png';
-
       setSelectedFile(blobUrl);
       setValue('avatar', url);
     }
   };
+
   const handleButtonClick = () => {
     document.getElementById('avat').click();
   };
 
   return (
     <ModalContainer>
+      <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <ModalContent>
         <Edit>Edit information</Edit>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,8 +106,8 @@ const EditInformationModal = ({ user, onClose }) => {
             ) : user?.avatar ? (
               <ProfileFormModalImg src={user.avatar} alt="user photo" />
             ) : (
-              <svg width="50" height="50" fill="aqua">
-                <use href={`${sprite}#user-02`}></use>
+              <svg width="50" height="50">
+                <use href={`${sprsvg}#user-02`}></use>
               </svg>
             )}
 
@@ -121,6 +132,9 @@ const EditInformationModal = ({ user, onClose }) => {
             </div>
             <UploadPhoto type="button" onClick={handleButtonClick}>
               Upload photo
+              <svg width="18" height="18">
+                <use href={`${sprsvg}#upload-cloud`}></use>
+              </svg>
             </UploadPhoto>
           </EditInformationPhoto>
           <div>
@@ -148,9 +162,10 @@ const EditInformationModal = ({ user, onClose }) => {
             <EditInformationLabelInput
               id="phone"
               {...register('phone')}
-              defaultValue={user?.phone}
+              defaultValue={user?.phone || '+380'}
               placeholder="+380"
-              type="number"
+              // type="number"
+              type="text"
             />
             {errors.phone && (
               <ErrorMessage>{errors.phone.message}</ErrorMessage>

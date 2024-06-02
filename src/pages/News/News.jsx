@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Input, NewsContainer, NewsDiv, Titel } from './News.styled';
+import {
+  Input,
+  NewsButton,
+  NewsButtonsDiv,
+  NewsContainer,
+  NewsDiv,
+  Titel,
+} from './News.styled';
 import NewsList from '../../components/NewsList/NewsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNews } from '../../redux/operation';
 import Paginations from '../../components/Pagination/Pagination';
-
+import sprite from '../../img/sprite.svg';
 const News = () => {
   const [keyword, setKeyword] = useState('');
   const [news, setNews] = useState([]);
@@ -52,12 +59,13 @@ const News = () => {
   const lastPage = () => {
     setPage(totalPages);
   };
+  const clearInput = () => {};
 
   return (
     <NewsContainer>
       <NewsDiv>
         <Titel>News</Titel>
-        <form onSubmit={handleSearch}>
+        <form onSubmit={handleSearch} style={{ position: 'relative' }}>
           {/* <Input style={{ display: 'flex', alignItems: 'center' }}> */}
           <Input
             type="text"
@@ -65,18 +73,24 @@ const News = () => {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
-          {keyword && (
-            <button type="button" onClick={handleClear}>
+          <NewsButtonsDiv>
+            {keyword && (
+              <NewsButton type="button" onClick={handleClear}>
+                <svg width="20" height="20">
+                  <use
+                    href={`${sprite}#cross-small`}
+                    width="20"
+                    height="20"
+                  ></use>
+                </svg>
+              </NewsButton>
+            )}
+            <NewsButton type="button">
               <svg width="20" height="20">
-                {/* <use href={`${sprite}#blow`} width="20" height="20"></use> */}
+                <use href={`${sprite}#search`} width="20" height="20"></use>
               </svg>
-            </button>
-          )}
-          <button type="submit">
-            <svg width="20" height="20">
-              {/* <use href={`${sprite}#blow`} width="20" height="20"></use> */}
-            </svg>
-          </button>
+            </NewsButton>
+          </NewsButtonsDiv>
           {/* </Input> */}
         </form>
       </NewsDiv>

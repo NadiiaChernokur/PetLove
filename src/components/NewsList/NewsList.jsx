@@ -17,6 +17,9 @@ const NewsList = ({ list }) => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+  const handleReadMoreClick = (url) => {
+    window.open(url, '_blank');
+  };
 
   return (
     <Ul>
@@ -27,7 +30,9 @@ const NewsList = ({ list }) => {
           <NewsText>{news.text}</NewsText>
           <ReadMoreDiv>
             <NewsData>{formatDate(news.date)}</NewsData>
-            <ReadMoreButton>Read more</ReadMoreButton>
+            <ReadMoreButton onClick={() => handleReadMoreClick(news.url)}>
+              Read more
+            </ReadMoreButton>
           </ReadMoreDiv>
         </Li>
       ))}

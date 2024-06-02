@@ -20,7 +20,7 @@ import {
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import sprsvg from '../../img/sprite2.svg';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -31,40 +31,40 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyPetsList from '../MyPets/MyPets';
 import EditInformationModal from '../Modals/EditInformationModal';
 
-const schema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  email: yup
-    .string()
-    .matches(
-      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-      'Invalid email format'
-    )
-    .required('Email is required'),
-  avatar: yup
-    .string()
-    .matches(/^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/, 'Invalid URL')
-    .required('Avatar URL is required'),
-  phone: yup
-    .string()
-    .matches(/^\+38\d{10}$/, 'Invalid phone number format')
-    .required('Phone number is required'),
-});
+// const schema = yup.object().shape({
+//   name: yup.string().required('Name is required'),
+//   email: yup
+//     .string()
+//     .matches(
+//       /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+//       'Invalid email format'
+//     )
+//     .required('Email is required'),
+//   avatar: yup
+//     .string()
+//     .matches(/^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/, 'Invalid URL')
+//     .required('Avatar URL is required'),
+//   phone: yup
+//     .string()
+//     .matches(/^\+38\d{10}$/, 'Invalid phone number format')
+//     .required('Phone number is required'),
+// });
 
 const ProfileForm = () => {
   const [userData, setUserData] = useState([]);
   const [isUploadUserModal, setIsUploadUserModal] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
-    handleSubmit,
-    control,
-    setError,
-    setValue,
+    // handleSubmit,
+    // control,
+    // setError,
+    // setValue,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
     // defaultValues: {
     //   name: name,
     //   email,
@@ -92,28 +92,27 @@ const ProfileForm = () => {
     fetchUser();
   }, [dispatch, navigate]);
 
-  const onSubmit = async (data) => {
-    try {
-      console.log(data);
-      //   const response = await axios.put('/api/user', data);
-      //   onUpdate(response.data); // Оновлення даних користувача в UserBlock
-    } catch (error) {
-      setError('apiError', { message: error.response.data.message });
-    }
-  };
-  const DownloadImg = () => {
-    document.getElementById('avatar').click();
-  };
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    console.log(URL.createObjectURL(file));
+  // const onSubmit = async (data) => {
+  //   try {
+  //     console.log(data);
 
-    if (file) {
-      const blobUrl = URL.createObjectURL(file);
-      setSelectedFile(blobUrl);
-      setValue('avatar', blobUrl);
-    }
-  };
+  //   } catch (error) {
+  //     setError('apiError', { message: error.response.data.message });
+  //   }
+  // };
+  // const DownloadImg = () => {
+  //   document.getElementById('avatar').click();
+  // };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   console.log(URL.createObjectURL(file));
+
+  //   if (file) {
+  //     const blobUrl = URL.createObjectURL(file);
+  //     setSelectedFile(blobUrl);
+  //     setValue('avatar', blobUrl);
+  //   }
+  // };
   const logout = async () => {
     const res = await dispatch(logOut());
     console.log(res);
@@ -126,6 +125,9 @@ const ProfileForm = () => {
   const uploadUserModal = () => {
     setIsUploadUserModal(true);
   };
+  const uploadUserModalClose = () => {
+    setIsUploadUserModal(false);
+  };
   const addPetPage = () => {
     navigate('/add-pet');
   };
@@ -134,12 +136,13 @@ const ProfileForm = () => {
     <ProfileFormContainer>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+        <form>
           <ProfileFormFirstDiv>
             <ProfileFormUser>
               User
-              <svg width="22" height="22">
-                <use href={`${sprite}#icons8_cat-footprint`}></use>
+              <svg width="18" height="18">
+                <use href={`${sprsvg}#people`}></use>
               </svg>
             </ProfileFormUser>
             <UploadPhotoDiv>
@@ -160,17 +163,18 @@ const ProfileForm = () => {
                   type="file"
                   accept="image/png, image/jpeg, image/gif, image/bmp, image/webp"
                   {...register('avatar')}
-                  onChange={handleFileChange}
+                  // onChange={handleFileChange}
                 />
                 {errors.avatar && (
                   <ErrorMessage>{errors.avatar.message}</ErrorMessage>
                 )}
               </ProfileFormDiv>
-              <UploadPhotoButton type="button" onClick={DownloadImg}>
+              {/* <UploadPhotoButton type="button" onClick={DownloadImg}> */}
+              <UploadPhotoButton type="button" onClick={uploadUserModal}>
                 Upload photo
               </UploadPhotoButton>
             </UploadPhotoDiv>
-            <UploadUserButton onClick={uploadUserModal}>
+            <UploadUserButton type="button" onClick={uploadUserModal}>
               <svg width="16" height="16">
                 <use href={`${sprite}#edit`}></use>
               </svg>
@@ -198,7 +202,12 @@ const ProfileForm = () => {
 
           <div>
             <label htmlFor="phone"></label>
-            <FormInput id="phone" {...register('phone')} placeholder="+380" />
+            <FormInput
+              id="phone"
+              {...register('phone')}
+              placeholder="+380"
+              value={userData?.phone}
+            />
             {errors.phone && (
               <ErrorMessage>{errors.phone.message}</ErrorMessage>
             )}
@@ -218,7 +227,9 @@ const ProfileForm = () => {
 
         <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
-      {isUploadUserModal && <EditInformationModal user={userData} />}
+      {isUploadUserModal && (
+        <EditInformationModal user={userData} onClose={uploadUserModalClose} />
+      )}
     </ProfileFormContainer>
   );
 };

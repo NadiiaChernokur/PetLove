@@ -22,4 +22,14 @@ export const Input = styled.input`
   border-radius: 30px;
   padding: 14px;
   width: 230px;
+  position: relative;
+`;
+export const NewsButtonsDiv = styled.div`
+  position: absolute;
+  top: 15px;
+  right: 11px;
+`;
+export const NewsButton = styled.button`
+  background: none;
+  border: none;
 `;
