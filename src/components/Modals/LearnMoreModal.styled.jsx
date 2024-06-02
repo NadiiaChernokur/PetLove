@@ -15,7 +15,7 @@ export const ModalContainer = styled.div`
   background: #fff;
   border-radius: 30px;
   width: 473px;
-  /* height: 476px; */
+  position: relative;
   margin: 10% auto;
   padding: 40px 55px;
   display: flex;
@@ -24,10 +24,29 @@ export const ModalContainer = styled.div`
 `;
 export const LearnMoreModalImg = styled.img`
   border-radius: 100px;
-
+  position: relative;
   width: 150px;
   height: 150px;
   margin-bottom: 16px;
+`;
+export const LearnMoreDiv = styled.div`
+  position: absolute;
+  border-radius: 30px;
+  padding: 8px 14px;
+  width: 52px;
+  height: 34px;
+  background: #fff4df;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #f6b83d;
+  left: 167px;
+`;
+export const LearnMoreSvg = styled.svg`
+  position: absolute;
+  top: 20px;
+  right: 24px;
 `;
 
 export const LearnMoreModalName = styled.p`
@@ -95,4 +114,8 @@ export const LearnMoreModalAdd = styled.button`
   line-height: 125%;
   letter-spacing: -0.03em;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;

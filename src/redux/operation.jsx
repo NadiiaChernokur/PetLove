@@ -58,6 +58,30 @@ export const getEditUser = createAsyncThunk(
     }
   }
 );
+export const toFavoriteAdd = createAsyncThunk(
+  'favoriteAdd',
+  async (id, thunkAPI) => {
+    try {
+      const respons = await axios.post(`/notices/favorites/add/${id}`);
+      console.log(respons.data);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const toFavoriteRemove = createAsyncThunk(
+  'favoriteRemove',
+  async (id, thunkAPI) => {
+    try {
+      const respons = await axios.delete(`/notices/favorites/remove/${id}`);
+      console.log(respons.data);
+      return respons.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
   try {

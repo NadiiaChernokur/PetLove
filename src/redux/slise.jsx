@@ -8,6 +8,8 @@ import {
   logIn,
   logOut,
   registration,
+  toFavoriteAdd,
+  toFavoriteRemove,
 } from './operation';
 import { getNews } from './operation';
 import { getFriends } from './operation';
@@ -28,6 +30,7 @@ const initialState = {
   logIn: [],
   registr: [],
   user: [],
+  favoriteArray: [],
   isLoading: false,
   error: null,
 };
@@ -114,6 +117,18 @@ const getNoticesResponseFulfilled = (state, action) => {
   console.log(action.payload);
   state.noticesResponse = action.payload;
 };
+const addToFavoriteFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  console.log(action.payload);
+  state.favoriteArray = action.payload;
+};
+const removeFulfilled = (state, action) => {
+  state.isLoading = false;
+  state.error = null;
+  console.log(action.payload);
+  state.favoriteArray = action.payload;
+};
 
 const petsSlice = createSlice({
   name: 'pets',
@@ -135,6 +150,12 @@ const petsSlice = createSlice({
       .addCase(getNoticesResponse.pending, handlePending)
       .addCase(getNoticesResponse.fulfilled, getNoticesResponseFulfilled)
       .addCase(getNoticesResponse.rejected, handleRejected)
+      .addCase(toFavoriteAdd.pending, handlePending)
+      .addCase(toFavoriteAdd.fulfilled, addToFavoriteFulfilled)
+      .addCase(toFavoriteAdd.rejected, handleRejected)
+      .addCase(toFavoriteRemove.pending, handlePending)
+      .addCase(toFavoriteRemove.fulfilled, removeFulfilled)
+      .addCase(toFavoriteRemove.rejected, handleRejected)
       .addCase(addPet.pending, handlePending)
       .addCase(addPet.fulfilled, addPetFulfilled)
       .addCase(addPet.rejected, handleRejected)

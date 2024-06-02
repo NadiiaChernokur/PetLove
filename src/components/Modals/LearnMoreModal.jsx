@@ -1,4 +1,5 @@
 import {
+  LearnMoreDiv,
   LearnMoreModalAdd,
   LearnMoreModalButton,
   LearnMoreModalButtons,
@@ -8,19 +9,37 @@ import {
   LearnMoreModalName,
   LearnMoreModalStars,
   LearnMoreModalText,
+  LearnMoreSvg,
   ModalBackground,
   ModalContainer,
 } from './LearnMoreModal.styled';
-
+import sprite from '../../img/heart.svg';
+import sprit from '../../img/cross.svg';
+import {
+  RatingFive,
+  RatingFour,
+  RatingOne,
+  RatingThree,
+  RatingTwo,
+} from '../Rating/Rating';
 const LearnMoreModal = ({ pet, close }) => {
   console.log(pet);
   return (
     <ModalBackground>
       <ModalContainer>
+        <LearnMoreSvg width="24" height="24" onClick={close}>
+          <use href={`${sprit}#x-x`}></use>
+        </LearnMoreSvg>
         <LearnMoreModalImg src={pet.imgURL} alt={pet.title}></LearnMoreModalImg>
+        <LearnMoreDiv>{pet.category}</LearnMoreDiv>
         <LearnMoreModalName>{pet.titel}</LearnMoreModalName>
         <LearnMoreModalStars>
-          <p>1</p>
+          {pet.popularity <= 10 && <RatingOne />}
+          {pet.popularity > 10 && pet.popularity <= 20 && <RatingTwo />}
+          {pet.popularity > 20 && pet.popularity <= 30 && <RatingThree />}
+          {pet.popularity > 40 && pet.popularity <= 50 && <RatingFour />}
+          {pet.popularity > 50 && <RatingFive />}
+          <p>{pet.popularity}</p>
         </LearnMoreModalStars>
         <LearnMoreModalInformation>
           <LearnMoreModalInf>
@@ -42,7 +61,12 @@ const LearnMoreModal = ({ pet, close }) => {
         </LearnMoreModalInformation>
         <LearnMoreModalText>{pet.comment}</LearnMoreModalText>
         <LearnMoreModalButtons>
-          <LearnMoreModalAdd>Add to</LearnMoreModalAdd>
+          <LearnMoreModalAdd>
+            Add to
+            <svg width="20" height="20">
+              <use href={`${sprite}#heartW`}></use>
+            </svg>
+          </LearnMoreModalAdd>
           <LearnMoreModalButton>Contact</LearnMoreModalButton>
         </LearnMoreModalButtons>
       </ModalContainer>

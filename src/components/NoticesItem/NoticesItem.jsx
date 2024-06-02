@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AnimalInformation,
   AnimalInformationAbout,
@@ -15,14 +15,48 @@ import {
   NoticesItemList,
 } from './NoticesItem.styled';
 import LearnMoreModal from '../Modals/LearnMoreModal';
-import AttentionModal from '../Modals/AttentionModal';
-import CongratsModal from '../Modals/CongratsModal';
-import LeavingModal from '../Modals/LeavingModal';
-import EditInformationModal from '../Modals/EditInformationModal';
+import sprite from '../../img/sprite.svg';
+import {
+  getCurrentUser,
+  safeToken,
+  toFavoriteAdd,
+  toFavoriteRemove,
+} from '../../redux/operation';
+import { useDispatch } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const NoticesItem = ({ array }) => {
+  console.log(array);
   const [isShowModal, setIsShowModal] = useState(false);
   const [pet, setPet] = useState([]);
+  const [heartClick, setHeartClick] = useState([]);
+  // const [userDataFavorId, setUserDataFavorId] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const storedUserData = localStorage.getItem('petLoveUserData');
+      console.log(storedUserData);
+      if (storedUserData) {
+        const user = JSON.parse(storedUserData);
+        console.log(user.token);
+        safeToken(user.token);
+        const res = await dispatch(getCurrentUser());
+        if (res.payload.noticesFavorites.length > 0) {
+          const favoriteIds = res.payload.noticesFavorites.map(
+            (item) => item._id
+          );
+          setHeartClick(favoriteIds);
+        }
+
+        console.log(res.payload.noticesFavorites);
+      } else {
+        navigate('/login');
+      }
+    };
+    fetchUser();
+  }, [dispatch, navigate]);
 
   const showModal = (item) => {
     setIsShowModal(true);
@@ -30,6 +64,27 @@ const NoticesItem = ({ array }) => {
   };
   const closeModal = () => {
     setIsShowModal(false);
+  };
+  // const toHeartClick = (id) => {
+  //   console.log(id);
+  //   setHeartClick(!heartClick);
+  // };
+  const toggleHeartClick = async (id) => {
+    console.log(id);
+    console.log(heartClick);
+    try {
+      let updatedFavorites;
+      if (heartClick.includes(id)) {
+        await dispatch(toFavoriteRemove(id));
+        updatedFavorites = heartClick.filter((itemId) => itemId !== id);
+      } else {
+        await dispatch(toFavoriteAdd(id));
+        updatedFavorites = [...heartClick, id];
+      }
+      setHeartClick(updatedFavorites);
+    } catch (error) {
+      console.error('Error updating favorite item', error);
+    }
   };
   return (
     <NoticesItemContainer>
@@ -70,14 +125,22 @@ const NoticesItem = ({ array }) => {
           <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
           <Buttons>
             <LearnMore onClick={() => showModal(item)}>Learn more</LearnMore>
-            <LikeButton></LikeButton>
+            {/* <LikeButton onClick={() => toHeartClick(item._id)}> */}
+            <LikeButton onClick={() => toggleHeartClick(item._id)}>
+              {heartClick?.includes(item._id) ? (
+                <svg width="20" height="20">
+                  <use href={`${sprite}#hart`}></use>
+                </svg>
+              ) : (
+                <svg width="20" height="20">
+                  <use href={`${sprite}#heart`}></use>
+                </svg>
+              )}
+            </LikeButton>
           </Buttons>
         </NoticesItemList>
       ))}
       {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />}
-      {/* {isShowModal && <AttentionModal close={closeModal} />}
-      {isShowModal && <EditInformationModal close={closeModal} />} */}
-      {/* {isShowModal && <CongratsModal close={closeModal} />} */}
     </NoticesItemContainer>
   );
 };

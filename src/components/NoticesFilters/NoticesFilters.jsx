@@ -6,6 +6,7 @@ import {
   NoticesField,
   NoticesFiltersContainer,
   NoticesForm,
+  SearchButton,
 } from './NoticesFilters.styled';
 import { Formik } from 'formik';
 import Select from 'react-select';
@@ -15,6 +16,8 @@ import {
   getNoticesCategories,
   getNoticesResponse,
 } from '../../redux/operation';
+import sprite from '../../img/s.svg';
+
 const customStyles = {
   control: (provided) => ({
     ...provided,
@@ -128,6 +131,10 @@ const NoticesFilters = ({ arrayByCategory }) => {
     console.log(response);
     arrayByCategory(response.payload.results);
   };
+  const radioClear = async (field, setFieldValue, values) => {
+    setCheck('');
+    await handleSelectChange(field, '', setFieldValue, values);
+  };
 
   return (
     <NoticesFiltersContainer>
@@ -148,22 +155,29 @@ const NoticesFilters = ({ arrayByCategory }) => {
       >
         {({ setFieldValue, values }) => (
           <NoticesForm>
-            <SearchField
-              name="keyword"
-              placeholder="Search..."
-              //   onChange={(e) => setFieldValue('keyword', e.target.value)}
-              onChange={async (e) => {
-                const value = e.target.value;
-                console.log(value);
-                await handleSelectChange(
-                  'keyword',
-                  value,
-                  setFieldValue,
-                  values
-                );
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <SearchField
+                name="keyword"
+                placeholder="Search..."
+                //   onChange={(e) => setFieldValue('keyword', e.target.value)}
+                onChange={async (e) => {
+                  const value = e.target.value;
+                  console.log(value);
+                  await handleSelectChange(
+                    'keyword',
+                    value,
+                    setFieldValue,
+                    values
+                  );
+                }}
+              />
 
+              <SearchButton type="button">
+                <svg width="20" height="20">
+                  <use href={`${sprite}#search`} width="20" height="20"></use>
+                </svg>
+              </SearchButton>
+            </div>
             <NoticesField
               as="select"
               name="category"
@@ -239,7 +253,7 @@ const NoticesFilters = ({ arrayByCategory }) => {
               onChange={async (selectedOption) => {
                 console.log(selectedOption);
                 const value = selectedOption;
-                // const value = e.target.value;
+
                 await handleSelectChange(
                   'location',
                   value.value,
@@ -250,14 +264,13 @@ const NoticesFilters = ({ arrayByCategory }) => {
             />
             <CheckDiv>
               <CheckboxLabel
-                style={check === 'popularity' ? { background: 'blue' } : {}}
+                style={check === 'popularity' ? { background: '#f6b83d' } : {}}
               >
                 <CheckboxInput
                   type="radio"
                   name="sortBy"
                   value="popularity"
                   checked={check === 'popularity'}
-                  //   onChange={() => setCheck('popularity')}
                   onChange={async (e) => {
                     setCheck('popularity');
                     const value = e.target.value;
@@ -270,16 +283,24 @@ const NoticesFilters = ({ arrayByCategory }) => {
                   }}
                 />
                 Popular
+                <svg
+                  width="20"
+                  height="20"
+                  onClick={async () => {
+                    await radioClear('sortBy', setFieldValue, values);
+                  }}
+                >
+                  <use href={`${sprite}#x`}></use>
+                </svg>
               </CheckboxLabel>
               <CheckboxLabel
-                style={check === 'unpopular' ? { background: 'blue' } : {}}
+                style={check === 'unpopular' ? { background: '#f6b83d' } : {}}
               >
                 <CheckboxInput
                   type="radio"
                   name="sortBy"
                   value="unpopular"
                   checked={check === 'unpopular'}
-                  //   onChange={() => setCheck('unpopular')}
                   onChange={async (e) => {
                     setCheck('unpopular');
                     const value = e.target.value;
@@ -292,16 +313,24 @@ const NoticesFilters = ({ arrayByCategory }) => {
                   }}
                 />
                 Unpopular
+                <svg
+                  width="20"
+                  height="20"
+                  onClick={async () => {
+                    await radioClear('sortBy', setFieldValue, values);
+                  }}
+                >
+                  <use href={`${sprite}#x`}></use>
+                </svg>
               </CheckboxLabel>
               <CheckboxLabel
-                style={check === 'cheap' ? { background: 'blue' } : {}}
+                style={check === 'cheap' ? { background: '#f6b83d' } : {}}
               >
                 <CheckboxInput
                   type="radio"
                   name="sortBy"
                   value="cheap"
                   checked={check === 'cheap'}
-                  //   onChange={() => setCheck('cheap')}
                   onChange={async (e) => {
                     setCheck('cheap');
                     const value = e.target.value;
@@ -314,16 +343,24 @@ const NoticesFilters = ({ arrayByCategory }) => {
                   }}
                 />
                 Cheap
+                <svg
+                  width="20"
+                  height="20"
+                  onClick={async () => {
+                    await radioClear('sortBy', setFieldValue, values);
+                  }}
+                >
+                  <use href={`${sprite}#x`}></use>
+                </svg>
               </CheckboxLabel>
               <CheckboxLabel
-                style={check === 'expensive' ? { background: 'blue' } : {}}
+                style={check === 'expensive' ? { background: '#f6b83d' } : {}}
               >
                 <CheckboxInput
                   type="radio"
                   name="sortBy"
                   value="expensive"
                   checked={check === 'expensive'}
-                  //   onChange={() => setCheck('expensive')}
                   onChange={async (e) => {
                     setCheck('expensive');
                     const value = e.target.value;
@@ -336,6 +373,15 @@ const NoticesFilters = ({ arrayByCategory }) => {
                   }}
                 />
                 Expensive
+                <svg
+                  width="20"
+                  height="20"
+                  onClick={async () => {
+                    await radioClear('sortBy', setFieldValue, values);
+                  }}
+                >
+                  <use href={`${sprite}#x`}></use>
+                </svg>
               </CheckboxLabel>
             </CheckDiv>
           </NoticesForm>

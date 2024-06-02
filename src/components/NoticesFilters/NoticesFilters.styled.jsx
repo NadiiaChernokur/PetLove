@@ -31,6 +31,9 @@ export const NoticesField = styled(Field)`
   height: 48px;
   background: #fff;
   border: none;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
+  appearance: none;
 `;
 export const CheckDiv = styled.div`
   display: flex;
@@ -45,7 +48,8 @@ export const CheckboxInput = styled.input`
 export const CheckboxLabel = styled.label`
   cursor: pointer;
   position: relative;
-  display: block;
+  display: flex;
+  gap: 8px;
   border: 1px solid rgba(16, 24, 40, 0.2);
   border-radius: 30px;
   padding: 14px;
@@ -56,4 +60,11 @@ export const CheckboxLabel = styled.label`
     background-color: green;
     mix-blend-mode: multiply;
   }
+`;
+export const SearchButton = styled.button`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
 `;

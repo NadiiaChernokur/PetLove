@@ -16,7 +16,7 @@ export const NoticesItemImg = styled.div`
   border-radius: 16px;
   width: 315px;
   height: 178px;
-  background-color: blue;
+  background-color: #fff4df;
   margin-bottom: 24px;
   position: relative;
   overflow: hidden;
