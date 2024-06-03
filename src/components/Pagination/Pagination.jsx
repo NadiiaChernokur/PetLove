@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   PageButton,
   PageSpan,
@@ -7,8 +8,13 @@ import {
 } from './Pagination.styled';
 
 const Paginations = ({ subtract, add, page, first, last, total }) => {
+  const [getTotal, setTotal] = useState(0);
+  useEffect(() => {
+    setTotal(total);
+  }, [total]);
+
   return (
-    <Pagination>
+    <Pagination key={total}>
       <PageButton onClick={first} disabled={page === 1}>
         {'<<'}
       </PageButton>
@@ -18,13 +24,13 @@ const Paginations = ({ subtract, add, page, first, last, total }) => {
       <Pages>
         {page - 1 > 0 && <PageSpan>{page - 1}</PageSpan>}
         <PageSpanActiv> {page} </PageSpanActiv>
-        {page !== total && <PageSpan> {page + 1} </PageSpan>}
-        {page !== total && <PageSpan> {'...'} </PageSpan>}
+        {page !== getTotal && <PageSpan> {page + 1} </PageSpan>}
+        {page !== getTotal && <PageSpan> {'...'} </PageSpan>}
       </Pages>
-      <PageButton onClick={add} disabled={page === total}>
+      <PageButton onClick={add} disabled={page === getTotal}>
         {'>'}
       </PageButton>
-      <PageButton onClick={last} disabled={page === total}>
+      <PageButton onClick={last} disabled={page === getTotal}>
         {'>>'}
       </PageButton>
     </Pagination>

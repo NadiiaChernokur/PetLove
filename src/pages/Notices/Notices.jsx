@@ -22,6 +22,7 @@ const Notices = () => {
         if (animals.meta.requestStatus === 'fulfilled') {
           console.log(animals);
           setNoticesArray(animals.payload.results);
+          setTotalPages(animals.payload.totalPages);
           return;
         }
       } catch (error) {

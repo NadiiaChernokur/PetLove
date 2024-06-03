@@ -21,10 +21,12 @@ import { ProfileFormPhotoInput } from '../ProfileForm/ProfileForm.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import sprsvg from '../../img/sprite2.svg';
+import sprit from '../../img/cross.svg';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getEditUser } from '../../redux/operation';
+import { LearnMoreSvg } from './LearnMoreModal.styled';
 const schema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string()
@@ -41,7 +43,7 @@ const schema = Yup.object().shape({
   phone: Yup.string().matches(/^\+38\d{10}$/, 'Invalid phone number'),
 });
 
-const EditInformationModal = ({ user, onClose }) => {
+const EditInformationModal = ({ user, close }) => {
   const [selectedFile, setSelectedFile] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,6 +89,7 @@ const EditInformationModal = ({ user, onClose }) => {
       const res = await dispatch(getEditUser(data));
       console.log(res);
       if (res.meta.requestStatus === 'fulfilled') {
+        close();
         navigate('/profile');
       } else {
         toast('You are not authorized');
@@ -118,6 +121,9 @@ const EditInformationModal = ({ user, onClose }) => {
     <ModalContainer onClick={handleBackgroundClick}>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <ModalContent>
+        <LearnMoreSvg width="24" height="24" onClick={close}>
+          <use href={`${sprit}#x-x`}></use>
+        </LearnMoreSvg>
         <Edit>Edit information</Edit>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* <EditInformationModalImg> */}

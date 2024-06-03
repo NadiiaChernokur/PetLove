@@ -18,6 +18,7 @@ export const ModalContent = styled.div`
   width: 480px;
   height: 580px;
   margin: 10% auto;
+  position: relative;
 `;
 
 export const ErrorMessage = styled.p`

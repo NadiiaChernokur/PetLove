@@ -47,14 +47,38 @@ const customStyles = {
 };
 
 const NoticesFilters = ({ arrayByCategory, page, total }) => {
+  console.log(page);
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [petTypes, setPetTypes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [cities, setCities] = useState([]);
   const [check, setCheck] = useState('');
-  // const [page, setPage] = useState(1);
+  const [toPage, setToPage] = useState(1);
+  // const [firstOpen, setFirstOpen] = useState(true);
+  const [valuesArray, setValuesArray] = useState({
+    category: '',
+    gender: '',
+    keyword: '',
+    location: '',
+    petType: '',
+    sortBy: '',
+  });
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchNotices = async () => {
+      const valuesArrayPage = { ...valuesArray, page };
+      const response = await dispatch(getNoticesResponse(valuesArrayPage));
+      arrayByCategory(response.payload.results);
+      return;
+    };
+    if (page !== toPage) {
+      console.log('Page changed');
+      setToPage(page);
+      fetchNotices();
+    }
+  }, [arrayByCategory, dispatch, page, toPage, valuesArray]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,27 +128,8 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
       console.error('Error fetching locations', error);
     }
   };
-  //   const handleChange = async () => {
-  //     try {
-  //       const objektCategor = {
-  //         categories,
-  //         genders,
-  //         petTypes,
-  //         locations,
-  //         check,
-  //       };
-  //       console.log(objektCategor);
-  //       const array = await dispatch(getNoticesResponse(objektCategor));
-  //       console.log(array);
-  //     } catch (error) {
-  //       console.error('Error fetching locations', error);
-  //     }
-  //   };
+
   const handleSelectChange = async (field, value, setFieldValue, values) => {
-    // console.log(field);
-    // console.log(value);
-    // console.log(setFieldValue);
-    // console.log(values);
     setFieldValue(field, value);
     const updatedValues = { ...values, [field]: value, page };
     console.log(updatedValues);
@@ -133,13 +138,11 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
     total(response.payload.totalPages);
     arrayByCategory(response.payload.results);
   };
+
   const radioClear = async (field, setFieldValue, values) => {
     setCheck('');
     await handleSelectChange(field, '', setFieldValue, values);
   };
-  // const addPage = () => {
-  //   setPage((prev) => prev + 1);
-  // };
 
   return (
     <NoticesFiltersContainer>
@@ -164,10 +167,9 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
               <SearchField
                 name="keyword"
                 placeholder="Search..."
-                //   onChange={(e) => setFieldValue('keyword', e.target.value)}
                 onChange={async (e) => {
                   const value = e.target.value;
-                  console.log(value);
+                  setValuesArray(values);
                   await handleSelectChange(
                     'keyword',
                     value,
@@ -188,6 +190,11 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
               name="category"
               onChange={async (e) => {
                 const value = e.target.value;
+                setValuesArray(values);
+                if (page !== 1) {
+                  console.log('888888');
+                  page === 1;
+                }
                 await handleSelectChange(
                   'category',
                   value,
@@ -209,6 +216,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
               name="gender"
               onChange={async (e) => {
                 const value = e.target.value;
+                setValuesArray(values);
                 await handleSelectChange(
                   'gender',
                   value,
@@ -229,6 +237,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
               name="petType"
               onChange={async (e) => {
                 const value = e.target.value;
+                setValuesArray(values);
                 await handleSelectChange(
                   'petType',
                   value,
@@ -256,7 +265,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
               //   }}
               placeholder="Location"
               onChange={async (selectedOption) => {
-                console.log(selectedOption);
+                setValuesArray(values);
                 const value = selectedOption;
 
                 await handleSelectChange(
@@ -279,6 +288,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
                   onChange={async (e) => {
                     setCheck('popularity');
                     const value = e.target.value;
+                    setValuesArray(values);
                     await handleSelectChange(
                       'sortBy',
                       value,
@@ -309,6 +319,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
                   onChange={async (e) => {
                     setCheck('unpopular');
                     const value = e.target.value;
+                    setValuesArray(values);
                     await handleSelectChange(
                       'sortBy',
                       value,
@@ -338,6 +349,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
                   checked={check === 'cheap'}
                   onChange={async (e) => {
                     setCheck('cheap');
+                    setValuesArray(values);
                     const value = e.target.value;
                     await handleSelectChange(
                       'sortBy',
@@ -368,6 +380,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
                   checked={check === 'expensive'}
                   onChange={async (e) => {
                     setCheck('expensive');
+                    setValuesArray(values);
                     const value = e.target.value;
                     await handleSelectChange(
                       'sortBy',

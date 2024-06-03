@@ -3,14 +3,20 @@ import styled from 'styled-components';
 export const NoticesItemContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
+  /* gap: 32px; */
+  justify-content: space-between;
+  min-width: 700px;
 `;
 export const NoticesItemList = styled.li`
   margin-bottom: 8px;
-  padding: 24px;
+  padding: 14px;
   background: #fff;
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
 `;
 export const NoticesItemImg = styled.div`
   border-radius: 16px;
@@ -37,19 +43,24 @@ export const KindOfAnimal = styled.div`
   line-height: 133%;
   color: #2b2b2a;
   margin-bottom: 8px;
+  width: 100%;
 `;
 export const KindOfAnimalStar = styled.div`
   display: flex;
+  align-items: center;
+  gap: 4px;
 `;
 export const AnimalInformation = styled.div`
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  /* gap: 20px; */
   font-weight: 500;
   font-size: 12px;
   line-height: 117%;
   letter-spacing: -0.02em;
   color: #262626;
   margin-bottom: 16px;
+  width: 292px;
 `;
 export const Information = styled.p`
   text-transform: capitalize;
@@ -61,6 +72,9 @@ export const AnimalInformationHeader = styled.p`
   line-height: 140%;
   letter-spacing: -0.02em;
   color: rgba(38, 38, 38, 0.5);
+`;
+export const AnimalInformationAboutDiv = styled.div`
+  width: 292px;
 `;
 export const AnimalInformationAbout = styled.p`
   display: flex;

@@ -8,10 +8,13 @@ import {
 } from './FavoritePets.styled';
 import NoticesItem from '../NoticesItem/NoticesItem';
 
-const FavoritePets = () => {
+const FavoritePets = ({ favoritsPets }) => {
+  console.log(favoritsPets);
   const [activeButton, setActiveButton] = useState('favorites');
   const [petsArray, setPetsArray] = useState([]);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setPetsArray(favoritsPets);
+  }, [favoritsPets]);
 
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType);
@@ -33,7 +36,7 @@ const FavoritePets = () => {
         </FavoritePetsButton>
       </FavoritePetsButtons>
       {petsArray.length > 0 ? (
-        <NoticesItem />
+        <NoticesItem array={petsArray} del={true} />
       ) : (
         <FavoritePetsEmptyArray>
           Oops,

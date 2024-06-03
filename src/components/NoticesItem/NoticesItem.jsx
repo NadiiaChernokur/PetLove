@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   AnimalInformation,
   AnimalInformationAbout,
+  AnimalInformationAboutDiv,
   AnimalInformationHeader,
   Buttons,
   Information,
@@ -23,9 +24,9 @@ import {
   toFavoriteRemove,
 } from '../../redux/operation';
 import { useDispatch } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const NoticesItem = ({ array }) => {
+const NoticesItem = ({ array, del }) => {
   console.log(array);
   const [isShowModal, setIsShowModal] = useState(false);
   const [pet, setPet] = useState([]);
@@ -87,6 +88,10 @@ const NoticesItem = ({ array }) => {
       console.error('Error updating favorite item', error);
     }
   };
+  const deleteClick = async (id) => {
+    await dispatch(toFavoriteRemove(id));
+    window.location.reload();
+  };
   return (
     <NoticesItemContainer>
       {array?.map((item) => (
@@ -97,7 +102,9 @@ const NoticesItem = ({ array }) => {
           <KindOfAnimal>
             <p>{item.title}</p>
             <KindOfAnimalStar>
-              <svg width={16} height={16}></svg>
+              <svg width="20" height="20">
+                <use href={`${sprite}#star`}></use>
+              </svg>
               <p>{item.popularity}</p>
             </KindOfAnimalStar>
           </KindOfAnimal>
@@ -123,21 +130,31 @@ const NoticesItem = ({ array }) => {
               <Information>{item.category}</Information>
             </div>
           </AnimalInformation>
-          <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
+          <AnimalInformationAboutDiv>
+            <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
+          </AnimalInformationAboutDiv>
           <Buttons>
             <LearnMore onClick={() => showModal(item)}>Learn more</LearnMore>
-            {/* <LikeButton onClick={() => toHeartClick(item._id)}> */}
-            <LikeButton onClick={() => toggleHeartClick(item._id)}>
-              {heartClick?.includes(item._id) ? (
+
+            {del ? (
+              <LikeButton onClick={() => deleteClick(item._id)}>
                 <svg width="20" height="20">
-                  <use href={`${sprite}#hart`}></use>
+                  <use href={`${sprite}#trash-2`}></use>
                 </svg>
-              ) : (
-                <svg width="20" height="20">
-                  <use href={`${sprite}#heart`}></use>
-                </svg>
-              )}
-            </LikeButton>
+              </LikeButton>
+            ) : (
+              <LikeButton onClick={() => toggleHeartClick(item._id)}>
+                {heartClick?.includes(item._id) ? (
+                  <svg width="20" height="20">
+                    <use href={`${sprite}#hart`}></use>
+                  </svg>
+                ) : (
+                  <svg width="20" height="20">
+                    <use href={`${sprite}#heart`}></use>
+                  </svg>
+                )}
+              </LikeButton>
+            )}
           </Buttons>
         </NoticesItemList>
       ))}

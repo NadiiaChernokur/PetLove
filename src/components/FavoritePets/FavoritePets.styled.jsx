@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const FavoritePetsContainer = styled.div`
   width: 678px;
-  background: pink;
 `;
 
 export const FavoritePetsButtons = styled.div`

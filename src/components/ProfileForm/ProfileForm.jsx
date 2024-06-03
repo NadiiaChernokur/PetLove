@@ -50,8 +50,8 @@ import EditInformationModal from '../Modals/EditInformationModal';
 //     .required('Phone number is required'),
 // });
 
-const ProfileForm = () => {
-  const [userData, setUserData] = useState([]);
+const ProfileForm = ({ userData }) => {
+  // const [userData, setUserData] = useState([]);
   const [isUploadUserModal, setIsUploadUserModal] = useState(false);
   // const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
@@ -73,24 +73,26 @@ const ProfileForm = () => {
     // },
   });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const storedUserData = localStorage.getItem('petLoveUserData');
-      console.log(storedUserData);
-      if (storedUserData) {
-        const user = JSON.parse(storedUserData);
-        console.log(user.token);
-        safeToken(user.token);
-        const res = await dispatch(getCurrentUser());
-        setUserData(res.payload);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const storedUserData = localStorage.getItem('petLoveUserData');
+  //     console.log(storedUserData);
+  //     if (storedUserData) {
+  //       const user = JSON.parse(storedUserData);
+  //       console.log(user.token);
+  //       safeToken(user.token);
+  //       const res = await dispatch(getCurrentUser());
+  //       setUserData(res.payload);
+  //       // console.log(res.payload);
+  //       // addArray(res.payload);
 
-        console.log(res.payload);
-      } else {
-        navigate('/login');
-      }
-    };
-    fetchUser();
-  }, [dispatch, navigate]);
+  //       console.log(res.payload);
+  //     } else {
+  //       navigate('/login');
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [addArray, dispatch, navigate]);
 
   // const onSubmit = async (data) => {
   //   try {
@@ -228,7 +230,7 @@ const ProfileForm = () => {
         <LogoutButton onClick={logout}>Log out</LogoutButton>
       </div>
       {isUploadUserModal && (
-        <EditInformationModal user={userData} onClose={uploadUserModalClose} />
+        <EditInformationModal user={userData} close={uploadUserModalClose} />
       )}
     </ProfileFormContainer>
   );

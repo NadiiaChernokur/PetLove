@@ -139,6 +139,7 @@ export const getNoticesResponse = createAsyncThunk(
   'noticesResponse',
   async (data, thunkAPI) => {
     try {
+      console.log(data);
       const { category, gender, keyword, location, petType, sortBy, page } =
         data;
       console.log(page);
