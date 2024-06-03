@@ -30,6 +30,7 @@ const NoticesItem = ({ array }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [pet, setPet] = useState([]);
   const [heartClick, setHeartClick] = useState([]);
+
   // const [userDataFavorId, setUserDataFavorId] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -140,7 +141,13 @@ const NoticesItem = ({ array }) => {
           </Buttons>
         </NoticesItemList>
       ))}
-      {isShowModal && <LearnMoreModal pet={pet} close={closeModal} />}
+      {isShowModal && (
+        <LearnMoreModal
+          pet={pet}
+          close={closeModal}
+          fav={heartClick.includes(pet._id) ? 'true' : 'false'}
+        />
+      )}
     </NoticesItemContainer>
   );
 };

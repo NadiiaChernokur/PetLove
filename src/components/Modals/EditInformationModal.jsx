@@ -21,7 +21,7 @@ import { ProfileFormPhotoInput } from '../ProfileForm/ProfileForm.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import sprsvg from '../../img/sprite2.svg';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getEditUser } from '../../redux/operation';
@@ -53,6 +53,27 @@ const EditInformationModal = ({ user, onClose }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      close();
+    }
+  };
   console.log('99999999999');
   useEffect(() => {
     if (user?.avatar) {
@@ -94,7 +115,7 @@ const EditInformationModal = ({ user, onClose }) => {
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer onClick={handleBackgroundClick}>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <ModalContent>
         <Edit>Edit information</Edit>

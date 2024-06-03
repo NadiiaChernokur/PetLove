@@ -10,6 +10,8 @@ const Notices = () => {
   const [noticesArray, setNoticesArray] = useState([]);
   const [newArray, setNewArray] = useState([]);
   const [schowNewArray, setSchowNewArray] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const dispatch = useDispatch();
   console.log('8888888888888');
   console.log(newArray);
@@ -39,12 +41,38 @@ const Notices = () => {
   const getResponseArray = (newArray) => {
     setNewArray(newArray);
   };
+  const addPage = () => {
+    setPage((prev) => prev + 1);
+  };
+  const subtractPage = () => {
+    setPage((prev) => prev - 1);
+  };
+  const firstPage = () => {
+    setPage(1);
+  };
+  const lastPage = () => {
+    setPage(totalPages);
+  };
+  const toTotalPege = (totP) => {
+    setTotalPages(totP);
+  };
   return (
     <NoticesContainer>
       <NoticesTitel>Find your favorite pet</NoticesTitel>
-      <NoticesFilters arrayByCategory={getResponseArray} />
+      <NoticesFilters
+        arrayByCategory={getResponseArray}
+        page={page}
+        total={toTotalPege}
+      />
       <NoticesItem array={schowNewArray ? newArray : noticesArray} />
-      <Paginations />
+      <Paginations
+        add={addPage}
+        subtract={subtractPage}
+        page={page}
+        first={firstPage}
+        last={lastPage}
+        total={totalPages}
+      />
     </NoticesContainer>
   );
 };

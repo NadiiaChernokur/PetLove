@@ -46,13 +46,14 @@ const customStyles = {
   }),
 };
 
-const NoticesFilters = ({ arrayByCategory }) => {
+const NoticesFilters = ({ arrayByCategory, page, total }) => {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [petTypes, setPetTypes] = useState([]);
   const [locations, setLocations] = useState([]);
   const [cities, setCities] = useState([]);
   const [check, setCheck] = useState('');
+  // const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -120,21 +121,25 @@ const NoticesFilters = ({ arrayByCategory }) => {
   //     }
   //   };
   const handleSelectChange = async (field, value, setFieldValue, values) => {
-    console.log(field);
-    console.log(value);
-    console.log(setFieldValue);
-    console.log(values);
+    // console.log(field);
+    // console.log(value);
+    // console.log(setFieldValue);
+    // console.log(values);
     setFieldValue(field, value);
-    const updatedValues = { ...values, [field]: value };
+    const updatedValues = { ...values, [field]: value, page };
     console.log(updatedValues);
     const response = await dispatch(getNoticesResponse(updatedValues));
-    console.log(response);
+    console.log(response.payload.totalPages);
+    total(response.payload.totalPages);
     arrayByCategory(response.payload.results);
   };
   const radioClear = async (field, setFieldValue, values) => {
     setCheck('');
     await handleSelectChange(field, '', setFieldValue, values);
   };
+  // const addPage = () => {
+  //   setPage((prev) => prev + 1);
+  // };
 
   return (
     <NoticesFiltersContainer>

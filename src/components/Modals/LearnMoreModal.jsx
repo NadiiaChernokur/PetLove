@@ -5,6 +5,7 @@ import {
   LearnMoreModalButtons,
   LearnMoreModalImg,
   LearnMoreModalInf,
+  LearnMoreModalInfTitle,
   LearnMoreModalInformation,
   LearnMoreModalName,
   LearnMoreModalStars,
@@ -22,17 +23,40 @@ import {
   RatingThree,
   RatingTwo,
 } from '../Rating/Rating';
-const LearnMoreModal = ({ pet, close }) => {
-  console.log(pet);
+import { useCallback, useEffect, useState } from 'react';
+const LearnMoreModal = ({ pet, close, fav }) => {
+  const [isFavorite, setIsFavorite] = useState(fav);
+  console.log(fav);
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+  useEffect(() => {
+    setIsFavorite(fav);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [fav, handleKeyDown]);
+
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      close();
+    }
+  };
   return (
-    <ModalBackground>
+    <ModalBackground onClick={handleBackgroundClick}>
       <ModalContainer>
         <LearnMoreSvg width="24" height="24" onClick={close}>
           <use href={`${sprit}#x-x`}></use>
         </LearnMoreSvg>
         <LearnMoreModalImg src={pet.imgURL} alt={pet.title}></LearnMoreModalImg>
         <LearnMoreDiv>{pet.category}</LearnMoreDiv>
-        <LearnMoreModalName>{pet.titel}</LearnMoreModalName>
+        <LearnMoreModalName>{pet.title}</LearnMoreModalName>
         <LearnMoreModalStars>
           {pet.popularity <= 10 && <RatingOne />}
           {pet.popularity > 10 && pet.popularity <= 20 && <RatingTwo />}
@@ -43,30 +67,35 @@ const LearnMoreModal = ({ pet, close }) => {
         </LearnMoreModalStars>
         <LearnMoreModalInformation>
           <LearnMoreModalInf>
-            <p>Name</p>
+            <LearnMoreModalInfTitle>Name</LearnMoreModalInfTitle>
             <p>{pet.name}</p>
           </LearnMoreModalInf>
           <LearnMoreModalInf>
-            <p>Birthday</p>
+            <LearnMoreModalInfTitle>Birthday</LearnMoreModalInfTitle>
             <p>{pet.birthday}</p>
           </LearnMoreModalInf>
           <LearnMoreModalInf>
-            <p>Sex</p>
+            <LearnMoreModalInfTitle>Sex</LearnMoreModalInfTitle>
             <p>{pet.sex}</p>
           </LearnMoreModalInf>
           <LearnMoreModalInf>
-            <p>Species</p>
+            <LearnMoreModalInfTitle>Species</LearnMoreModalInfTitle>
             <p>{pet.species}</p>
           </LearnMoreModalInf>
         </LearnMoreModalInformation>
         <LearnMoreModalText>{pet.comment}</LearnMoreModalText>
         <LearnMoreModalButtons>
-          <LearnMoreModalAdd>
-            Add to
-            <svg width="20" height="20">
-              <use href={`${sprite}#heartW`}></use>
-            </svg>
-          </LearnMoreModalAdd>
+          {!isFavorite ? (
+            <LearnMoreModalAdd>
+              Add to
+              <svg width="20" height="20">
+                <use href={`${sprite}#heartW`}></use>
+              </svg>
+            </LearnMoreModalAdd>
+          ) : (
+            <div>Remove</div>
+          )}
+
           <LearnMoreModalButton>Contact</LearnMoreModalButton>
         </LearnMoreModalButtons>
       </ModalContainer>

@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import {
   AttentionModalImg,
   AttentionModalText,
@@ -11,8 +12,28 @@ import {
 } from './LearnMoreModal.styled';
 
 const CongratsModal = ({ close }) => {
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      close();
+    }
+  };
   return (
-    <ModalBackground>
+    <ModalBackground onClick={handleBackgroundClick}>
       <ModalContainer>
         <AttentionModalImg>
           <svg></svg>

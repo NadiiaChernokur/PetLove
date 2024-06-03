@@ -60,6 +60,7 @@ export const LearnMoreModalName = styled.p`
 export const LearnMoreModalStars = styled.div`
   display: flex;
   gap: 4px;
+  margin-bottom: 20px;
 `;
 export const LearnMoreModalInformation = styled.div`
   display: flex;
@@ -75,6 +76,18 @@ export const LearnMoreModalInf = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  color: #262626;
+`;
+export const LearnMoreModalInfTitle = styled.p`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 140%;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.5);
 `;
 export const LearnMoreModalText = styled.p`
   font-weight: 500;

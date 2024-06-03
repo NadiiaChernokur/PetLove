@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from 'react';
 import { AttentionModalImg } from './AttentionModal.styled';
 import { LearnMoreModalAdd, ModalBackground } from './LearnMoreModal.styled';
 import {
@@ -8,8 +9,28 @@ import {
 } from './LeavingModal.styled';
 
 const LeavingModal = ({ close }) => {
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      close();
+    }
+  };
   return (
-    <ModalBackground>
+    <ModalBackground onClick={handleBackgroundClick}>
       <LeavingModalContainer>
         <AttentionModalImg>
           <svg></svg>
