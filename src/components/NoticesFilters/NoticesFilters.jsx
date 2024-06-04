@@ -46,8 +46,7 @@ const customStyles = {
   }),
 };
 
-const NoticesFilters = ({ arrayByCategory, page, total }) => {
-  console.log(page);
+const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [petTypes, setPetTypes] = useState([]);
@@ -66,9 +65,10 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
   });
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchNotices = async () => {
-      const valuesArrayPage = { ...valuesArray, page };
+      const valuesArrayPage = { ...valuesArray, toPage };
       const response = await dispatch(getNoticesResponse(valuesArrayPage));
       arrayByCategory(response.payload.results);
       return;
@@ -130,12 +130,12 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
   };
 
   const handleSelectChange = async (field, value, setFieldValue, values) => {
-    console.log(page);
+    console.log('88888888');
     setFieldValue(field, value);
-    const updatedValues = { ...values, [field]: value, page };
-    console.log(updatedValues);
+    const updatedValues = { ...values, [field]: value, toPage: 1 };
+
     const response = await dispatch(getNoticesResponse(updatedValues));
-    console.log(response.payload.totalPages);
+    toFirst();
     total(response.payload.totalPages);
     arrayByCategory(response.payload.results);
   };

@@ -1,6 +1,7 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   ButtonLog,
+  ButtonLogOut,
   ButtonReg,
   ButtonsAuthDiv,
   ButtonsAuthP,
@@ -15,7 +16,7 @@ import {
 import sprite from '/src/img/sprite.svg';
 import sprit from '/src/img/user.svg';
 import { useEffect, useState } from 'react';
-import { getCurrentUser, safeToken } from '../../redux/operation';
+import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Header = () => {
@@ -26,6 +27,7 @@ export const Header = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/home';
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +47,12 @@ export const Header = () => {
     };
     fetchUser();
   });
+  const toLogOut = async () => {
+    const res = await dispatch(logOut());
+    console.log(res);
+    localStorage.setItem('petLoveUserData', JSON.stringify([]));
+    navigate('/home');
+  };
 
   return (
     <HeaderContainer>
@@ -80,8 +88,10 @@ export const Header = () => {
         </ButtonsDiv>
       ) : (
         <ButtonsAuthDiv>
-          <NavLink to="/home">
-            <ButtonLog isHomePage={isHomePage}>Log out</ButtonLog>
+          <NavLink>
+            <ButtonLogOut onClick={toLogOut} isHomePage={isHomePage}>
+              Log out
+            </ButtonLogOut>
           </NavLink>
           <NavLink to="/profile">
             <ButtonsAuthSvgDiv isHomePage={isHomePage}>

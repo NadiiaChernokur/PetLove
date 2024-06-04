@@ -33,11 +33,10 @@ const Notices = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log('555555555');
-    if (newArray.length !== 0) {
+    if (newArray?.length !== 0) {
       setSchowNewArray(true);
     }
-  }, [newArray.length]);
+  }, [newArray?.length]);
 
   const getResponseArray = (newArray) => {
     setNewArray(newArray);
@@ -57,6 +56,7 @@ const Notices = () => {
   const toTotalPege = (totP) => {
     setTotalPages(totP);
   };
+
   return (
     <NoticesContainer>
       <NoticesTitel>Find your favorite pet</NoticesTitel>
@@ -64,6 +64,7 @@ const Notices = () => {
         arrayByCategory={getResponseArray}
         page={page}
         total={toTotalPege}
+        toFirst={firstPage}
       />
       <NoticesItem array={schowNewArray ? newArray : noticesArray} />
       <Paginations

@@ -78,6 +78,20 @@ export const ButtonLog = styled.button`
   text-transform: uppercase;
   color: #fff;
 `;
+export const ButtonLogOut = styled.button`
+  all: unset;
+  padding: 0 35px;
+  height: 50px;
+  display: ${({ isHomePage }) => (isHomePage ? 'none' : 'block')};
+  border-radius: 30px;
+  background: #f6b83d;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+`;
 export const ButtonReg = styled.button`
   padding: 0 20px;
   height: 50px;

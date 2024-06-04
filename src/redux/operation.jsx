@@ -140,14 +140,14 @@ export const getNoticesResponse = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       console.log(data);
-      const { category, gender, keyword, location, petType, sortBy, page } =
+      const { category, gender, keyword, location, petType, sortBy, toPage } =
         data;
-      console.log(page);
+      console.log(toPage);
       //   const respons = await axios.get(
       //     `/notices?keyword=${keyword}&category=${category}&species=${petType}&sex=${gender}&locationId=${location}&by${sortBy}=true`
       //   );
       const respons = await axios.get(
-        `/notices?keyword=${keyword}&category=${category}&species=${petType}&locationId=${location}&by${sortBy}=true&sex=${gender}&page=${page}`
+        `/notices?keyword=${keyword}&category=${category}&species=${petType}&locationId=${location}&by${sortBy}=true&sex=${gender}&page=${toPage}`
       );
       console.log(respons.data);
       return respons.data;

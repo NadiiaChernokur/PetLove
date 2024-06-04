@@ -83,7 +83,9 @@ const getSpeciesFulfilled = (state, action) => {
 const logOutFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  // state.species = action.payload;
+  state.user = [];
+  state.logIn = [];
+  state.registr = [];
 };
 const logInFulfilled = (state, action) => {
   state.isLoading = false;
@@ -114,19 +116,19 @@ const editUserFulfilled = (state, action) => {
 const getNoticesResponseFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  console.log(action.payload);
+
   state.noticesResponse = action.payload;
 };
 const addToFavoriteFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  console.log(action.payload);
+
   state.favoriteArray = action.payload;
 };
 const removeFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  console.log(action.payload);
+
   state.favoriteArray = action.payload;
 };
 
