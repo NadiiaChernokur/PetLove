@@ -6,6 +6,7 @@ import {
   Title,
   TitleImg,
 } from './ErrorPage.styled';
+import cat from '../../img/cat-circle.png';
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ErrorPage = () => {
   return (
     <Container>
       <Title>
-        4<TitleImg></TitleImg>4
+        4<TitleImg src={cat}></TitleImg>4
       </Title>
       <ErrorText>Ooops! This page not found :(</ErrorText>
       <ErrorButton onClick={click}>To home page</ErrorButton>

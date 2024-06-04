@@ -5,6 +5,7 @@ import {
   CatDiv,
   CatImg,
   CatSection,
+  CatSectionImg,
   Div,
   ErrorText,
   FieldFormik,
@@ -28,6 +29,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import sprite from '/src/img/sprite.svg';
+import photoT from '../../img/catRagT.png';
 import { registration } from '../../redux/operation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -98,6 +100,7 @@ const Registration = () => {
             </DogDescribeP>
           </CatDiv>
         </CatDescribe>
+        <CatSectionImg src={photoT}></CatSectionImg>
       </CatSection>
       <RegistrSection>
         <Registr>Registration</Registr>

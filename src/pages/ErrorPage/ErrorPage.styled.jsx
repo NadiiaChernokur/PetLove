@@ -12,6 +12,9 @@ export const Container = styled.div`
   margin: 0 32px;
   gap: 32px;
   background: #f6b83d;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    min-width: 770px;
+  }
 `;
 
 export const Title = styled.div`
@@ -33,6 +36,7 @@ export const ErrorText = styled.p`
   line-height: 117%;
   letter-spacing: -0.03em;
   color: #fff;
+  white-space: nowrap;
 `;
 export const ErrorButton = styled.button`
   border-radius: 30px;

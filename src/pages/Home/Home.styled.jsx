@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import photo from '/src/img/dogGirl.png';
+import photoT from '/src/img/girlDogTab.png';
 export const HomeContainer = styled.div`
   min-width: 1282px;
   margin: auto;
@@ -20,11 +22,26 @@ export const HomeFirst = styled.div`
   gap: 73px;
   padding: 32px 64px;
   align-items: flex-end;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    min-height: 384px;
+    flex-direction: column;
+    padding: 0 32px;
+    padding-top: 173px;
+    height: 496px;
+    width: 704px;
+    gap: 32px;
+  }
 `;
 export const HomeSecond = styled.div`
   border-radius: 60px;
-  /* width: 1216px; */
+  background-image: url(${photo});
   height: 384px;
+  width: 1216px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 704px;
+    height: 496px;
+    background-image: url(${photoT});
+  }
 `;
 export const HomeTitel = styled.h3`
   font-weight: 700;
@@ -32,6 +49,11 @@ export const HomeTitel = styled.h3`
   line-height: 97%;
   letter-spacing: -0.03em;
   color: #fff;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 96%;
+  }
 `;
 export const HomeText = styled.p`
   font-weight: 500;

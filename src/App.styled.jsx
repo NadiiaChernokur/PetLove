@@ -7,6 +7,6 @@ export const AppWrapper = styled.div`
   height: 100vh;
 
   background-repeat: no-repeat;
-  background-position: left top;
+  background-position: center;
   background-size: 100% 100%;
 `;

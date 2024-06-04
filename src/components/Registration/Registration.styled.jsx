@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
 import photo from '../../img/catReg.png';
+import photoT from '../../img/catRagT.png';
 export const RegistrationContainer = styled.div`
   margin: 32px;
   margin-top: 0;
@@ -8,13 +9,34 @@ export const RegistrationContainer = styled.div`
   gap: 32px;
   justify-content: space-between;
   /* justify-content: center; */
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    flex-direction: column;
+  }
 `;
 export const CatSection = styled.div`
   border-radius: 60px;
-  width: 592px;
+  /* width: 592px; */
+  min-width: 592px;
   height: 654px;
   background-image: url(${photo});
   position: relative;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    border: 1px solid #000;
+    border-radius: 60px;
+    width: 704px;
+    height: 302px;
+    background: #f6b83d;
+
+    background-repeat: no-repeat;
+  }
+`;
+export const CatSectionImg = styled.img`
+  display: none;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    left: 308px;
+    position: relative;
+    display: block;
+  }
 `;
 export const CatDescribe = styled.div`
   border-radius: 20px;

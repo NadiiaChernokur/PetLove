@@ -11,17 +11,21 @@ import {
   HeaderLogo,
   HeaderLogoSvg,
   Navigation,
+  NavigationBurgerDiv,
   NavigationP,
 } from './Header.styled';
 import sprite from '/src/img/sprite.svg';
 import sprit from '/src/img/user.svg';
+import burger from '/src/img/burger.svg';
 import { useEffect, useState } from 'react';
 import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
 import { useDispatch, useSelector } from 'react-redux';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 export const Header = () => {
   const [isUserRegster, setIsUserRegister] = useState(false);
   const [userName, setUserName] = useState();
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const data = useSelector((state) => state.logIn);
   console.log(data);
   const location = useLocation();
@@ -53,9 +57,17 @@ export const Header = () => {
     localStorage.setItem('petLoveUserData', JSON.stringify([]));
     navigate('/home');
   };
+  const openBurgerMenu = () => {
+    setIsBurgerMenuOpen(true);
+  };
+  const closeBurgerMenu = () => {
+    setIsBurgerMenuOpen(false);
+  };
 
   return (
     <HeaderContainer>
+      {isBurgerMenuOpen && <BurgerMenu close={closeBurgerMenu} />}
+
       <NavLink to="/home">
         <HeaderLogo isHomePage={isHomePage}>
           petl
@@ -77,34 +89,39 @@ export const Header = () => {
           <NavigationP isHomePage={isHomePage}>Our friends</NavigationP>
         </NavLink>
       </Navigation>
-      {!isUserRegster || data.length === 0 ? (
-        <ButtonsDiv>
-          <NavLink to="/login">
-            <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
-          </NavLink>
-          <NavLink to="/register">
-            <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
-          </NavLink>
-        </ButtonsDiv>
-      ) : (
-        <ButtonsAuthDiv>
-          <NavLink>
-            <ButtonLogOut onClick={toLogOut} isHomePage={isHomePage}>
-              Log out
-            </ButtonLogOut>
-          </NavLink>
-          <NavLink to="/profile">
-            <ButtonsAuthSvgDiv isHomePage={isHomePage}>
-              <svg width="24" height="24">
-                <use href={`${sprit}#userr`}></use>
-              </svg>
-            </ButtonsAuthSvgDiv>
-          </NavLink>
-          <NavLink to="/profile">
-            <ButtonsAuthP>{userName || data.name}</ButtonsAuthP>
-          </NavLink>
-        </ButtonsAuthDiv>
-      )}
+      <NavigationBurgerDiv>
+        {!isUserRegster || data.length === 0 ? (
+          <ButtonsDiv>
+            <NavLink to="/login">
+              <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
+            </NavLink>
+            <NavLink to="/register">
+              <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
+            </NavLink>
+          </ButtonsDiv>
+        ) : (
+          <ButtonsAuthDiv>
+            <NavLink>
+              <ButtonLogOut onClick={toLogOut} isHomePage={isHomePage}>
+                Log out
+              </ButtonLogOut>
+            </NavLink>
+            <NavLink to="/profile">
+              <ButtonsAuthSvgDiv isHomePage={isHomePage}>
+                <svg width="24" height="24">
+                  <use href={`${sprit}#userr`}></use>
+                </svg>
+              </ButtonsAuthSvgDiv>
+            </NavLink>
+            <NavLink to="/profile">
+              <ButtonsAuthP>{userName || data.name}</ButtonsAuthP>
+            </NavLink>
+          </ButtonsAuthDiv>
+        )}
+        <svg width="36" height="36" onClick={openBurgerMenu}>
+          <use href={`${burger}#menu-01`}></use>
+        </svg>
+      </NavigationBurgerDiv>
     </HeaderContainer>
   );
 };

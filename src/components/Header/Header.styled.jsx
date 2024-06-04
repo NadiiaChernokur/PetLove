@@ -9,6 +9,12 @@ export const HeaderContainer = styled.div`
   align-items: center;
   position: relative;
   z-index: 5;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    max-width: 770px;
+    min-width: 770px;
+    padding: 32px;
+    margin: 0 32%;
+  }
 `;
 export const HeaderLogo = styled.h2`
   display: flex;
@@ -26,6 +32,17 @@ export const Navigation = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    display: none;
+  }
+`;
+export const NavigationBurgerDiv = styled.div`
+  display: none;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
 `;
 export const NavigationP = styled.p`
   padding: 15px 20px;

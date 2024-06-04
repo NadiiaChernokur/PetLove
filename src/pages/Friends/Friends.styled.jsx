@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 export const FriendsContainer = styled.div`
-  max-width: 1193px;
+  width: 1193px;
   padding: 0 20px;
   margin: 64px auto;
 `;
