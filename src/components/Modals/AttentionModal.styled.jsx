@@ -10,6 +10,7 @@ export const AttentionModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 export const AttentionModalTitel = styled.p`
@@ -26,8 +27,10 @@ export const AttentionModalImg = styled.div`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: pink;
+  background-color: #fff4df;
   margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 export const AttentionModalText = styled.p`
   font-weight: 500;
@@ -37,4 +40,8 @@ export const AttentionModalText = styled.p`
   text-align: center;
   color: #2b2b2a;
   margin-bottom: 28px;
+`;
+export const AttentionModalDuttonsDiv = styled.div`
+  display: flex;
+  gap: 8px;
 `;

@@ -9,6 +9,7 @@ export const LeavingModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 export const LeavingModalTitel = styled.p`

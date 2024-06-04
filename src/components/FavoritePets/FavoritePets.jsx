@@ -35,7 +35,7 @@ const FavoritePets = ({ favoritsPets }) => {
           Viewed
         </FavoritePetsButton>
       </FavoritePetsButtons>
-      {petsArray.length > 0 ? (
+      {petsArray?.length > 0 ? (
         <NoticesItem array={petsArray} del={true} />
       ) : (
         <FavoritePetsEmptyArray>

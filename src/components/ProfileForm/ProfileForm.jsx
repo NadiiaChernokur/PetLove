@@ -26,10 +26,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
 import sprite from '../../img/sprite.svg';
+import sprit from '../../img/user.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyPetsList from '../MyPets/MyPets';
 import EditInformationModal from '../Modals/EditInformationModal';
+import LeavingModal from '../Modals/LeavingModal';
 
 // const schema = yup.object().shape({
 //   name: yup.string().required('Name is required'),
@@ -53,6 +55,7 @@ import EditInformationModal from '../Modals/EditInformationModal';
 const ProfileForm = ({ userData }) => {
   // const [userData, setUserData] = useState([]);
   const [isUploadUserModal, setIsUploadUserModal] = useState(false);
+  const [isLogOutModal, setIsLogOutModal] = useState(false);
   // const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,9 +120,11 @@ const ProfileForm = ({ userData }) => {
   // };
   const logout = async () => {
     const res = await dispatch(logOut());
+    localStorage.setItem('petLoveUserData', JSON.stringify([]));
     console.log(res);
     if (res.error && res.payload.includes('401')) {
       toast('You are not authorized');
+      navigate('/home');
     } else {
       navigate('/home');
     }
@@ -132,6 +137,12 @@ const ProfileForm = ({ userData }) => {
   };
   const addPetPage = () => {
     navigate('/add-pet');
+  };
+  const logOutModal = () => {
+    setIsLogOutModal(true);
+  };
+  const logOutModalClose = () => {
+    setIsLogOutModal(false);
   };
 
   return (
@@ -155,8 +166,8 @@ const ProfileForm = ({ userData }) => {
                     alt="user photo"
                   ></ProfileFormImg>
                 ) : (
-                  <svg width="50" height="50" fill="aqua">
-                    <use href={`${sprite}#user-02`}></use>
+                  <svg width="50" height="50">
+                    <use href={`${sprit}#userr`}></use>
                   </svg>
                 )}
 
@@ -227,10 +238,13 @@ const ProfileForm = ({ userData }) => {
         </MyPetsDiv>
         {userData?.pets?.length > 0 && <MyPetsList pets={userData.pets} />}
 
-        <LogoutButton onClick={logout}>Log out</LogoutButton>
+        <LogoutButton onClick={logOutModal}>Log out</LogoutButton>
       </div>
       {isUploadUserModal && (
         <EditInformationModal user={userData} close={uploadUserModalClose} />
+      )}
+      {isLogOutModal && (
+        <LeavingModal close={logOutModalClose} logout={logout} />
       )}
     </ProfileFormContainer>
   );

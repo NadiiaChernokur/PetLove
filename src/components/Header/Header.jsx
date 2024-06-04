@@ -1,7 +1,10 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   ButtonLog,
   ButtonReg,
+  ButtonsAuthDiv,
+  ButtonsAuthP,
+  ButtonsAuthSvgDiv,
   ButtonsDiv,
   HeaderContainer,
   HeaderLogo,
@@ -10,21 +13,51 @@ import {
   NavigationP,
 } from './Header.styled';
 import sprite from '/src/img/sprite.svg';
+import sprit from '/src/img/user.svg';
+import { useEffect, useState } from 'react';
+import { getCurrentUser, safeToken } from '../../redux/operation';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Header = () => {
+  const [isUserRegster, setIsUserRegister] = useState(false);
+  const [userName, setUserName] = useState();
+  const data = useSelector((state) => state.logIn);
+  console.log(data);
   const location = useLocation();
   const isHomePage = location.pathname === '/home';
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const storedUserData = localStorage.getItem('petLoveUserData');
+
+      if (storedUserData) {
+        const user = JSON.parse(storedUserData);
+        safeToken(user.token);
+        const res = await dispatch(getCurrentUser());
+        if (res.payload._id) {
+          setIsUserRegister(true);
+          setUserName(res.payload.name);
+        }
+
+        console.log(res.payload);
+      }
+    };
+    fetchUser();
+  });
 
   return (
     <HeaderContainer>
-      <HeaderLogo isHomePage={isHomePage}>
-        petl
-        <HeaderLogoSvg isHomePage={isHomePage}>
-          <use href={`${sprite}#hart`}></use>
-        </HeaderLogoSvg>
-        {/* <svg width="19" height="17" isHomePage={isHomePage}></svg> */}
-        ve
-      </HeaderLogo>
+      <NavLink to="/home">
+        <HeaderLogo isHomePage={isHomePage}>
+          petl
+          <HeaderLogoSvg isHomePage={isHomePage}>
+            <use href={`${sprite}#hart`}></use>
+          </HeaderLogoSvg>
+          {/* <svg width="19" height="17" isHomePage={isHomePage}></svg> */}
+          ve
+        </HeaderLogo>
+      </NavLink>
       <Navigation>
         <NavLink to="/news">
           <NavigationP isHomePage={isHomePage}>News</NavigationP>
@@ -36,14 +69,32 @@ export const Header = () => {
           <NavigationP isHomePage={isHomePage}>Our friends</NavigationP>
         </NavLink>
       </Navigation>
-      <ButtonsDiv>
-        <NavLink to="/login">
-          <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
-        </NavLink>
-        <NavLink to="/register">
-          <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
-        </NavLink>
-      </ButtonsDiv>
+      {!isUserRegster || data.length === 0 ? (
+        <ButtonsDiv>
+          <NavLink to="/login">
+            <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
+          </NavLink>
+          <NavLink to="/register">
+            <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
+          </NavLink>
+        </ButtonsDiv>
+      ) : (
+        <ButtonsAuthDiv>
+          <NavLink to="/home">
+            <ButtonLog isHomePage={isHomePage}>Log out</ButtonLog>
+          </NavLink>
+          <NavLink to="/profile">
+            <ButtonsAuthSvgDiv isHomePage={isHomePage}>
+              <svg width="24" height="24">
+                <use href={`${sprit}#userr`}></use>
+              </svg>
+            </ButtonsAuthSvgDiv>
+          </NavLink>
+          <NavLink to="/profile">
+            <ButtonsAuthP>{userName || data.name}</ButtonsAuthP>
+          </NavLink>
+        </ButtonsAuthDiv>
+      )}
     </HeaderContainer>
   );
 };

@@ -130,6 +130,7 @@ const NoticesFilters = ({ arrayByCategory, page, total }) => {
   };
 
   const handleSelectChange = async (field, value, setFieldValue, values) => {
+    console.log(page);
     setFieldValue(field, value);
     const updatedValues = { ...values, [field]: value, page };
     console.log(updatedValues);

@@ -6,6 +6,7 @@ import {
   HomeText,
   HomeTitel,
 } from './Home.styled';
+import photo from '/src/img/dogGirl.png';
 
 const Home = () => {
   return (
@@ -20,7 +21,7 @@ const Home = () => {
         </HomeText>
       </HomeFirst>
       <HomeSecond>
-        <img></img>
+        <img src={photo}></img>
       </HomeSecond>
     </HomeContainer>
   );

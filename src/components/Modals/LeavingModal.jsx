@@ -1,14 +1,20 @@
 import { useCallback, useEffect } from 'react';
 import { AttentionModalImg } from './AttentionModal.styled';
-import { LearnMoreModalAdd, ModalBackground } from './LearnMoreModal.styled';
+import {
+  LearnMoreModalAdd,
+  LearnMoreSvg,
+  ModalBackground,
+} from './LearnMoreModal.styled';
 import {
   LeavingModalButtons,
   LeavingModalCancel,
   LeavingModalContainer,
   LeavingModalTitel,
 } from './LeavingModal.styled';
+import sprit from '../../img/cross.svg';
+import photo from '../../img/cat.png';
 
-const LeavingModal = ({ close }) => {
+const LeavingModal = ({ close, logout }) => {
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') {
@@ -32,14 +38,17 @@ const LeavingModal = ({ close }) => {
   return (
     <ModalBackground onClick={handleBackgroundClick}>
       <LeavingModalContainer>
+        <LearnMoreSvg width="24" height="24" onClick={close}>
+          <use href={`${sprit}#x-x`}></use>
+        </LearnMoreSvg>
         <AttentionModalImg>
-          <svg></svg>
+          <img src={photo} width="44" height="44"></img>
         </AttentionModalImg>
         <LeavingModalTitel>Already leaving?</LeavingModalTitel>
 
         <LeavingModalButtons>
-          <LearnMoreModalAdd>Yes</LearnMoreModalAdd>
-          <LeavingModalCancel>Cancel</LeavingModalCancel>
+          <LearnMoreModalAdd onClick={logout}>Yes</LearnMoreModalAdd>
+          <LeavingModalCancel onClick={close}>Cancel</LeavingModalCancel>
         </LeavingModalButtons>
       </LeavingModalContainer>
     </ModalBackground>

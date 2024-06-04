@@ -6,6 +6,9 @@ export const HomeContainer = styled.div`
   position: absolute;
   z-index: 2;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const HomeFirst = styled.div`
@@ -22,7 +25,6 @@ export const HomeSecond = styled.div`
   border-radius: 60px;
   /* width: 1216px; */
   height: 384px;
-  background: #3df3f6;
 `;
 export const HomeTitel = styled.h3`
   font-weight: 700;

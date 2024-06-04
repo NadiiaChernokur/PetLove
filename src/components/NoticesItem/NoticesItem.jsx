@@ -25,12 +25,15 @@ import {
 } from '../../redux/operation';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AttentionModal from '../Modals/AttentionModal';
 
 const NoticesItem = ({ array, del }) => {
   console.log(array);
   const [isShowModal, setIsShowModal] = useState(false);
   const [pet, setPet] = useState([]);
   const [heartClick, setHeartClick] = useState([]);
+  const [isToken, setIsToken] = useState('');
+  const [isAttentionModal, setIsAttentionModal] = useState(false);
 
   // const [userDataFavorId, setUserDataFavorId] = useState([]);
   const dispatch = useDispatch();
@@ -44,6 +47,7 @@ const NoticesItem = ({ array, del }) => {
         const user = JSON.parse(storedUserData);
         console.log(user.token);
         safeToken(user.token);
+        setIsToken(user.token);
         const res = await dispatch(getCurrentUser());
         if (res.payload.noticesFavorites.length > 0) {
           const favoriteIds = res.payload.noticesFavorites.map(
@@ -67,6 +71,9 @@ const NoticesItem = ({ array, del }) => {
   const closeModal = () => {
     setIsShowModal(false);
   };
+  const closeModalAttention = () => {
+    setIsAttentionModal(false);
+  };
   // const toHeartClick = (id) => {
   //   console.log(id);
   //   setHeartClick(!heartClick);
@@ -74,6 +81,11 @@ const NoticesItem = ({ array, del }) => {
   const toggleHeartClick = async (id) => {
     console.log(id);
     console.log(heartClick);
+    if (!isToken) {
+      setIsAttentionModal(true);
+      return;
+    }
+
     try {
       let updatedFavorites;
       if (heartClick.includes(id)) {
@@ -88,6 +100,7 @@ const NoticesItem = ({ array, del }) => {
       console.error('Error updating favorite item', error);
     }
   };
+
   const deleteClick = async (id) => {
     await dispatch(toFavoriteRemove(id));
     window.location.reload();
@@ -165,6 +178,7 @@ const NoticesItem = ({ array, del }) => {
           fav={heartClick.includes(pet._id) ? 'true' : 'false'}
         />
       )}
+      {isAttentionModal && <AttentionModal close={closeModalAttention} />}
     </NoticesItemContainer>
   );
 };

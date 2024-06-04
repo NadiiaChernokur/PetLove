@@ -42,6 +42,27 @@ export const ButtonsDiv = styled.div`
   display: flex;
   gap: 8px;
 `;
+export const ButtonsAuthDiv = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+`;
+export const ButtonsAuthSvgDiv = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #fff4df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const ButtonsAuthP = styled.p`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  color: #262626;
+`;
 export const ButtonLog = styled.button`
   all: unset;
   padding: 0 35px;
