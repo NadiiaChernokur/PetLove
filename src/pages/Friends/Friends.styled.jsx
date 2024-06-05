@@ -3,6 +3,10 @@ export const FriendsContainer = styled.div`
   width: 1193px;
   padding: 0 20px;
   margin: 64px auto;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 744px;
+    padding: 0 20px;
+  }
 `;
 
 export const FriendsTitel = styled.h3`
@@ -21,12 +25,14 @@ export const FriendsUl = styled.ul`
 export const FriendsLi = styled.li`
   margin-bottom: 8px;
   background: #fff;
-
   border-radius: 15px;
   width: 371px;
   height: 196px;
   padding: 12px 20px;
   position: relative;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 342px;
+  }
 `;
 export const Time = styled.p`
   background: #fff4df;

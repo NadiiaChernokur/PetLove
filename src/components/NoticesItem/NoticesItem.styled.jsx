@@ -6,6 +6,12 @@ export const NoticesItemContainer = styled.ul`
   /* gap: 32px; */
   justify-content: space-between;
   min-width: 700px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    max-width: 744px;
+    min-width: 744px;
+    padding: 0 20px;
+    margin: auto;
+  }
 `;
 export const NoticesItemList = styled.li`
   margin-bottom: 8px;
@@ -16,7 +22,6 @@ export const NoticesItemList = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-}
 `;
 export const NoticesItemImg = styled.div`
   border-radius: 16px;

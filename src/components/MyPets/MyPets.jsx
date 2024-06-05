@@ -35,7 +35,9 @@ const MyPetsList = ({ pets }) => {
       {myFavoritesArray?.map((item) => (
         <MyPetsLi key={item._id}>
           <MyPetsBlock>
-            <MyPetsImg src={item.imgURL}></MyPetsImg>
+            <div>
+              <MyPetsImg src={item.imgURL}></MyPetsImg>
+            </div>
             <div>
               <MyPetsTitle>{item.title}</MyPetsTitle>
               <MyPetsInformation>

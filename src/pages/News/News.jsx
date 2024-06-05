@@ -59,7 +59,7 @@ const News = () => {
   const lastPage = () => {
     setPage(totalPages);
   };
-  const clearInput = () => {};
+  // const clearInput = () => {};
 
   return (
     <NewsContainer>

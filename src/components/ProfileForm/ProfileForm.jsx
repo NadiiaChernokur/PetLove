@@ -2,6 +2,7 @@ import {
   AddPetButton,
   AddPetButtonSpan,
   ErrorMessage,
+  FormContainer,
   FormInput,
   LogoutButton,
   MyInformation,
@@ -11,6 +12,7 @@ import {
   ProfileFormDiv,
   ProfileFormFirstDiv,
   ProfileFormImg,
+  ProfileFormImputDiv,
   ProfileFormPhotoInput,
   ProfileFormUser,
   UploadPhotoButton,
@@ -194,41 +196,48 @@ const ProfileForm = ({ userData }) => {
             </UploadUserButton>
           </ProfileFormFirstDiv>
           <MyInformation>My information</MyInformation>
+          <FormContainer>
+            <ProfileFormImputDiv>
+              <label htmlFor="name"></label>
+              <FormInput
+                id="name"
+                {...register('name')}
+                value={userData?.name}
+              />
+              {errors.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
+            </ProfileFormImputDiv>
 
-          <div>
-            <label htmlFor="name"></label>
-            <FormInput id="name" {...register('name')} value={userData?.name} />
-            {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-          </div>
+            <ProfileFormImputDiv>
+              <label htmlFor="email"></label>
+              <FormInput
+                id="email"
+                {...register('email')}
+                value={userData?.email}
+              />
+              {errors.email && (
+                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              )}
+            </ProfileFormImputDiv>
 
-          <div>
-            <label htmlFor="email"></label>
-            <FormInput
-              id="email"
-              {...register('email')}
-              value={userData?.email}
-            />
-            {errors.email && (
-              <ErrorMessage>{errors.email.message}</ErrorMessage>
+            <ProfileFormImputDiv>
+              <label htmlFor="phone"></label>
+              <FormInput
+                id="phone"
+                {...register('phone')}
+                placeholder="+380"
+                value={userData?.phone}
+              />
+              {errors.phone && (
+                <ErrorMessage>{errors.phone.message}</ErrorMessage>
+              )}
+            </ProfileFormImputDiv>
+
+            {errors.apiError && (
+              <ErrorMessage>{errors.apiError.message}</ErrorMessage>
             )}
-          </div>
-
-          <div>
-            <label htmlFor="phone"></label>
-            <FormInput
-              id="phone"
-              {...register('phone')}
-              placeholder="+380"
-              value={userData?.phone}
-            />
-            {errors.phone && (
-              <ErrorMessage>{errors.phone.message}</ErrorMessage>
-            )}
-          </div>
-
-          {errors.apiError && (
-            <ErrorMessage>{errors.apiError.message}</ErrorMessage>
-          )}
+          </FormContainer>
         </form>
         <MyPetsDiv>
           <MyPets>My pets</MyPets>

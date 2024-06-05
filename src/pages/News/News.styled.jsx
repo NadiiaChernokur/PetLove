@@ -3,6 +3,10 @@ export const NewsContainer = styled.div`
   width: 1282px;
   padding: 62px;
   margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 744px;
+    padding: 0 20px;
+  }
 `;
 export const NewsDiv = styled.div`
   display: flex;

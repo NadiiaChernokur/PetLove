@@ -13,8 +13,12 @@ export const Li = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  /* gap: 28px; */
   margin-bottom: 68px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 340px;
+    /* height: 476px; */
+  }
 `;
 
 export const NewsListImg = styled.img`
@@ -22,6 +26,7 @@ export const NewsListImg = styled.img`
   height: 226px;
   border-radius: 15px;
   background-color: #fff4df;
+  /* margin-bottom: 28px; */
 `;
 
 export const NewsTitel = styled.p`
@@ -30,6 +35,7 @@ export const NewsTitel = styled.p`
   line-height: 130%;
   letter-spacing: -0.03em;
   color: #262626;
+  /* margin-bottom: 14px; */
 `;
 export const NewsText = styled.p`
   font-weight: 500;

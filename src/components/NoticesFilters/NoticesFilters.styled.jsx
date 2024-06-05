@@ -2,13 +2,21 @@ import { Field, Form } from 'formik';
 import styled from 'styled-components';
 
 export const NoticesFiltersContainer = styled.div`
-  background: pink;
+  background: #fff4df;
   max-width: 1216px;
   min-width: 800px;
   height: 216px;
   padding: 40px;
   border-radius: 30px;
   margin-bottom: 40px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    max-width: 744px;
+    min-width: 744px;
+    height: 280px;
+    padding: 40px 20px;
+    margin: auto;
+    margin-bottom: 20px;
+  }
 `;
 export const ResetButton = styled.button`
   padding: 8px 16px;
@@ -38,6 +46,13 @@ export const NoticesField = styled(Field)`
 export const CheckDiv = styled.div`
   display: flex;
   gap: 8px;
+`;
+export const BorderDiv = styled.hr`
+  border: none;
+  height: 1px;
+  background-color: rgba(38, 38, 38, 0.1);
+  margin: 20px 0;
+  width: 704px;
 `;
 export const CheckboxInput = styled.input`
   position: absolute;

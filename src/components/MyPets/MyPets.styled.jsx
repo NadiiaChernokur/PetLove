@@ -4,6 +4,9 @@ export const MyPetsContainer = styled.ul`
   flex-direction: column;
   gap: 14px;
   margin-top: 20px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    flex-direction: row;
+  }
 `;
 
 export const MyPetsLi = styled.li`
@@ -14,6 +17,11 @@ export const MyPetsLi = styled.li`
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 305px;
+    height: 149px;
+    position: relative;
+  }
 `;
 export const MyPetsImg = styled.img`
   border-radius: 100px;
@@ -21,6 +29,11 @@ export const MyPetsImg = styled.img`
   height: 90px;
   background: pink;
   margin-right: 25px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 75px;
+    height: 75px;
+    margin-right: 14px;
+  }
 `;
 export const MyPetsDeliteButton = styled.button`
   border-radius: 30px;
@@ -29,6 +42,11 @@ export const MyPetsDeliteButton = styled.button`
   height: 38px;
   background: #fff4df;
   border: none;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+  }
 `;
 
 export const MyPetsTitle = styled.p`
@@ -46,6 +64,10 @@ export const MyPetsInformation = styled.div`
   line-height: 117%;
   letter-spacing: -0.02em;
   color: #262626;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 `;
 export const MyPetsInformationP = styled.p`
   font-weight: 500;

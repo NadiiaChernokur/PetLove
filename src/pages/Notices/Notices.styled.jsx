@@ -3,6 +3,10 @@ export const NoticesContainer = styled.div`
   width: 1280px;
   padding: 64px 32px;
   margin: auto;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 744px;
+    padding: 0 20px;
+  }
 `;
 
 export const NoticesTitel = styled.h3`
@@ -14,4 +18,6 @@ export const NoticesTitel = styled.h3`
   margin-bottom: 40px;
   position: relative;
   right: -42px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  }
 `;

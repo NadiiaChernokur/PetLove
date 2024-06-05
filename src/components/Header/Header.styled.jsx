@@ -13,7 +13,7 @@ export const HeaderContainer = styled.div`
     max-width: 770px;
     min-width: 770px;
     padding: 32px;
-    margin: 0 32%;
+    margin: auto;
   }
 `;
 export const HeaderLogo = styled.h2`

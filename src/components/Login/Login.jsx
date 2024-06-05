@@ -8,6 +8,7 @@ import {
   DogName,
   DogNameDiv,
   DogSection,
+  DogSectionImg,
   Log,
   LogButton,
   LogEye,
@@ -84,6 +85,7 @@ const Login = () => {
     <LoginContainer>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
       <DogSection>
+        <DogSectionImg></DogSectionImg>
         <DogDescribe>
           <DogImg>
             <img src={photo}></img>
@@ -131,27 +133,27 @@ const Login = () => {
                 value={values.email}
               />
               <ErrorMessage name="email" component={ErrorText} />
+              <div style={{ position: 'relative' }}>
+                <FieldFormik
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={values.password}
+                  onChange={handleChange}
+                />
+                {showPassword ? (
+                  <LogEye width="32" height="32" onClick={toggleShowPassword}>
+                    <use href={`${sprite}#eye`}></use>
+                  </LogEye>
+                ) : (
+                  <LogEye width="32" height="32" onClick={toggleShowPassword}>
+                    <use href={`${sprite}#eye-off`}></use>
+                  </LogEye>
+                )}
 
-              <FieldFormik
-                id="password"
-                name="password"
-                placeholder="Password"
-                type={showPassword ? 'text' : 'password'}
-                value={values.password}
-                onChange={handleChange}
-              />
-              {showPassword ? (
-                <LogEye width="32" height="32" onClick={toggleShowPassword}>
-                  <use href={`${sprite}#eye`}></use>
-                </LogEye>
-              ) : (
-                <LogEye width="32" height="32" onClick={toggleShowPassword}>
-                  <use href={`${sprite}#eye-off`}></use>
-                </LogEye>
-              )}
-
-              <ErrorMessage name="password" component={ErrorText} />
-
+                <ErrorMessage name="password" component={ErrorText} />
+              </div>
               <LogButton type="submit">Log In</LogButton>
               <HaveAnAccount>
                 Don’t have an account?

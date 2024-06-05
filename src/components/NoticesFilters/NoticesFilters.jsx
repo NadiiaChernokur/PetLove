@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  BorderDiv,
   CheckDiv,
   CheckboxInput,
   CheckboxLabel,
@@ -16,7 +17,8 @@ import {
   getNoticesCategories,
   getNoticesResponse,
 } from '../../redux/operation';
-import sprite from '../../img/s.svg';
+import sprite from '../../img/sprite.svg';
+import { NewsButton } from '../../pages/News/News.styled';
 
 const customStyles = {
   control: (provided) => ({
@@ -54,7 +56,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   const [cities, setCities] = useState([]);
   const [check, setCheck] = useState('');
   const [toPage, setToPage] = useState(1);
-  // const [firstOpen, setFirstOpen] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [valuesArray, setValuesArray] = useState({
     category: '',
     gender: '',
@@ -74,7 +76,6 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
       return;
     };
     if (page !== toPage) {
-      console.log('Page changed');
       setToPage(page);
       fetchNotices();
     }
@@ -84,7 +85,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
     const fetchData = async () => {
       try {
         const categoriesResponse = await dispatch(getNoticesCategories());
-        console.log(categoriesResponse);
+
         if (categoriesResponse.meta.requestStatus === 'fulfilled') {
           setCategories(categoriesResponse.payload.categoris);
           setGenders(categoriesResponse.payload.sex);
@@ -130,7 +131,9 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   };
 
   const handleSelectChange = async (field, value, setFieldValue, values) => {
-    console.log('88888888');
+    console.log(value);
+    console.log(selectedOption);
+    console.log(values);
     setFieldValue(field, value);
     const updatedValues = { ...values, [field]: value, toPage: 1 };
 
@@ -156,11 +159,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
           location: '',
           sortBy: '',
         }}
-        onSubmit={async (values) => {
-          //   console.log(values);
-          //   const array = await dispatch(getNoticesResponse(initialValues));
-          //   console.log(array);
-        }}
+        onSubmit={async (values) => {}}
       >
         {({ setFieldValue, values }) => (
           <NoticesForm>
@@ -182,7 +181,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
 
               <SearchButton type="button">
                 <svg width="20" height="20">
-                  <use href={`${sprite}#search`} width="20" height="20"></use>
+                  <use href={`${sprite}#search`}></use>
                 </svg>
               </SearchButton>
             </div>
@@ -193,7 +192,6 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                 const value = e.target.value;
                 setValuesArray(values);
                 if (page !== 1) {
-                  console.log('888888');
                   page === 1;
                 }
                 await handleSelectChange(
@@ -254,29 +252,45 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                 </option>
               ))}
             </NoticesField>
-
-            <Select
-              name="location"
-              options={locations}
-              styles={customStyles}
-              onInputChange={getCiti}
-              //   onChange={(selectedOption) => {
-              //     console.log(selectedOption);
-              //     // setLocations(selectedOption);
-              //   }}
-              placeholder="Location"
-              onChange={async (selectedOption) => {
-                setValuesArray(values);
-                const value = selectedOption;
-
-                await handleSelectChange(
-                  'location',
-                  value.value,
-                  setFieldValue,
-                  values
-                );
-              }}
-            />
+            <div style={{ position: 'relative' }}>
+              <Select
+                name="location"
+                options={locations}
+                styles={customStyles}
+                onInputChange={getCiti}
+                placeholder="Location"
+                onChange={async (selectedOption) => {
+                  setValuesArray(values);
+                  const value = selectedOption;
+                  setSelectedOption(value.label);
+                  await handleSelectChange(
+                    'location',
+                    value.value,
+                    setFieldValue,
+                    values
+                  );
+                }}
+              />
+              {selectedOption && (
+                <NewsButton
+                  type="button"
+                  onClick={() =>
+                    handleSelectChange('location', '', setFieldValue, values)
+                  }
+                  style={{ position: 'absolute', right: ' 41', top: '14' }}
+                >
+                  <svg width="20" height="20">
+                    <use href={`${sprite}#cross-small`}></use>
+                  </svg>
+                </NewsButton>
+              )}
+              <SearchButton type="button" style={{ background: 'white' }}>
+                <svg width="20" height="20">
+                  <use href={`${sprite}#search`}></use>
+                </svg>
+              </SearchButton>
+            </div>
+            <BorderDiv></BorderDiv>
             <CheckDiv>
               <CheckboxLabel
                 style={check === 'popularity' ? { background: '#f6b83d' } : {}}

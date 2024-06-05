@@ -26,7 +26,7 @@ export const CatSection = styled.div`
     width: 704px;
     height: 302px;
     background: #f6b83d;
-
+    margin: auto;
     background-repeat: no-repeat;
   }
 `;
@@ -95,6 +95,9 @@ export const RegistrSection = styled.section`
   background: #fff;
   padding: 77px 84px;
   box-sizing: border-box;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    margin: auto;
+  }
 `;
 
 export const Registr = styled.h3`

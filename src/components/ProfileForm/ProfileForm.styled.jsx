@@ -3,15 +3,21 @@ import styled from 'styled-components';
 export const ProfileFormContainer = styled.div`
   border-radius: 60px;
   width: 520px;
-
   background: #fff;
   padding: 40px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    margin: auto;
+    width: 704px;
+  }
 `;
 
 export const ProfileFormFirstDiv = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    justify-content: space-between;
+  }
 `;
 export const ProfileFormUser = styled.div`
   border-radius: 30px;
@@ -37,6 +43,11 @@ export const ProfileFormImg = styled.img`
   background: #fff4df;
   display: flex;
   margin-bottom: 8px; */
+`;
+export const ProfileFormImputDiv = styled.div`
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 305px;
+  }
 `;
 export const ProfileFormDiv = styled.div`
   display: flex;
@@ -96,6 +107,16 @@ export const FormInput = styled.input`
   width: 440px;
   height: 52px;
   margin-bottom: 14px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 305px;
+  }
+`;
+export const FormContainer = styled.div`
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 `;
 
 export const MyPetsDiv = styled.div`
