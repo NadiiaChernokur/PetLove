@@ -22,6 +22,7 @@ import {
   Form,
   FormInput,
   FormInputFile,
+  ImgDiv,
   PawDiv,
   SexDiv,
   SubmitButton,
@@ -125,9 +126,9 @@ const AddPet = () => {
   return (
     <AddPetContsiner>
       <ToastContainer toastStyle={{ background: '#f30e0e', color: 'white' }} />
-      <div width={592}>
-        <AddPetImg src={photo}></AddPetImg>
-      </div>
+      <ImgDiv>
+        <AddPetImg></AddPetImg>
+      </ImgDiv>
       <AddPetFormContainer>
         <AddPetFormTitel>
           Add my pet /

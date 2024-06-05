@@ -144,6 +144,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   };
 
   const radioClear = async (field, setFieldValue, values) => {
+    console.log('999999');
     setCheck('');
     await handleSelectChange(field, '', setFieldValue, values);
   };
@@ -363,7 +364,10 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   value="cheap"
                   checked={check === 'cheap'}
                   onChange={async (e) => {
-                    setCheck('cheap');
+                    console.log('lllllllllllll');
+                    console.log(check);
+                    setCheck((prev) => (prev === 'cheap' ? '' : 'cheap'));
+                    // setCheck('cheap');
                     setValuesArray(values);
                     const value = e.target.value;
                     await handleSelectChange(

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import photo from '../../img/dogAddpets.png';
+import photoT from '../../img/appDogT.png';
 
 export const ErrorMessage = styled.span`
   color: red;
@@ -11,11 +13,29 @@ export const AddPetContsiner = styled.div`
   display: flex;
   gap: 32px;
   justify-content: space-between;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    flex-direction: column;
+    margin: auto;
+  }
 `;
 export const AddPetImg = styled.img`
   border-radius: 60px;
   width: 592px;
   height: 654px;
+  background-image: url(${photo});
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    background-image: url(${photoT});
+    width: 704px;
+    height: 248px;
+  }
+`;
+export const ImgDiv = styled.div`
+  width: 592px;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 704px;
+    height: 248px;
+    margin: auto;
+  }
 `;
 export const AddPetFormContainer = styled.div`
   border-radius: 60px;
@@ -24,6 +44,9 @@ export const AddPetFormContainer = styled.div`
   height: 654px;
   padding: 60px 80px;
   background: #fff;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    margin: auto;
+  }
 `;
 export const AddPetFormTitel = styled.p`
   font-weight: 700;
