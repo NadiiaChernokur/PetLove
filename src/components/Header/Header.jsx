@@ -32,7 +32,7 @@ export const Header = () => {
   const isHomePage = location.pathname === '/home';
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUser = async () => {
       const storedUserData = localStorage.getItem('petLoveUserData');
@@ -66,7 +66,9 @@ export const Header = () => {
 
   return (
     <HeaderContainer>
-      {isBurgerMenuOpen && <BurgerMenu close={closeBurgerMenu} />}
+      {isBurgerMenuOpen && (
+        <BurgerMenu close={closeBurgerMenu} home={isHomePage} />
+      )}
 
       <NavLink to="/home">
         <HeaderLogo isHomePage={isHomePage}>
