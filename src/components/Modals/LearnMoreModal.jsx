@@ -24,9 +24,9 @@ import {
   RatingTwo,
 } from '../Rating/Rating';
 import { useCallback, useEffect, useState } from 'react';
-const LearnMoreModal = ({ pet, close, fav }) => {
+const LearnMoreModal = ({ pet, close, fav, toggleHeartClick }) => {
   const [isFavorite, setIsFavorite] = useState(fav);
-  console.log(fav);
+  // console.log(fav);
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') {
@@ -35,6 +35,7 @@ const LearnMoreModal = ({ pet, close, fav }) => {
     },
     [close]
   );
+
   useEffect(() => {
     setIsFavorite(fav);
     document.addEventListener('keydown', handleKeyDown);
@@ -48,6 +49,8 @@ const LearnMoreModal = ({ pet, close, fav }) => {
       close();
     }
   };
+
+  console.log(isFavorite);
   return (
     <ModalBackground onClick={handleBackgroundClick}>
       <ModalContainer>
@@ -85,15 +88,17 @@ const LearnMoreModal = ({ pet, close, fav }) => {
         </LearnMoreModalInformation>
         <LearnMoreModalText>{pet.comment}</LearnMoreModalText>
         <LearnMoreModalButtons>
-          {!isFavorite ? (
-            <LearnMoreModalAdd>
+          {isFavorite === 'true' ? (
+            <LearnMoreModalAdd onClick={() => toggleHeartClick(pet._id)}>
+              Remove
+            </LearnMoreModalAdd>
+          ) : (
+            <LearnMoreModalAdd onClick={() => toggleHeartClick(pet._id)}>
               Add to
               <svg width="20" height="20">
                 <use href={`${sprite}#heartW`}></use>
               </svg>
             </LearnMoreModalAdd>
-          ) : (
-            <div>Remove</div>
           )}
 
           <LearnMoreModalButton>Contact</LearnMoreModalButton>

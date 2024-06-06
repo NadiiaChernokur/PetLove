@@ -101,7 +101,7 @@ export const LearnMoreModalButtons = styled.div`
   display: flex;
   gap: 10px;
 `;
-export const LearnMoreModalButton = styled.button`
+export const LearnMoreModalButton = styled.a`
   border-radius: 30px;
   padding: 14px;
   width: 160px;
@@ -113,6 +113,9 @@ export const LearnMoreModalButton = styled.button`
   line-height: 125%;
   letter-spacing: -0.03em;
   color: #f6b83d;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 `;
 
 export const LearnMoreModalAdd = styled.button`
@@ -131,4 +134,5 @@ export const LearnMoreModalAdd = styled.button`
   align-items: center;
   justify-content: center;
   gap: 8px;
+  cursor: pointer;
 `;

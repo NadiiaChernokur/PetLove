@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
@@ -47,6 +48,12 @@ export const NavigationBurgerDiv = styled.div`
     gap: 16px;
   } */
 `;
+export const NavigationLink = styled(NavLink)`
+  border: ${({ isActive }) =>
+    isActive ? '1px solid #f6b83d' : '1px solid rgba(38, 38, 38, 0.15)'};
+  border-radius: 30px;
+  text-decoration: none;
+`;
 export const NavigationP = styled.p`
   padding: 15px 20px;
 
@@ -56,6 +63,10 @@ export const NavigationP = styled.p`
       : '1px solid rgba(38, 38, 38, 0.15)'};
   border-radius: 30px;
   color: ${({ isHomePage }) => (isHomePage ? '#fff' : '#262626')};
+  &.active {
+    color: blue;
+    font-weight: bold;
+  }
 `;
 
 export const ButtonsDiv = styled.div`

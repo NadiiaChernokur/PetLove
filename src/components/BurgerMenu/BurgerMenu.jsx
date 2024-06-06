@@ -6,11 +6,13 @@ import {
   BurgerButtonReg,
   BurgerContainer,
   BurgerNavigation,
+  BurgerNavigationLink,
   BurgerNavigationP,
 } from './BurgerMenu.styled';
 import { useCallback, useEffect } from 'react';
 import { LearnMoreSvg, ModalBackground } from '../Modals/LearnMoreModal.styled';
 import sprit from '../../img/cross.svg';
+import { NavigationLink } from '../Header/Header.styled';
 
 const BurgerMenu = ({ close, home }) => {
   const navigate = useNavigate();
@@ -46,30 +48,39 @@ const BurgerMenu = ({ close, home }) => {
         </LearnMoreSvg>
         <div>
           <BurgerNavigation>
-            <NavLink to="/news">
+            <BurgerNavigationLink
+              to="/news"
+              isActive={location.pathname === '/news'}
+            >
               <BurgerNavigationP
                 isHomePage={home}
                 onClick={() => toNavigate('news')}
               >
                 News
               </BurgerNavigationP>
-            </NavLink>
-            <NavLink to="/notices">
+            </BurgerNavigationLink>
+            <BurgerNavigationLink
+              to="/notices"
+              isActive={location.pathname === '/notices'}
+            >
               <BurgerNavigationP
                 isHomePage={home}
                 onClick={() => toNavigate('notices')}
               >
                 Find pet
               </BurgerNavigationP>
-            </NavLink>
-            <NavLink to="/friends">
+            </BurgerNavigationLink>
+            <BurgerNavigationLink
+              to="/friends"
+              isActive={location.pathname === '/friends'}
+            >
               <BurgerNavigationP
                 isHomePage={home}
                 onClick={() => toNavigate('friends')}
               >
                 Our friends
               </BurgerNavigationP>
-            </NavLink>
+            </BurgerNavigationLink>
           </BurgerNavigation>
         </div>
         <BurgerButtonDiv>
@@ -79,7 +90,6 @@ const BurgerMenu = ({ close, home }) => {
                 isHomePage={home}
                 onClick={() => toNavigate('login')}
               >
-                {' '}
                 Log In
               </BurgenButtonLog>
             </NavLink>

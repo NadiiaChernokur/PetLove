@@ -13,10 +13,12 @@ import {
   HeaderLogoSvg,
   Navigation,
   NavigationBurgerDiv,
+  NavigationLink,
   NavigationP,
 } from './Header.styled';
 import sprite from '/src/img/sprite.svg';
 import sprit from '/src/img/user.svg';
+import heart from '/src/img/whitehart.svg';
 import burger from '/src/img/burger.svg';
 import { useEffect, useState } from 'react';
 import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
@@ -26,6 +28,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 export const Header = () => {
   const [isUserRegster, setIsUserRegister] = useState(false);
   const [userName, setUserName] = useState();
+  const [userPhoto, setUserPhoto] = useState();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const data = useSelector((state) => state.logIn);
   console.log(data);
@@ -45,6 +48,7 @@ export const Header = () => {
         if (res.payload._id) {
           setIsUserRegister(true);
           setUserName(res.payload.name);
+          setUserPhoto(res.payload.avatar);
         }
 
         console.log(res.payload);
@@ -74,23 +78,34 @@ export const Header = () => {
       <NavLink to="/home">
         <HeaderLogo isHomePage={isHomePage}>
           petl
-          <HeaderLogoSvg isHomePage={isHomePage}>
-            <use href={`${sprite}#hart`}></use>
-          </HeaderLogoSvg>
-          {/* <svg width="19" height="17" isHomePage={isHomePage}></svg> */}
+          {isHomePage ? (
+            <HeaderLogoSvg isHomePage={isHomePage}>
+              <use href={`${heart}#heart-circle`}></use>
+            </HeaderLogoSvg>
+          ) : (
+            <HeaderLogoSvg isHomePage={isHomePage}>
+              <use href={`${sprite}#hart`}></use>
+            </HeaderLogoSvg>
+          )}
           ve
         </HeaderLogo>
       </NavLink>
       <Navigation>
-        <NavLink to="/news">
+        <NavigationLink to="/news" isActive={location.pathname === '/news'}>
           <NavigationP isHomePage={isHomePage}>News</NavigationP>
-        </NavLink>
-        <NavLink to="/notices">
+        </NavigationLink>
+        <NavigationLink
+          to="/notices"
+          isActive={location.pathname === '/notices'}
+        >
           <NavigationP isHomePage={isHomePage}>Find pet</NavigationP>
-        </NavLink>
-        <NavLink to="/friends">
+        </NavigationLink>
+        <NavigationLink
+          to="/friends"
+          isActive={location.pathname === '/friends'}
+        >
           <NavigationP isHomePage={isHomePage}>Our friends</NavigationP>
-        </NavLink>
+        </NavigationLink>
       </Navigation>
       <NavigationBurgerDiv>
         {!isUserRegster || data.length === 0 ? (
@@ -111,9 +126,13 @@ export const Header = () => {
             </NavLink>
             <NavLink to="/profile">
               <ButtonsAuthSvgDiv isHomePage={isHomePage}>
-                <svg width="24" height="24">
-                  <use href={`${sprit}#userr`}></use>
-                </svg>
+                {userPhoto ? (
+                  <img src={userPhoto}></img>
+                ) : (
+                  <svg width="24" height="24">
+                    <use href={`${sprit}#userr`}></use>
+                  </svg>
+                )}
               </ButtonsAuthSvgDiv>
             </NavLink>
             <NavLink to="/profile">

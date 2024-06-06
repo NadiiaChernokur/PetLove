@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 export const BurgerContainer = styled.div`
   background: ${({ isHomePage }) => (isHomePage ? '#fff' : '#f6b83d')};
@@ -91,4 +92,11 @@ export const BurgerButtonReg = styled.button`
   &:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
+`;
+export const BurgerNavigationLink = styled(NavLink)`
+  border: ${({ isActive }) =>
+    isActive ? '1px solid #133eea' : '1px solid rgba(255, 255, 255, 0.4)'};
+
+  border-radius: 30px;
+  text-decoration: none;
 `;

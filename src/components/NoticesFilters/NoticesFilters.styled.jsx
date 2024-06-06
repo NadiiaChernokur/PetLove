@@ -48,11 +48,14 @@ export const CheckDiv = styled.div`
   gap: 8px;
 `;
 export const BorderDiv = styled.hr`
-  border: none;
-  height: 1px;
-  background-color: rgba(38, 38, 38, 0.1);
-  margin: 20px 0;
-  width: 704px;
+  display: none;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    border: none;
+    height: 1px;
+    background-color: rgba(38, 38, 38, 0.1);
+    margin: 20px 0;
+    width: 704px;
+  }
 `;
 export const CheckboxInput = styled.input`
   position: absolute;

@@ -176,6 +176,7 @@ const NoticesItem = ({ array, del }) => {
           pet={pet}
           close={closeModal}
           fav={heartClick.includes(pet._id) ? 'true' : 'false'}
+          toggleHeartClick={toggleHeartClick}
         />
       )}
       {isAttentionModal && <AttentionModal close={closeModalAttention} />}
