@@ -6,4 +6,7 @@ export const Input = styled.input`
   width: 265px;
   background: #fff;
   border: none;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+  }
 `;

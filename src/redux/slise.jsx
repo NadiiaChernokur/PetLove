@@ -33,6 +33,7 @@ const initialState = {
   favoriteArray: [],
   isLoading: false,
   isLoadingCategory: false,
+  isLoadingLocation: false,
   error: null,
 };
 
@@ -42,6 +43,9 @@ const handlePending = (state) => {
 const handlePendingCategory = (state) => {
   state.isLoadingCategory = true;
 };
+// const handlePendingLocation = (state) => {
+//   state.isLoadingLocation = true;
+// };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;

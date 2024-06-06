@@ -4,10 +4,14 @@ import {
   CheckDiv,
   CheckboxInput,
   CheckboxLabel,
+  CrossButton,
+  GenderCategoryDiv,
+  LocationDiv,
   NoticesField,
   NoticesFiltersContainer,
   NoticesForm,
   SearchButton,
+  SearchFieldDiv,
 } from './NoticesFilters.styled';
 import { Formik } from 'formik';
 import Select from 'react-select';
@@ -18,8 +22,8 @@ import {
   getNoticesResponse,
 } from '../../redux/operation';
 import sprite from '../../img/sprite.svg';
-import { NewsButton } from '../../pages/News/News.styled';
-import { Loader, LoaderInput } from '../Loader/Loader';
+
+import { LoaderInput } from '../Loader/Loader';
 
 const customStyles = {
   control: (provided) => ({
@@ -57,7 +61,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   const [cities, setCities] = useState([]);
   const [check, setCheck] = useState('');
   const [toPage, setToPage] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState();
   const [valuesArray, setValuesArray] = useState({
     category: '',
     gender: '',
@@ -160,11 +164,11 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
           location: '',
           sortBy: '',
         }}
-        onSubmit={async (values) => {}}
+        onSubmit={() => {}}
       >
         {({ setFieldValue, values }) => (
           <NoticesForm>
-            <div style={{ position: 'relative' }}>
+            <SearchFieldDiv>
               <SearchField
                 name="keyword"
                 placeholder="Search..."
@@ -185,60 +189,62 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   <use href={`${sprite}#search`}></use>
                 </svg>
               </SearchButton>
-            </div>
-            {isLoad ? (
-              <LoaderInput width={170} />
-            ) : (
-              <NoticesField
-                as="select"
-                name="category"
-                onChange={async (e) => {
-                  const value = e.target.value;
-                  setValuesArray(values);
-                  if (page !== 1) {
-                    page === 1;
-                  }
-                  await handleSelectChange(
-                    'category',
-                    value,
-                    setFieldValue,
-                    values
-                  );
-                }}
-              >
-                <option value="">Category</option>
-                {categories.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </NoticesField>
-            )}
-            {isLoad ? (
-              <LoaderInput width={170} />
-            ) : (
-              <NoticesField
-                as="select"
-                name="gender"
-                onChange={async (e) => {
-                  const value = e.target.value;
-                  setValuesArray(values);
-                  await handleSelectChange(
-                    'gender',
-                    value,
-                    setFieldValue,
-                    values
-                  );
-                }}
-              >
-                <option value="">By gender</option>
-                {genders.map((gender, index) => (
-                  <option key={index} value={gender}>
-                    {gender}
-                  </option>
-                ))}
-              </NoticesField>
-            )}
+            </SearchFieldDiv>
+            <GenderCategoryDiv>
+              {isLoad ? (
+                <LoaderInput width={170} />
+              ) : (
+                <NoticesField
+                  as="select"
+                  name="category"
+                  onChange={async (e) => {
+                    const value = e.target.value;
+                    setValuesArray(values);
+                    if (page !== 1) {
+                      page === 1;
+                    }
+                    await handleSelectChange(
+                      'category',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                >
+                  <option value="">Category</option>
+                  {categories.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </NoticesField>
+              )}
+              {isLoad ? (
+                <LoaderInput width={170} />
+              ) : (
+                <NoticesField
+                  as="select"
+                  name="gender"
+                  onChange={async (e) => {
+                    const value = e.target.value;
+                    setValuesArray(values);
+                    await handleSelectChange(
+                      'gender',
+                      value,
+                      setFieldValue,
+                      values
+                    );
+                  }}
+                >
+                  <option value="">By gender</option>
+                  {genders.map((gender, index) => (
+                    <option key={index} value={gender}>
+                      {gender}
+                    </option>
+                  ))}
+                </NoticesField>
+              )}
+            </GenderCategoryDiv>
             {isLoad ? (
               <LoaderInput width={170} />
             ) : (
@@ -264,7 +270,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                 ))}
               </NoticesField>
             )}
-            <div style={{ position: 'relative' }}>
+            <LocationDiv>
               <Select
                 name="location"
                 options={locations}
@@ -284,7 +290,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                 }}
               />
               {selectedOption && (
-                <NewsButton
+                <CrossButton
                   type="button"
                   onClick={() =>
                     handleSelectChange('location', '', setFieldValue, values)
@@ -294,14 +300,14 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   <svg width="20" height="20">
                     <use href={`${sprite}#cross-small`}></use>
                   </svg>
-                </NewsButton>
+                </CrossButton>
               )}
               <SearchButton type="button" style={{ background: 'white' }}>
                 <svg width="20" height="20">
                   <use href={`${sprite}#search`}></use>
                 </svg>
               </SearchButton>
-            </div>
+            </LocationDiv>
             <BorderDiv></BorderDiv>
             <CheckDiv>
               <CheckboxLabel

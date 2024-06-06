@@ -16,6 +16,12 @@ export const HeaderContainer = styled.div`
     padding: 32px;
     margin: auto;
   }
+  @media screen and (max-width: 767px) {
+    max-width: 415px;
+    min-width: 415px;
+    padding: 24px 20px;
+    margin: auto;
+  }
 `;
 export const HeaderLogo = styled.h2`
   display: flex;
@@ -33,7 +39,7 @@ export const Navigation = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     display: none;
   }
 `;
@@ -93,6 +99,9 @@ export const ButtonsAuthP = styled.p`
   line-height: 100%;
   letter-spacing: -0.03em;
   color: #262626;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 export const ButtonLog = styled.button`
   all: unset;
@@ -122,6 +131,9 @@ export const ButtonLogOut = styled.button`
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #fff;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 export const ButtonReg = styled.button`
   padding: 0 20px;
@@ -138,7 +150,7 @@ export const ButtonReg = styled.button`
 `;
 export const BurgerDivSvg = styled.div`
   display: none;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     display: block;
   }
 `;
