@@ -32,11 +32,15 @@ const initialState = {
   user: [],
   favoriteArray: [],
   isLoading: false,
+  isLoadingCategory: false,
   error: null,
 };
 
 const handlePending = (state) => {
   state.isLoading = true;
+};
+const handlePendingCategory = (state) => {
+  state.isLoadingCategory = true;
 };
 
 const handleRejected = (state, action) => {
@@ -44,7 +48,7 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 const getNoticesCategoriesFulfilled = (state, _) => {
-  state.isLoading = false;
+  state.isLoadingCategory = false;
   state.error = null;
   //   state.categoriesArray = action.payload;
 };
@@ -146,7 +150,7 @@ const petsSlice = createSlice({
       .addCase(getNotices.pending, handlePending)
       .addCase(getNotices.fulfilled, getNoticesFulfilled)
       .addCase(getNotices.rejected, handleRejected)
-      .addCase(getNoticesCategories.pending, handlePending)
+      .addCase(getNoticesCategories.pending, handlePendingCategory)
       .addCase(getNoticesCategories.fulfilled, getNoticesCategoriesFulfilled)
       .addCase(getNoticesCategories.rejected, handleRejected)
       .addCase(getNoticesResponse.pending, handlePending)

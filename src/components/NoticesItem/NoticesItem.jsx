@@ -14,6 +14,7 @@ import {
   NoticesItemContainer,
   NoticesItemImg,
   NoticesItemList,
+  NoticesPDiv,
 } from './NoticesItem.styled';
 import LearnMoreModal from '../Modals/LearnMoreModal';
 import sprite from '../../img/sprite.svg';
@@ -23,9 +24,10 @@ import {
   toFavoriteAdd,
   toFavoriteRemove,
 } from '../../redux/operation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AttentionModal from '../Modals/AttentionModal';
+import { Loader } from '../Loader/Loader';
 
 const NoticesItem = ({ array, del }) => {
   console.log(array);
@@ -34,7 +36,8 @@ const NoticesItem = ({ array, del }) => {
   const [heartClick, setHeartClick] = useState([]);
   const [isToken, setIsToken] = useState('');
   const [isAttentionModal, setIsAttentionModal] = useState(false);
-
+  const isLoad = useSelector((state) => state.isLoading);
+  console.log(isLoad);
   // const [userDataFavorId, setUserDataFavorId] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -105,72 +108,80 @@ const NoticesItem = ({ array, del }) => {
     await dispatch(toFavoriteRemove(id));
     window.location.reload();
   };
+
   return (
     <NoticesItemContainer>
-      {array?.map((item) => (
-        <NoticesItemList key={item._id}>
-          <NoticesItemImg>
-            <NoticesImg src={item.imgURL} alt={item.title}></NoticesImg>
-          </NoticesItemImg>
-          <KindOfAnimal>
-            <p>{item.title}</p>
-            <KindOfAnimalStar>
-              <svg width="20" height="20">
-                <use href={`${sprite}#star`}></use>
-              </svg>
-              <p>{item.popularity}</p>
-            </KindOfAnimalStar>
-          </KindOfAnimal>
-          <AnimalInformation>
-            <div>
-              <AnimalInformationHeader>Name</AnimalInformationHeader>
-              <p>{item.name}</p>
-            </div>
-            <div>
-              <AnimalInformationHeader>Birthday</AnimalInformationHeader>
-              <p>{item.birthday}</p>
-            </div>
-            <div>
-              <AnimalInformationHeader>Sex</AnimalInformationHeader>
-              <Information>{item.sex}</Information>
-            </div>
-            <div>
-              <AnimalInformationHeader>Species</AnimalInformationHeader>
-              <Information>{item.species}</Information>
-            </div>
-            <div>
-              <AnimalInformationHeader>Category</AnimalInformationHeader>
-              <Information>{item.category}</Information>
-            </div>
-          </AnimalInformation>
-          <AnimalInformationAboutDiv>
-            <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
-          </AnimalInformationAboutDiv>
-          <Buttons>
-            <LearnMore onClick={() => showModal(item)}>Learn more</LearnMore>
-
-            {del ? (
-              <LikeButton onClick={() => deleteClick(item._id)}>
+      {isLoad ? (
+        <Loader />
+      ) : (
+        array?.map((item) => (
+          <NoticesItemList key={item._id}>
+            <NoticesItemImg>
+              <NoticesImg src={item.imgURL} alt={item.title}></NoticesImg>
+            </NoticesItemImg>
+            <KindOfAnimal>
+              <NoticesPDiv data-full-text={item.title}>
+                <p>{item.title}</p>
+              </NoticesPDiv>
+              <KindOfAnimalStar>
                 <svg width="20" height="20">
-                  <use href={`${sprite}#trash-2`}></use>
+                  <use href={`${sprite}#star`}></use>
                 </svg>
-              </LikeButton>
-            ) : (
-              <LikeButton onClick={() => toggleHeartClick(item._id)}>
-                {heartClick?.includes(item._id) ? (
+                <p>{item.popularity}</p>
+              </KindOfAnimalStar>
+            </KindOfAnimal>
+            <AnimalInformation>
+              <div>
+                <AnimalInformationHeader>Name</AnimalInformationHeader>
+                <p>{item.name}</p>
+              </div>
+              <div>
+                <AnimalInformationHeader>Birthday</AnimalInformationHeader>
+                <p>{item.birthday}</p>
+              </div>
+              <div>
+                <AnimalInformationHeader>Sex</AnimalInformationHeader>
+                <Information>{item.sex}</Information>
+              </div>
+              <div>
+                <AnimalInformationHeader>Species</AnimalInformationHeader>
+                <Information>{item.species}</Information>
+              </div>
+              <div>
+                <AnimalInformationHeader>Category</AnimalInformationHeader>
+                <Information>{item.category}</Information>
+              </div>
+            </AnimalInformation>
+            <AnimalInformationAboutDiv>
+              <AnimalInformationAbout>{item.comment}</AnimalInformationAbout>
+            </AnimalInformationAboutDiv>
+            <Buttons>
+              <LearnMore onClick={() => showModal(item)}>Learn more</LearnMore>
+
+              {del ? (
+                <LikeButton onClick={() => deleteClick(item._id)}>
                   <svg width="20" height="20">
-                    <use href={`${sprite}#hart`}></use>
+                    <use href={`${sprite}#trash-2`}></use>
                   </svg>
-                ) : (
-                  <svg width="20" height="20">
-                    <use href={`${sprite}#heart`}></use>
-                  </svg>
-                )}
-              </LikeButton>
-            )}
-          </Buttons>
-        </NoticesItemList>
-      ))}
+                </LikeButton>
+              ) : (
+                <LikeButton onClick={() => toggleHeartClick(item._id)}>
+                  {heartClick?.includes(item._id) ? (
+                    <svg width="20" height="20">
+                      <use href={`${sprite}#hart`}></use>
+                    </svg>
+                  ) : (
+                    <svg width="20" height="20">
+                      <use href={`${sprite}#heart`}></use>
+                    </svg>
+                  )}
+                </LikeButton>
+              )}
+            </Buttons>
+          </NoticesItemList>
+        ))
+      )}
+
       {isShowModal && (
         <LearnMoreModal
           pet={pet}

@@ -117,3 +117,27 @@ export const LikeButton = styled.button`
   background: #fff4df;
   border: none;
 `;
+
+export const NoticesPDiv = styled.div`
+  width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  cursor: pointer;
+
+  &:hover::after {
+    content: attr(data-full-text);
+    white-space: normal;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    top: 100%;
+    left: 0;
+    width: max-content;
+    max-width: 300px; /* Встановіть максимальну ширину для повного тексту */
+    z-index: 1;
+  }
+`;

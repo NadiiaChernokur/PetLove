@@ -12,13 +12,14 @@ import {
 import { Formik } from 'formik';
 import Select from 'react-select';
 import SearchField from '../SearchField/SearchField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getNoticesCategories,
   getNoticesResponse,
 } from '../../redux/operation';
 import sprite from '../../img/sprite.svg';
 import { NewsButton } from '../../pages/News/News.styled';
+import { Loader, LoaderInput } from '../Loader/Loader';
 
 const customStyles = {
   control: (provided) => ({
@@ -65,7 +66,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
     petType: '',
     sortBy: '',
   });
-
+  const isLoad = useSelector((state) => state.isLoadingCategory);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -144,7 +145,6 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   };
 
   const radioClear = async (field, setFieldValue, values) => {
-    console.log('999999');
     setCheck('');
     await handleSelectChange(field, '', setFieldValue, values);
   };
@@ -186,73 +186,84 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                 </svg>
               </SearchButton>
             </div>
-            <NoticesField
-              as="select"
-              name="category"
-              onChange={async (e) => {
-                const value = e.target.value;
-                setValuesArray(values);
-                if (page !== 1) {
-                  page === 1;
-                }
-                await handleSelectChange(
-                  'category',
-                  value,
-                  setFieldValue,
-                  values
-                );
-              }}
-            >
-              <option value="">Category</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </NoticesField>
-
-            <NoticesField
-              as="select"
-              name="gender"
-              onChange={async (e) => {
-                const value = e.target.value;
-                setValuesArray(values);
-                await handleSelectChange(
-                  'gender',
-                  value,
-                  setFieldValue,
-                  values
-                );
-              }}
-            >
-              <option value="">By gender</option>
-              {genders.map((gender, index) => (
-                <option key={index} value={gender}>
-                  {gender}
-                </option>
-              ))}
-            </NoticesField>
-            <NoticesField
-              as="select"
-              name="petType"
-              onChange={async (e) => {
-                const value = e.target.value;
-                setValuesArray(values);
-                await handleSelectChange(
-                  'petType',
-                  value,
-                  setFieldValue,
-                  values
-                );
-              }}
-            >
-              <option value="">By type</option>
-              {petTypes.map((petType, index) => (
-                <option key={index} value={petType}>
-                  {petType}
-                </option>
-              ))}
-            </NoticesField>
+            {isLoad ? (
+              <LoaderInput width={170} />
+            ) : (
+              <NoticesField
+                as="select"
+                name="category"
+                onChange={async (e) => {
+                  const value = e.target.value;
+                  setValuesArray(values);
+                  if (page !== 1) {
+                    page === 1;
+                  }
+                  await handleSelectChange(
+                    'category',
+                    value,
+                    setFieldValue,
+                    values
+                  );
+                }}
+              >
+                <option value="">Category</option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </NoticesField>
+            )}
+            {isLoad ? (
+              <LoaderInput width={170} />
+            ) : (
+              <NoticesField
+                as="select"
+                name="gender"
+                onChange={async (e) => {
+                  const value = e.target.value;
+                  setValuesArray(values);
+                  await handleSelectChange(
+                    'gender',
+                    value,
+                    setFieldValue,
+                    values
+                  );
+                }}
+              >
+                <option value="">By gender</option>
+                {genders.map((gender, index) => (
+                  <option key={index} value={gender}>
+                    {gender}
+                  </option>
+                ))}
+              </NoticesField>
+            )}
+            {isLoad ? (
+              <LoaderInput width={170} />
+            ) : (
+              <NoticesField
+                as="select"
+                name="petType"
+                onChange={async (e) => {
+                  const value = e.target.value;
+                  setValuesArray(values);
+                  await handleSelectChange(
+                    'petType',
+                    value,
+                    setFieldValue,
+                    values
+                  );
+                }}
+              >
+                <option value="">By type</option>
+                {petTypes.map((petType, index) => (
+                  <option key={index} value={petType}>
+                    {petType}
+                  </option>
+                ))}
+              </NoticesField>
+            )}
             <div style={{ position: 'relative' }}>
               <Select
                 name="location"
