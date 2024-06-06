@@ -1,5 +1,6 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
+  BurgerDivSvg,
   ButtonLog,
   ButtonLogOut,
   ButtonReg,
@@ -120,9 +121,11 @@ export const Header = () => {
             </NavLink>
           </ButtonsAuthDiv>
         )}
-        <svg width="36" height="36" onClick={openBurgerMenu}>
-          <use href={`${burger}#menu-01`}></use>
-        </svg>
+        <BurgerDivSvg>
+          <svg width="36" height="36" onClick={openBurgerMenu}>
+            <use href={`${burger}#menu-01`}></use>
+          </svg>
+        </BurgerDivSvg>
       </NavigationBurgerDiv>
     </HeaderContainer>
   );

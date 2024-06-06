@@ -11,6 +11,13 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    min-width: 744px;
+    max-width: 744px;
+    padding: 0 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 export const HomeFirst = styled.div`

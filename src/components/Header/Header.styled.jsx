@@ -37,16 +37,19 @@ export const Navigation = styled.nav`
   }
 `;
 export const NavigationBurgerDiv = styled.div`
-  display: none;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* display: none; */
+  /* @media screen and (min-width: 768px) and (max-width: 1280px) {
     display: flex;
     align-items: center;
     gap: 16px;
-  }
+  } */
 `;
 export const NavigationP = styled.p`
   padding: 15px 20px;
-  /* border: 1px solid rgba(38, 38, 38, 0.15); */
+
   border: ${({ isHomePage }) =>
     isHomePage
       ? '1px solid rgba(255, 255, 255, 0.4);'
@@ -121,4 +124,10 @@ export const ButtonReg = styled.button`
   text-transform: uppercase;
   color: #f6b83d;
   border: none;
+`;
+export const BurgerDivSvg = styled.div`
+  display: none;
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    display: block;
+  }
 `;
