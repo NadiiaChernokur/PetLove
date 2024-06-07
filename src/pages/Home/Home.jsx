@@ -20,7 +20,7 @@ const Home = () => {
           life with immeasurable joy and tenderness.
         </HomeText>
       </HomeFirst>
-      <HomeSecond>{/* <img src={photo}></img> */}</HomeSecond>
+      <HomeSecond></HomeSecond>
     </HomeContainer>
   );
 };
