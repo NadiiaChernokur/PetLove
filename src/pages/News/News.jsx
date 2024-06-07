@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  Form,
   Input,
   NewsButton,
   NewsButtonsDiv,
@@ -65,8 +66,7 @@ const News = () => {
     <NewsContainer>
       <NewsDiv>
         <Titel>News</Titel>
-        <form onSubmit={handleSearch} style={{ position: 'relative' }}>
-          {/* <Input style={{ display: 'flex', alignItems: 'center' }}> */}
+        <Form onSubmit={handleSearch}>
           <Input
             type="text"
             placeholder="Search"
@@ -91,8 +91,7 @@ const News = () => {
               </svg>
             </NewsButton>
           </NewsButtonsDiv>
-          {/* </Input> */}
-        </form>
+        </Form>
       </NewsDiv>
       <NewsList list={news} />
       <Paginations

@@ -17,9 +17,14 @@ export const PageButton = styled.button`
   border-radius: 100%;
   border: 1px solid rgba(38, 38, 38, 0.2);
   background: none;
-  font-weight: 700;
+  /* font-weight: 700;
   font-size: 18px;
-  line-height: 122%;
+  line-height: 122%; */
+  @media screen and (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
 `;
 export const Pages = styled.div`
   display: flex;
@@ -42,6 +47,10 @@ export const PageSpan = styled.span`
   font-weight: 700;
   font-size: 18px;
   line-height: 122%;
+  @media screen and (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 export const PageSpanActiv = styled.span`
   display: flex;

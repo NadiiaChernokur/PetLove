@@ -5,15 +5,22 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 109px 283px;
+  padding: 0 283px;
   border-radius: 60px;
   min-width: 1216px;
-  height: 654px;
+  /* height: 654px; */
+  height: 100vh;
   margin: 0 32px;
   gap: 32px;
   background: #f6b83d;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     min-width: 770px;
+  }
+  @media screen and (max-width: 767px) {
+    border-radius: 30px;
+    min-width: 335px;
+    height: 100vh;
+    padding: 0 33px;
   }
 `;
 
@@ -23,11 +30,18 @@ export const Title = styled.div`
   line-height: 100%;
   color: #fff;
   display: flex;
+  @media screen and (max-width: 767px) {
+    font-size: 120px;
+  }
 `;
 export const TitleImg = styled.img`
   border-radius: 1000px;
   width: 299px;
   height: 300px;
+  @media screen and (max-width: 767px) {
+    width: 109px;
+    height: 109px;
+  }
 `;
 
 export const ErrorText = styled.p`
