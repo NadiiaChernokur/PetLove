@@ -30,14 +30,13 @@ import AttentionModal from '../Modals/AttentionModal';
 import { Loader } from '../Loader/Loader';
 
 const NoticesItem = ({ array, del }) => {
-  console.log(array);
   const [isShowModal, setIsShowModal] = useState(false);
   const [pet, setPet] = useState([]);
   const [heartClick, setHeartClick] = useState([]);
   const [isToken, setIsToken] = useState('');
   const [isAttentionModal, setIsAttentionModal] = useState(false);
   const isLoad = useSelector((state) => state.isLoading);
-  console.log(isLoad);
+
   // const [userDataFavorId, setUserDataFavorId] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,10 +44,10 @@ const NoticesItem = ({ array, del }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const storedUserData = localStorage.getItem('petLoveUserData');
-      console.log(storedUserData);
+
       if (storedUserData) {
         const user = JSON.parse(storedUserData);
-        console.log(user.token);
+
         safeToken(user.token);
         setIsToken(user.token);
         const res = await dispatch(getCurrentUser());
@@ -58,8 +57,6 @@ const NoticesItem = ({ array, del }) => {
           );
           setHeartClick(favoriteIds);
         }
-
-        console.log(res.payload.noticesFavorites);
       } else {
         navigate('/login');
       }
@@ -82,8 +79,6 @@ const NoticesItem = ({ array, del }) => {
   //   setHeartClick(!heartClick);
   // };
   const toggleHeartClick = async (id) => {
-    console.log(id);
-    console.log(heartClick);
     if (!isToken) {
       setIsAttentionModal(true);
       return;

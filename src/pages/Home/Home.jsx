@@ -6,7 +6,6 @@ import {
   HomeText,
   HomeTitel,
 } from './Home.styled';
-// import photo from '/src/img/dogGirl.png';
 
 const Home = () => {
   return (

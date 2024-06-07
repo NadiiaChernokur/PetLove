@@ -12,27 +12,25 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     min-width: 744px;
     max-width: 744px;
     padding: 0 20px;
-    left: 50%;
-    transform: translateX(-50%);
   }
   @media screen and (max-width: 767px) {
     border-radius: 30px;
     min-width: 335px;
     max-width: 335px;
-
-    padding: 0px;
-    left: 50%;
-    transform: translateX(-50%);
+    padding: 0;
   }
 `;
 
 export const HomeFirst = styled.div`
   border-radius: 60px;
-  /* width: 1216px; */
+
   height: 384px;
   background: #f6b83d;
   display: flex;
@@ -71,6 +69,7 @@ export const HomeSecond = styled.div`
   @media screen and (max-width: 767px) {
     background-image: url(${photoM});
     border-radius: 30px;
+    width: 335px;
     margin: auto;
   }
 `;

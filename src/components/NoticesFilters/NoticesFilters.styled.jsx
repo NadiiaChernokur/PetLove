@@ -122,18 +122,20 @@ export const SearchFieldDiv = styled.div`
   }
 `;
 export const GenderCategoryDiv = styled.div`
-  display: none;
+  display: flex;
+  gap: 8px;
   @media screen and (max-width: 767px) {
-    display: flex;
-    gap: 8px;
+    /* display: flex;
+    gap: 8px; */
     width: 100%;
   }
 `;
 export const LocationDiv = styled.div`
   position: relative;
+  width: 227px;
   @media screen and (max-width: 767px) {
     display: flex;
     gap: 8px;
-    width: 100%;
+    width: 295px;
   }
 `;

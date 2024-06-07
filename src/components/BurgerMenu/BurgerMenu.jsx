@@ -5,6 +5,8 @@ import {
   BurgerButtonDiv,
   BurgerButtonReg,
   BurgerContainer,
+  BurgerLogOut,
+  BurgerLogOutDiv,
   BurgerNavigation,
   BurgerNavigationLink,
   BurgerNavigationP,
@@ -12,9 +14,8 @@ import {
 import { useCallback, useEffect } from 'react';
 import { LearnMoreSvg, ModalBackground } from '../Modals/LearnMoreModal.styled';
 import sprit from '../../img/cross.svg';
-import { NavigationLink } from '../Header/Header.styled';
 
-const BurgerMenu = ({ close, home }) => {
+const BurgerMenu = ({ close, home, toLogOut, auth }) => {
   const navigate = useNavigate();
   const handleKeyDown = useCallback(
     (e) => {
@@ -42,7 +43,7 @@ const BurgerMenu = ({ close, home }) => {
   };
   return (
     <ModalBackground onClick={handleBackgroundClick}>
-      <BurgerContainer isHomePage={home}>
+      <BurgerContainer $isHomePage={home}>
         <LearnMoreSvg width="24" height="24" onClick={close}>
           <use href={`${sprit}#x-x`}></use>
         </LearnMoreSvg>
@@ -50,10 +51,10 @@ const BurgerMenu = ({ close, home }) => {
           <BurgerNavigation>
             <BurgerNavigationLink
               to="/news"
-              isActive={location.pathname === '/news'}
+              $isActive={location.pathname === '/news'}
             >
               <BurgerNavigationP
-                isHomePage={home}
+                $isHomePage={home}
                 onClick={() => toNavigate('news')}
               >
                 News
@@ -61,10 +62,10 @@ const BurgerMenu = ({ close, home }) => {
             </BurgerNavigationLink>
             <BurgerNavigationLink
               to="/notices"
-              isActive={location.pathname === '/notices'}
+              $isActive={location.pathname === '/notices'}
             >
               <BurgerNavigationP
-                isHomePage={home}
+                $isHomePage={home}
                 onClick={() => toNavigate('notices')}
               >
                 Find pet
@@ -72,10 +73,10 @@ const BurgerMenu = ({ close, home }) => {
             </BurgerNavigationLink>
             <BurgerNavigationLink
               to="/friends"
-              isActive={location.pathname === '/friends'}
+              $isActive={location.pathname === '/friends'}
             >
               <BurgerNavigationP
-                isHomePage={home}
+                $isHomePage={home}
                 onClick={() => toNavigate('friends')}
               >
                 Our friends
@@ -83,26 +84,32 @@ const BurgerMenu = ({ close, home }) => {
             </BurgerNavigationLink>
           </BurgerNavigation>
         </div>
-        <BurgerButtonDiv>
-          <BurgenButtonsDiv>
-            <NavLink to="/login">
-              <BurgenButtonLog
-                isHomePage={home}
-                onClick={() => toNavigate('login')}
-              >
-                Log In
-              </BurgenButtonLog>
-            </NavLink>
-            <NavLink to="/register">
-              <BurgerButtonReg
-                isHomePage={home}
-                onClick={() => toNavigate('register')}
-              >
-                Registration
-              </BurgerButtonReg>
-            </NavLink>
-          </BurgenButtonsDiv>
-        </BurgerButtonDiv>
+        {auth ? (
+          <BurgerButtonDiv>
+            <BurgenButtonsDiv>
+              <NavLink to="/login">
+                <BurgenButtonLog
+                  $isHomePage={home}
+                  onClick={() => toNavigate('login')}
+                >
+                  Log In
+                </BurgenButtonLog>
+              </NavLink>
+              <NavLink to="/register">
+                <BurgerButtonReg
+                  $isHomePage={home}
+                  onClick={() => toNavigate('register')}
+                >
+                  Registration
+                </BurgerButtonReg>
+              </NavLink>
+            </BurgenButtonsDiv>
+          </BurgerButtonDiv>
+        ) : (
+          <BurgerLogOutDiv>
+            <BurgerLogOut onClick={toLogOut}> Log out</BurgerLogOut>
+          </BurgerLogOutDiv>
+        )}
       </BurgerContainer>
     </ModalBackground>
   );

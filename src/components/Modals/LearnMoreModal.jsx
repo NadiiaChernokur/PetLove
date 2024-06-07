@@ -26,7 +26,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 const LearnMoreModal = ({ pet, close, fav, toggleHeartClick }) => {
   const [isFavorite, setIsFavorite] = useState(fav);
-  // console.log(fav);
+
   const handleKeyDown = useCallback(
     (e) => {
       if (e.key === 'Escape') {
@@ -50,7 +50,6 @@ const LearnMoreModal = ({ pet, close, fav, toggleHeartClick }) => {
     }
   };
 
-  console.log(isFavorite);
   return (
     <ModalBackground onClick={handleBackgroundClick}>
       <ModalContainer>
@@ -64,8 +63,8 @@ const LearnMoreModal = ({ pet, close, fav, toggleHeartClick }) => {
           {pet.popularity <= 10 && <RatingOne />}
           {pet.popularity > 10 && pet.popularity <= 20 && <RatingTwo />}
           {pet.popularity > 20 && pet.popularity <= 30 && <RatingThree />}
-          {pet.popularity > 40 && pet.popularity <= 50 && <RatingFour />}
-          {pet.popularity > 50 && <RatingFive />}
+          {pet.popularity > 30 && pet.popularity <= 40 && <RatingFour />}
+          {pet.popularity > 40 && <RatingFive />}
           <p>{pet.popularity}</p>
         </LearnMoreModalStars>
         <LearnMoreModalInformation>

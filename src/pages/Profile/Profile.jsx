@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [favoritsPetsArray, setFavoritsPetsArray] = useState([]);
+  const [viewedPetsArray, setViewedPetsArray] = useState([]);
   const [userData, setUserData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Profile = () => {
         const res = await dispatch(getCurrentUser());
         setUserData(res.payload);
         setFavoritsPetsArray(res.payload.noticesFavorites);
+        setViewedPetsArray(res.payload.noticesViewed);
       } else {
         navigate('/login');
       }
@@ -34,7 +36,7 @@ const Profile = () => {
   return (
     <ProfileContainer>
       <ProfileForm userData={userData} />
-      <FavoritePets favoritsPets={favoritsPetsArray} />
+      <FavoritePets favoritsPets={favoritsPetsArray} viewed={viewedPetsArray} />
     </ProfileContainer>
   );
 };

@@ -10,6 +10,11 @@ export const LeavingModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    padding: 0 28px;
+    justify-content: center;
+  }
 `;
 
 export const LeavingModalTitel = styled.p`

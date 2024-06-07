@@ -6,6 +6,7 @@ export const MyPetsContainer = styled.ul`
   margin-top: 20px;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 `;
 

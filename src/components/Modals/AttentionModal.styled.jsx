@@ -11,6 +11,9 @@ export const AttentionModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+  }
 `;
 
 export const AttentionModalTitel = styled.p`

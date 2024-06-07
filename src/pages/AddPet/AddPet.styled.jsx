@@ -100,13 +100,11 @@ export const AddPetRadioFemaleLabel = styled.label`
   padding: 6px;
   width: 40px;
   height: 40px;
-  background: ${(props) => props.bgColor || 'rgba(244, 63, 94, 0.1)'};
+  background: ${($bgColor) => $bgColor || 'rgba(244, 63, 94, 0.1)'};
   text-align: center;
   line-height: 40px;
 
   &:after {
-    /* content: '${(props) => props.text}'; */
-
     display: block;
     width: 100%;
     height: 100%;
@@ -115,7 +113,7 @@ export const AddPetRadioFemaleLabel = styled.label`
   }
 
   ${AddPetRadio}:checked + & {
-    background: ${(props) => props.bgrColor};
+    background: ${($bgrColor) => $bgrColor};
     stroke: #fff;
     /* mix-blend-mode: multiply; */
   }

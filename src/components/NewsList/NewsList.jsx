@@ -26,10 +26,10 @@ const NewsList = ({ list }) => {
       {list.map((news) => (
         <Li key={news.id}>
           <NewsListImg src={news.imgUrl} alt={news.title}></NewsListImg>
-          {/* <div> */}
+
           <NewsTitel>{news.title}</NewsTitel>
           <NewsText>{news.text}</NewsText>
-          {/* </div> */}
+
           <ReadMoreDiv>
             <NewsData>{formatDate(news.date)}</NewsData>
             <ReadMoreButton onClick={() => handleReadMoreClick(news.url)}>

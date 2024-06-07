@@ -9,9 +9,8 @@ export const Loader = () => {
   );
 };
 export const LoaderInput = ({ width }) => {
-  console.log(width);
   return (
-    <LoaderContainerInput prop={width}>
+    <LoaderContainerInput $prop={width}>
       <SpinnerInfinity />
     </LoaderContainerInput>
   );

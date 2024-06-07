@@ -11,7 +11,6 @@ import {
   LearnMoreModalButton,
   LearnMoreSvg,
   ModalBackground,
-  ModalContainer,
 } from './LearnMoreModal.styled';
 import { useNavigate } from 'react-router-dom';
 import photo from '../../img/dog.png';

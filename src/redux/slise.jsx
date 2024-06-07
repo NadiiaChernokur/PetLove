@@ -51,7 +51,7 @@ const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };
-const getNoticesCategoriesFulfilled = (state, _) => {
+const getNoticesCategoriesFulfilled = (state) => {
   state.isLoadingCategory = false;
   state.error = null;
   //   state.categoriesArray = action.payload;
@@ -78,7 +78,7 @@ const addPetFulfilled = (state, action) => {
   state.error = null;
   state.newPet = action.payload;
 };
-const deletePetFulfilled = (state, action) => {
+const deletePetFulfilled = (state) => {
   state.isLoading = false;
   state.error = null;
   // state.newPet = action.payload;
@@ -88,7 +88,7 @@ const getSpeciesFulfilled = (state, action) => {
   state.error = null;
   state.species = action.payload;
 };
-const logOutFulfilled = (state, action) => {
+const logOutFulfilled = (state) => {
   state.isLoading = false;
   state.error = null;
   state.user = [];
@@ -124,19 +124,16 @@ const editUserFulfilled = (state, action) => {
 const getNoticesResponseFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-
   state.noticesResponse = action.payload;
 };
 const addToFavoriteFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-
   state.favoriteArray = action.payload;
 };
 const removeFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-
   state.favoriteArray = action.payload;
 };
 

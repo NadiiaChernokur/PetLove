@@ -13,7 +13,7 @@ const clearToken = () => {
 export const logIn = createAsyncThunk('logIn', async (data, thunkAPI) => {
   try {
     const respons = await axios.post(`/users/signin`, data);
-    console.log(respons.data);
+
     safeToken(respons.data.token);
     return respons.data;
   } catch (error) {
@@ -25,7 +25,7 @@ export const registration = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const respons = await axios.post(`/users/signup`, data);
-      console.log(respons.data);
+
       safeToken(respons.data.token);
       return respons.data;
     } catch (error) {
@@ -38,7 +38,7 @@ export const getCurrentUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const respons = await axios.get(`/users/current/full`);
-      console.log(respons.data);
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -51,7 +51,7 @@ export const getEditUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const respons = await axios.patch(`/users/current/edit`, data);
-      console.log(respons.data);
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -63,7 +63,7 @@ export const toFavoriteAdd = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const respons = await axios.post(`/notices/favorites/add/${id}`);
-      console.log(respons.data);
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -75,7 +75,7 @@ export const toFavoriteRemove = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const respons = await axios.delete(`/notices/favorites/remove/${id}`);
-      console.log(respons.data);
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -85,15 +85,11 @@ export const toFavoriteRemove = createAsyncThunk(
 
 export const getNews = createAsyncThunk('news', async (data, thunkAPI) => {
   try {
-    console.log(data);
     const { page, keyword } = data;
     const respons = await axios.get(
       `/news?page=${page ? page : 1}&keyword=${keyword ? keyword : ''}`
     );
-    //const respons = await axios.get(`/news?keyword=ukrainian`);
-    //const respons = await axios.get(`/news`);
-    console.log(respons.data);
-    // return respons.data.results;
+
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -139,17 +135,13 @@ export const getNoticesResponse = createAsyncThunk(
   'noticesResponse',
   async (data, thunkAPI) => {
     try {
-      console.log(data);
       const { category, gender, keyword, location, petType, sortBy, toPage } =
         data;
-      console.log(toPage);
-      //   const respons = await axios.get(
-      //     `/notices?keyword=${keyword}&category=${category}&species=${petType}&sex=${gender}&locationId=${location}&by${sortBy}=true`
-      //   );
+
       const respons = await axios.get(
         `/notices?keyword=${keyword}&category=${category}&species=${petType}&locationId=${location}&by${sortBy}=true&sex=${gender}&page=${toPage}`
       );
-      console.log(respons.data);
+
       return respons.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -159,7 +151,7 @@ export const getNoticesResponse = createAsyncThunk(
 export const getSpecies = createAsyncThunk('species', async (_, thunkAPI) => {
   try {
     const respons = await axios.get(`/notices/species`);
-    console.log(respons.data);
+
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -169,7 +161,7 @@ export const getSpecies = createAsyncThunk('species', async (_, thunkAPI) => {
 export const addPet = createAsyncThunk('addPet', async (data, thunkAPI) => {
   try {
     const respons = await axios.post(`/users/current/pets/add`, data);
-    console.log(respons.data);
+
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -178,7 +170,7 @@ export const addPet = createAsyncThunk('addPet', async (data, thunkAPI) => {
 export const deletePet = createAsyncThunk('deletePet', async (id, thunkAPI) => {
   try {
     const respons = await axios.delete(`/users/current/pets/remove/${id}`);
-    console.log(respons.data);
+
     return respons.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -187,7 +179,7 @@ export const deletePet = createAsyncThunk('deletePet', async (id, thunkAPI) => {
 export const logOut = createAsyncThunk('logOut', async (data, thunkAPI) => {
   try {
     const respons = await axios.post(`/users/signout`);
-    console.log(respons.data);
+
     clearToken();
     return respons.data;
   } catch (error) {

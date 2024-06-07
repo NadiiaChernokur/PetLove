@@ -6,7 +6,6 @@ import {
 } from './AttentionModal.styled';
 import {
   LearnMoreModalAdd,
-  LearnMoreModalButton,
   ModalBackground,
   ModalContainer,
 } from './LearnMoreModal.styled';

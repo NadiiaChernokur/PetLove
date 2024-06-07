@@ -1,4 +1,4 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -31,11 +31,11 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPet, getSpecies, safeToken } from '../../redux/operation';
-import Select from 'react-select';
+// import Select from 'react-select';
 import sprite from '../../img/sprite.svg';
 import sprit from '../../img/svg.svg';
-import spri from '../../img/s.svg';
-import photo from '../../img/dogAddpets.png';
+// import spri from '../../img/s.svg';
+// import photo from '../../img/dogAddpets.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -63,7 +63,7 @@ const AddPet = () => {
   const {
     register,
     handleSubmit,
-    control,
+
     setValue,
     formState: { errors },
   } = useForm({
@@ -147,8 +147,8 @@ const AddPet = () => {
 
                 <AddPetRadioFemaleLabel
                   htmlFor="female"
-                  bgColor="rgba(244, 63, 94, 0.1)"
-                  bgrColor=" #f43f5e"
+                  $bgColor="rgba(244, 63, 94, 0.1)"
+                  $bgrColor=" #f43f5e"
                 >
                   <svg width="24" height="24">
                     <use href={`${sprite}#female`}></use>
@@ -164,8 +164,8 @@ const AddPet = () => {
                 />
                 <AddPetRadioFemaleLabel
                   htmlFor="male"
-                  bgColor="rgba(84, 173, 255, 0.1)"
-                  bgrColor=" #3fd6f4"
+                  $bgColor="rgba(84, 173, 255, 0.1)"
+                  $bgrColor=" #3fd6f4"
                 >
                   <svg width="24" height="24">
                     <use href={`${sprite}#male`}></use>
@@ -184,8 +184,8 @@ const AddPet = () => {
                 />
                 <AddPetRadioFemaleLabel
                   htmlFor="multiple"
-                  bgColor="#fff4df"
-                  bgrColor=" #f7bf4e"
+                  $bgColor="#fff4df"
+                  $bgrColor=" #f7bf4e"
                 >
                   <svg width="24" height="24">
                     <use

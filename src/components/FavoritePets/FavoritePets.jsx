@@ -8,8 +8,7 @@ import {
 } from './FavoritePets.styled';
 import NoticesItem from '../NoticesItem/NoticesItem';
 
-const FavoritePets = ({ favoritsPets }) => {
-  console.log(favoritsPets);
+const FavoritePets = ({ favoritsPets, viewed }) => {
   const [activeButton, setActiveButton] = useState('favorites');
   const [petsArray, setPetsArray] = useState([]);
   // const [myFavoritesArray, setMyFavoritesArray] = useState([]);
@@ -50,17 +49,22 @@ const FavoritePets = ({ favoritsPets }) => {
           Viewed
         </FavoritePetsButton>
       </FavoritePetsButtons>
-      {petsArray?.length > 0 ? (
-        <NoticesItem array={petsArray} del={true} />
+      {activeButton === 'favorites' ? (
+        petsArray?.length > 0 ? (
+          <NoticesItem array={petsArray} del={true} />
+        ) : (
+          <FavoritePetsEmptyArray>
+            Oops,
+            <FavoritePetsEmptyArraySpan>
+              looks like there aren&apos;t any furries
+            </FavoritePetsEmptyArraySpan>
+            on our adorable page yet. Do not worry! View your pets on the
+            &#34;find your favorite pet&#34; page and add them to your
+            favorites.
+          </FavoritePetsEmptyArray>
+        )
       ) : (
-        <FavoritePetsEmptyArray>
-          Oops,
-          <FavoritePetsEmptyArraySpan>
-            looks like there aren't any furries
-          </FavoritePetsEmptyArraySpan>
-          on our adorable page yet. Do not worry! View your pets on the "find
-          your favorite pet" page and add them to your favorites.
-        </FavoritePetsEmptyArray>
+        <NoticesItem array={viewed} del={true} />
       )}
     </FavoritePetsContainer>
   );

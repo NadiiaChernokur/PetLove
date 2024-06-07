@@ -21,6 +21,10 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    /* padding: 0 28px; */
+  }
 `;
 export const LearnMoreModalImg = styled.img`
   border-radius: 100px;

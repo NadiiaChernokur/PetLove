@@ -31,7 +31,7 @@ export const Header = () => {
   const [userPhoto, setUserPhoto] = useState();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const data = useSelector((state) => state.logIn);
-  console.log(data);
+
   const location = useLocation();
   const isHomePage = location.pathname === '/home';
   const dispatch = useDispatch();
@@ -50,15 +50,13 @@ export const Header = () => {
           setUserName(res.payload.name);
           setUserPhoto(res.payload.avatar);
         }
-
-        console.log(res.payload);
       }
     };
     fetchUser();
   });
   const toLogOut = async () => {
-    const res = await dispatch(logOut());
-    console.log(res);
+    await dispatch(logOut());
+
     localStorage.setItem('petLoveUserData', JSON.stringify([]));
     navigate('/home');
   };
@@ -68,22 +66,27 @@ export const Header = () => {
   const closeBurgerMenu = () => {
     setIsBurgerMenuOpen(false);
   };
-
+  const isNotAuth = !isUserRegster || data.length === 0;
   return (
     <HeaderContainer>
       {isBurgerMenuOpen && (
-        <BurgerMenu close={closeBurgerMenu} home={isHomePage} />
+        <BurgerMenu
+          close={closeBurgerMenu}
+          home={isHomePage}
+          toLogOut={toLogOut}
+          auth={isNotAuth}
+        />
       )}
 
       <NavLink to="/home">
-        <HeaderLogo isHomePage={isHomePage}>
+        <HeaderLogo $isHomePage={isHomePage}>
           petl
           {isHomePage ? (
-            <HeaderLogoSvg isHomePage={isHomePage}>
+            <HeaderLogoSvg $isHomePage={isHomePage}>
               <use href={`${heart}#heart-circle`}></use>
             </HeaderLogoSvg>
           ) : (
-            <HeaderLogoSvg isHomePage={isHomePage}>
+            <HeaderLogoSvg $isHomePage={isHomePage}>
               <use href={`${sprite}#hart`}></use>
             </HeaderLogoSvg>
           )}
@@ -91,41 +94,41 @@ export const Header = () => {
         </HeaderLogo>
       </NavLink>
       <Navigation>
-        <NavigationLink to="/news" isActive={location.pathname === '/news'}>
-          <NavigationP isHomePage={isHomePage}>News</NavigationP>
+        <NavigationLink to="/news" $isActive={location.pathname === '/news'}>
+          <NavigationP $isHomePage={isHomePage}>News</NavigationP>
         </NavigationLink>
         <NavigationLink
           to="/notices"
-          isActive={location.pathname === '/notices'}
+          $isActive={location.pathname === '/notices'}
         >
-          <NavigationP isHomePage={isHomePage}>Find pet</NavigationP>
+          <NavigationP $isHomePage={isHomePage}>Find pet</NavigationP>
         </NavigationLink>
         <NavigationLink
           to="/friends"
-          isActive={location.pathname === '/friends'}
+          $isActive={location.pathname === '/friends'}
         >
-          <NavigationP isHomePage={isHomePage}>Our friends</NavigationP>
+          <NavigationP $isHomePage={isHomePage}>Our friends</NavigationP>
         </NavigationLink>
       </Navigation>
       <NavigationBurgerDiv>
         {!isUserRegster || data.length === 0 ? (
           <ButtonsDiv>
             <NavLink to="/login">
-              <ButtonLog isHomePage={isHomePage}> Log In</ButtonLog>
+              <ButtonLog $isHomePage={isHomePage}> Log In</ButtonLog>
             </NavLink>
             <NavLink to="/register">
-              <ButtonReg isHomePage={isHomePage}>Registration</ButtonReg>
+              <ButtonReg $isHomePage={isHomePage}>Registration</ButtonReg>
             </NavLink>
           </ButtonsDiv>
         ) : (
           <ButtonsAuthDiv>
             <NavLink>
-              <ButtonLogOut onClick={toLogOut} isHomePage={isHomePage}>
+              <ButtonLogOut onClick={toLogOut} $isHomePage={isHomePage}>
                 Log out
               </ButtonLogOut>
             </NavLink>
             <NavLink to="/profile">
-              <ButtonsAuthSvgDiv isHomePage={isHomePage}>
+              <ButtonsAuthSvgDiv $isHomePage={isHomePage}>
                 {userPhoto ? (
                   <img src={userPhoto}></img>
                 ) : (

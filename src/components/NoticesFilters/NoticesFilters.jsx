@@ -108,7 +108,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   const getCiti = (inputValue) => {
     try {
       const copyArray = JSON.parse(JSON.stringify(cities));
-      console.log(copyArray);
+
       if (!Array.isArray(copyArray) || copyArray.length === 0) {
         console.error('Cities array is empty or not an array');
         return;
@@ -136,9 +136,6 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
   };
 
   const handleSelectChange = async (field, value, setFieldValue, values) => {
-    console.log(value);
-    console.log(selectedOption);
-    console.log(values);
     setFieldValue(field, value);
     const updatedValues = { ...values, [field]: value, toPage: 1 };
 
@@ -148,10 +145,10 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
     arrayByCategory(response.payload.results);
   };
 
-  const radioClear = async (field, setFieldValue, values) => {
-    setCheck('');
-    await handleSelectChange(field, '', setFieldValue, values);
-  };
+  // const radioClear = async (field, setFieldValue, values) => {
+  //   setCheck('');
+  //   await handleSelectChange(field, '', setFieldValue, values);
+  // };
 
   return (
     <NoticesFiltersContainer>
@@ -382,8 +379,6 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   value="cheap"
                   checked={check === 'cheap'}
                   onChange={async (e) => {
-                    console.log('lllllllllllll');
-                    console.log(check);
                     setCheck((prev) => (prev === 'cheap' ? '' : 'cheap'));
                     // setCheck('cheap');
                     setValuesArray(values);

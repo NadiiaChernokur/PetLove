@@ -28,7 +28,7 @@ import {
 import sprite from '/src/img/sprite.svg';
 import photo from '../../img/dog.png';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../redux/operation';
 import { ToastContainer, toast } from 'react-toastify';
@@ -69,7 +69,7 @@ const Login = () => {
   };
   const fetchLogin = async (data) => {
     const results = await dispatch(logIn(data));
-    console.log(results);
+
     if (
       results.error?.message === 'Rejected' &&
       results.payload.includes('401')
@@ -78,7 +78,6 @@ const Login = () => {
     } else {
       localStorage.setItem('petLoveUserData', JSON.stringify(results.payload));
       navigate('/profile');
-      console.log(results.payload);
     }
   };
   return (

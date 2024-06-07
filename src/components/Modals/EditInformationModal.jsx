@@ -5,9 +5,7 @@ import * as Yup from 'yup';
 import {
   Edit,
   EditInformationInput,
-  EditInformationLabelDiv,
   EditInformationLabelInput,
-  EditInformationModalImg,
   EditInformationPhoto,
   ErrorMessage,
   ModalContainer,
@@ -76,7 +74,7 @@ const EditInformationModal = ({ user, close }) => {
       close();
     }
   };
-  console.log('99999999999');
+
   useEffect(() => {
     if (user?.avatar) {
       setValue('avatar', user.avatar);
@@ -85,17 +83,14 @@ const EditInformationModal = ({ user, close }) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
       const res = await dispatch(getEditUser(data));
-      console.log(res);
+
       if (res.meta.requestStatus === 'fulfilled') {
         close();
         navigate('/profile');
       } else {
         toast('You are not authorized');
       }
-
-      // onClose();
     } catch (error) {
       alert('Error updating user: ' + error.message);
     }

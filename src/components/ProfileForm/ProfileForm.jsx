@@ -19,14 +19,14 @@ import {
   UploadPhotoDiv,
   UploadUserButton,
 } from './ProfileForm.styled';
-import * as yup from 'yup';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+// import { yupResolver } from '@hookform/resolvers/yup';
 import sprsvg from '../../img/sprite2.svg';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, logOut, safeToken } from '../../redux/operation';
+import { logOut } from '../../redux/operation';
 import sprite from '../../img/sprite.svg';
 import sprit from '../../img/user.svg';
 import { ToastContainer, toast } from 'react-toastify';
@@ -123,7 +123,7 @@ const ProfileForm = ({ userData }) => {
   const logout = async () => {
     const res = await dispatch(logOut());
     localStorage.setItem('petLoveUserData', JSON.stringify([]));
-    console.log(res);
+
     if (res.error && res.payload.includes('401')) {
       toast('You are not authorized');
       navigate('/home');

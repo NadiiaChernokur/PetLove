@@ -19,6 +19,10 @@ export const ModalContent = styled.div`
   height: 580px;
   margin: 10% auto;
   position: relative;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    padding: 40px 20px;
+  }
 `;
 
 export const ErrorMessage = styled.p`
@@ -42,7 +46,7 @@ export const EditInformationModalImg = styled.div`
 `;
 export const Save = styled.button`
   border-radius: 30px;
-  padding: 16px 173px;
+  padding: 16px;
   width: 380px;
   height: 52px;
   background: #f6b83d;
@@ -52,6 +56,9 @@ export const Save = styled.button`
   letter-spacing: -0.03em;
   color: #fff;
   border: none;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 export const EditInformationLabelDiv = styled.div`
   border: 1px solid #f6b83d;
@@ -72,12 +79,18 @@ export const EditInformationInput = styled.input`
   padding: 12px 20px 12px 12px;
   width: 226px;
   height: 42px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 export const EditInformationPhoto = styled.div`
   display: flex;
   gap: 8px;
   width: 380px;
   margin-bottom: 20px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 export const UploadPhoto = styled.button`

@@ -16,15 +16,14 @@ import { useEffect, useState } from 'react';
 const MyPetsList = ({ pets }) => {
   const [myFavoritesArray, setMyFavoritesArray] = useState([]);
   const dispatch = useDispatch();
-  console.log(pets);
 
   useEffect(() => {
     setMyFavoritesArray(pets);
   }, [pets]);
 
   const petDelite = async (id) => {
-    const res = await dispatch(deletePet(id));
-    console.log(res);
+    await dispatch(deletePet(id));
+
     setMyFavoritesArray((prevArray) =>
       prevArray.filter((item) => item._id !== id)
     );

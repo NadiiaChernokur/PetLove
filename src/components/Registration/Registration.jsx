@@ -113,9 +113,9 @@ const Registration = () => {
             confirmPassword: '',
           }}
           onSubmit={(values) => {
+            // eslint-disable-next-line no-unused-vars
             const { confirmPassword, ...rest } = values;
             fetchRegistration(rest);
-            console.log(rest);
           }}
           validationSchema={schema}
         >

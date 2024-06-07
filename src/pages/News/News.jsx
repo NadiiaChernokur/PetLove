@@ -9,7 +9,7 @@ import {
   Titel,
 } from './News.styled';
 import NewsList from '../../components/NewsList/NewsList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getNews } from '../../redux/operation';
 import Paginations from '../../components/Pagination/Pagination';
 import sprite from '../../img/sprite.svg';
@@ -20,12 +20,12 @@ const News = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [search, setSearch] = useState(false);
   const dispatch = useDispatch();
-  const newsArray = useSelector((state) => state.newsArray);
+  // const newsArray = useSelector((state) => state.newsArray);
 
   useEffect(() => {
     const fetchNews = async () => {
       const res = await dispatch(getNews({ page, keyword }));
-      console.log(res.payload);
+
       if (res.meta.requestStatus === 'fulfilled') {
         setNews(res.payload.results);
         setTotalPages(res.payload.totalPages);
@@ -60,7 +60,6 @@ const News = () => {
   const lastPage = () => {
     setPage(totalPages);
   };
-  // const clearInput = () => {};
 
   return (
     <NewsContainer>

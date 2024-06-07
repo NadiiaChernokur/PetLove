@@ -26,12 +26,12 @@ export const HeaderContainer = styled.div`
 export const HeaderLogo = styled.h2`
   display: flex;
   align-items: center;
-  color: ${({ isHomePage }) => (isHomePage ? '#fff' : '#262626')};
+  color: ${({ $isHomePage }) => ($isHomePage ? '#fff' : '#262626')};
 `;
 export const HeaderLogoSvg = styled.svg`
   width: 19px;
   height: 23px;
-  fill: ${({ isHomePage }) => (isHomePage ? '#fff' : '#f6b83d')};
+  fill: ${({ $isHomePage }) => ($isHomePage ? '#fff' : '#f6b83d')};
 `;
 
 export const Navigation = styled.nav`
@@ -47,28 +47,22 @@ export const NavigationBurgerDiv = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-  /* display: none; */
-  /* @media screen and (min-width: 768px) and (max-width: 1280px) {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  } */
 `;
 export const NavigationLink = styled(NavLink)`
-  border: ${({ isActive }) =>
-    isActive ? '1px solid #f6b83d' : '1px solid rgba(38, 38, 38, 0.15)'};
+  border: ${({ $isActive }) =>
+    $isActive ? '1px solid #f6b83d' : '1px solid rgba(38, 38, 38, 0.15)'};
   border-radius: 30px;
   text-decoration: none;
 `;
 export const NavigationP = styled.p`
   padding: 15px 20px;
 
-  border: ${({ isHomePage }) =>
-    isHomePage
+  border: ${({ $isHomePage }) =>
+    $isHomePage
       ? '1px solid rgba(255, 255, 255, 0.4);'
       : '1px solid rgba(38, 38, 38, 0.15)'};
   border-radius: 30px;
-  color: ${({ isHomePage }) => (isHomePage ? '#fff' : '#262626')};
+  color: ${({ $isHomePage }) => ($isHomePage ? '#fff' : '#262626')};
   &.active {
     color: blue;
     font-weight: bold;
@@ -107,8 +101,8 @@ export const ButtonLog = styled.button`
   all: unset;
   padding: 0 35px;
   height: 50px;
-  border: ${({ isHomePage }) =>
-    isHomePage ? '1px solid rgba(255, 255, 255, 0.4);' : 'none'};
+  border: ${({ $isHomePage }) =>
+    $isHomePage ? '1px solid rgba(255, 255, 255, 0.4);' : 'none'};
   border-radius: 30px;
   background: #f6b83d;
   font-weight: 700;
@@ -122,7 +116,7 @@ export const ButtonLogOut = styled.button`
   all: unset;
   padding: 0 35px;
   height: 50px;
-  display: ${({ isHomePage }) => (isHomePage ? 'none' : 'block')};
+  display: ${({ $isHomePage }) => ($isHomePage ? 'none' : 'block')};
   border-radius: 30px;
   background: #f6b83d;
   font-weight: 700;

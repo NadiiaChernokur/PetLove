@@ -13,14 +13,12 @@ const Notices = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const dispatch = useDispatch();
-  console.log('8888888888888');
-  console.log(newArray);
+
   useEffect(() => {
     const getArray = async () => {
       try {
         const animals = await dispatch(getNotices());
         if (animals.meta.requestStatus === 'fulfilled') {
-          console.log(animals);
           setNoticesArray(animals.payload.results);
           setTotalPages(animals.payload.totalPages);
           return;

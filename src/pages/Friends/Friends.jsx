@@ -22,7 +22,7 @@ const Friends = () => {
     const fetchFriends = async () => {
       try {
         const array = await dispatch(getFriends());
-        console.log(array.payload);
+
         setFriendsArray(array.payload);
       } catch (error) {
         console.error('Failed to fetch friends:', error);
@@ -35,7 +35,7 @@ const Friends = () => {
       <FriendsTitel>Our friends</FriendsTitel>
       <FriendsUl>
         {friendsArray.map((item) => (
-          <FriendsLi key={item.id}>
+          <FriendsLi key={item.title}>
             <Time>
               {item.workDays && item.workDays[0]
                 ? `${
