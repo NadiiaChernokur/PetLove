@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import photo from '../../img/dogLog.png';
 import { Field } from 'formik';
 import photoT from '../../img/dogLogT.png';
+import photoM from '../../img/dogLogM.png';
 
 export const LoginContainer = styled.div`
   margin: 32px;
@@ -11,6 +12,10 @@ export const LoginContainer = styled.div`
   justify-content: space-between;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     flex-direction: column;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    margin: auto;
   }
 `;
 export const DogSection = styled.div`
@@ -26,6 +31,13 @@ export const DogSection = styled.div`
     width: 704px;
     height: 302px;
   }
+  @media screen and (max-width: 767px) {
+    background-image: url(${photoM});
+    min-width: 335px;
+    height: 280px;
+    background-repeat: no-repeat;
+    margin: auto;
+  }
 `;
 export const DogSectionImg = styled.img`
   display: none;
@@ -36,10 +48,6 @@ export const DogSectionImg = styled.img`
     left: 290px;
     width: 364px;
     height: 302px;
-    /* background: #f6b83d;
-    margin: auto;
-    width: 704px;
-    height: 302px; */
   }
 `;
 export const DogDescribe = styled.div`
@@ -55,6 +63,9 @@ export const DogDescribe = styled.div`
   left: 61px;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     bottom: 32px;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `;
 export const DogImg = styled.div`
@@ -91,7 +102,7 @@ export const DogDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* width: 194px; */
+#
 `;
 export const DogBirthday = styled.div`
   font-weight: 500;
@@ -111,6 +122,11 @@ export const LogSection = styled.section`
   box-sizing: border-box;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     margin: auto;
+  }
+  @media screen and (max-width: 767px) {
+    margin: auto;
+    width: 335px;
+    padding: 60px 20px;
   }
 `;
 

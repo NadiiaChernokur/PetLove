@@ -25,6 +25,9 @@ export const Pages = styled.div`
   display: flex;
   gap: 10px;
   margin: 0 16px;
+  @media screen and (max-width: 767px) {
+    margin: 0;
+  }
 `;
 
 export const PageSpan = styled.span`

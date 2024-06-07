@@ -37,6 +37,9 @@ export const NoticesForm = styled(Form)`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  @media screen and (max-width: 767px) {
+    gap: 12px;
+  }
 `;
 export const NoticesField = styled(Field)`
   border-radius: 30px;
@@ -55,6 +58,9 @@ export const NoticesField = styled(Field)`
 export const CheckDiv = styled.div`
   display: flex;
   gap: 8px;
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+  }
 `;
 export const BorderDiv = styled.hr`
   display: none;
@@ -65,6 +71,9 @@ export const BorderDiv = styled.hr`
     margin: 20px 0;
     width: 704px;
     display: block;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0;
   }
 `;
 export const CheckboxInput = styled.input`
@@ -87,6 +96,9 @@ export const CheckboxLabel = styled.label`
   ${CheckboxInput}:checked + & {
     background-color: green;
     mix-blend-mode: multiply;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 12px;
   }
 `;
 export const SearchButton = styled.button`

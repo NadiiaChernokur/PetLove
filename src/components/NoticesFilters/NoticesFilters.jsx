@@ -32,7 +32,7 @@ const customStyles = {
     border: 'none',
     borderRadius: '30px',
     padding: '6px',
-    width: '227px',
+    width: '100%',
   }),
   menu: (provided) => ({
     ...provided,
@@ -289,6 +289,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   );
                 }}
               />
+
               {selectedOption && (
                 <CrossButton
                   type="button"
@@ -331,7 +332,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 />
                 Popular
-                <svg
+                {/* <svg
                   width="20"
                   height="20"
                   onClick={async () => {
@@ -339,7 +340,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 >
                   <use href={`${sprite}#x`}></use>
-                </svg>
+                </svg> */}
               </CheckboxLabel>
               <CheckboxLabel
                 style={check === 'unpopular' ? { background: '#f6b83d' } : {}}
@@ -362,7 +363,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 />
                 Unpopular
-                <svg
+                {/* <svg
                   width="20"
                   height="20"
                   onClick={async () => {
@@ -370,7 +371,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 >
                   <use href={`${sprite}#x`}></use>
-                </svg>
+                </svg> */}
               </CheckboxLabel>
               <CheckboxLabel
                 style={check === 'cheap' ? { background: '#f6b83d' } : {}}
@@ -396,7 +397,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 />
                 Cheap
-                <svg
+                {/* <svg
                   width="20"
                   height="20"
                   onClick={async () => {
@@ -404,7 +405,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 >
                   <use href={`${sprite}#x`}></use>
-                </svg>
+                </svg> */}
               </CheckboxLabel>
               <CheckboxLabel
                 style={check === 'expensive' ? { background: '#f6b83d' } : {}}
@@ -427,7 +428,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 />
                 Expensive
-                <svg
+                {/* <svg
                   width="20"
                   height="20"
                   onClick={async () => {
@@ -435,7 +436,7 @@ const NoticesFilters = ({ arrayByCategory, page, total, toFirst }) => {
                   }}
                 >
                   <use href={`${sprite}#x`}></use>
-                </svg>
+                </svg> */}
               </CheckboxLabel>
             </CheckDiv>
           </NoticesForm>

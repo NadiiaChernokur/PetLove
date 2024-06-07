@@ -9,6 +9,12 @@ export const ProfileFormContainer = styled.div`
     margin: auto;
     width: 704px;
   }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: 335px;
+    padding: 18px 20px;
+    border-radius: 30px;
+  }
 `;
 
 export const ProfileFormFirstDiv = styled.div`
@@ -47,6 +53,9 @@ export const ProfileFormImg = styled.img`
 export const ProfileFormImputDiv = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 305px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
   }
 `;
 export const ProfileFormDiv = styled.div`
@@ -110,12 +119,18 @@ export const FormInput = styled.input`
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 305px;
   }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 export const FormContainer = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
   }
 `;
 

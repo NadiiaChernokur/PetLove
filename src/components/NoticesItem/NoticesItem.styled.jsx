@@ -12,6 +12,11 @@ export const NoticesItemContainer = styled.ul`
     padding: 0 20px;
     margin: auto;
   }
+  @media screen and (max-width: 767px) {
+    max-width: 375px;
+    min-width: 375px;
+    padding: 0 20px;
+  }
 `;
 export const NoticesItemList = styled.li`
   margin-bottom: 8px;
@@ -94,6 +99,7 @@ export const AnimalInformationAbout = styled.p`
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 `;
 export const LearnMore = styled.button`
   border-radius: 30px;

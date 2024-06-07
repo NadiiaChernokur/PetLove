@@ -10,4 +10,10 @@ export const ProfileContainer = styled.div`
     flex-direction: column;
     margin: auto;
   }
+  @media screen and (max-width: 767px) {
+    width: 375px;
+    padding: 0 20px;
+    flex-direction: column;
+    margin: auto;
+  }
 `;

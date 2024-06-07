@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
 import photo from '../../img/catReg.png';
-import photoT from '../../img/catRagT.png';
+import photoM from '../../img/catRegM.png';
 export const RegistrationContainer = styled.div`
   margin: 32px;
   margin-top: 0;
@@ -9,17 +9,20 @@ export const RegistrationContainer = styled.div`
   gap: 32px;
   justify-content: space-between;
   /* justify-content: center; */
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     flex-direction: column;
+    margin: auto;
+    align-items: center;
   }
 `;
 export const CatSection = styled.div`
   border-radius: 60px;
-  /* width: 592px; */
+
   min-width: 592px;
   height: 654px;
   background-image: url(${photo});
   position: relative;
+  background-repeat: no-repeat;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     border: 1px solid #000;
     border-radius: 60px;
@@ -27,7 +30,13 @@ export const CatSection = styled.div`
     height: 302px;
     background: #f6b83d;
     margin: auto;
-    background-repeat: no-repeat;
+  }
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    min-width: 335px;
+    height: 280px;
+    border-radius: 30px;
+    background-image: url(${photoM});
   }
 `;
 export const CatSectionImg = styled.img`
@@ -49,6 +58,9 @@ export const CatDescribe = styled.div`
   position: absolute;
   bottom: 97px;
   left: 61px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 export const CatImg = styled.div`
   width: 60px;
@@ -98,6 +110,10 @@ export const RegistrSection = styled.section`
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     margin: auto;
   }
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    padding: 27px 20px;
+  }
 `;
 
 export const Registr = styled.h3`
@@ -107,6 +123,9 @@ export const Registr = styled.h3`
   letter-spacing: -0.04em;
   color: #262626;
   margin-bottom: 16px;
+  @media screen and (max-width: 767px) {
+    font-size: 28px;
+  }
 `;
 
 export const Interest = styled.p`
@@ -116,6 +135,9 @@ export const Interest = styled.p`
   letter-spacing: -0.02em;
   color: #262626;
   margin-bottom: 32px;
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
 `;
 
 export const FormContainer = styled(Form)`
@@ -130,6 +152,9 @@ export const FieldFormik = styled(Field)`
   padding: 16px;
   position: relative;
   width: 424px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 export const RegButton = styled.button`
   background: #f6b83d;
