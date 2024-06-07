@@ -4,6 +4,7 @@ import {
   FriendInf,
   FriendName,
   FriendsContainer,
+  FriendsInfDiv,
   FriendsLi,
   FriendsTitel,
   FriendsUl,
@@ -52,7 +53,7 @@ const Friends = () => {
               <a href={item.url} target="_blank" rel="noopener noreferrer">
                 <FriendImg src={item.imageUrl} alt={item.title}></FriendImg>
               </a>
-              <div>
+              <FriendsInfDiv>
                 <FriendName>{item.title}</FriendName>
                 <a href={`mailto:${item.email}`}>
                   <Information>
@@ -78,7 +79,7 @@ const Friends = () => {
                     {item.phone === null ? 'without information' : item.phone}
                   </Information>
                 </a>
-              </div>
+              </FriendsInfDiv>
             </FriendInf>
           </FriendsLi>
         ))}

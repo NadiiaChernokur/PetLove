@@ -7,6 +7,11 @@ export const FriendsContainer = styled.div`
     width: 744px;
     padding: 0 20px;
   }
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    margin: auto;
+    padding: 0;
+  }
 `;
 
 export const FriendsTitel = styled.h3`
@@ -16,6 +21,9 @@ export const FriendsTitel = styled.h3`
   letter-spacing: -0.03em;
   color: #262626;
   margin-bottom: 60px;
+  @media screen and (max-width: 767px) {
+    font-size: 28px;
+  }
 `;
 export const FriendsUl = styled.ul`
   display: flex;
@@ -33,6 +41,10 @@ export const FriendsLi = styled.li`
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 342px;
   }
+  @media screen and (max-width: 767px) {
+    width: 335px;
+    margin: auto;
+  }
 `;
 export const Time = styled.p`
   background: #fff4df;
@@ -47,11 +59,17 @@ export const FriendInf = styled.div`
   display: flex;
   gap: 20px;
   margin-top: 40px;
+  @media screen and (max-width: 767px) {
+    gap: 14px;
+  }
 `;
 export const FriendImg = styled.img`
   width: 90px;
   height: 90px;
   cursor: pointer;
+`;
+export const FriendsInfDiv = styled.div`
+  width: 196px;
 `;
 
 export const FriendName = styled.p`
@@ -82,6 +100,9 @@ export const Information = styled.p`
     text-overflow: inherit;
     white-space: inherit;
     height: auto;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
   }
 `;
 export const InformationSpan = styled.span`
