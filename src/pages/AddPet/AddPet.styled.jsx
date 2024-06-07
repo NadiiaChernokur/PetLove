@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import photo from '../../img/dogAddpets.png';
 import photoT from '../../img/appDogT.png';
+import photoM from '../../img/addDogM.png';
 
 export const ErrorMessage = styled.span`
   color: red;
@@ -13,7 +14,7 @@ export const AddPetContsiner = styled.div`
   display: flex;
   gap: 32px;
   justify-content: space-between;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     flex-direction: column;
     margin: auto;
   }
@@ -28,12 +29,23 @@ export const AddPetImg = styled.img`
     width: 704px;
     height: 248px;
   }
+  @media screen and (max-width: 767px) {
+    min-width: 335px;
+    border-radius: 30px;
+    width: 335px;
+    height: 213px;
+    background-image: url(${photoM});
+  }
 `;
 export const ImgDiv = styled.div`
   width: 592px;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     width: 704px;
     height: 248px;
+    margin: auto;
+  }
+  @media screen and (max-width: 767px) {
+    width: 335px;
     margin: auto;
   }
 `;
@@ -46,6 +58,13 @@ export const AddPetFormContainer = styled.div`
   background: #fff;
   @media screen and (min-width: 768px) and (max-width: 1280px) {
     margin: auto;
+  }
+  @media screen and (max-width: 767px) {
+    border-radius: 30px;
+    width: 335px;
+    min-width: 335px;
+    margin: auto;
+    padding: 28px 20px;
   }
 `;
 export const AddPetFormTitel = styled.p`
@@ -119,6 +138,9 @@ export const AddPetRadioFemaleLabel = styled.label`
 // `;
 export const Form = styled.form`
   width: 432px;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 // export const AddPetRadioMultipleLabel = styled.label`
 //   cursor: pointer;
@@ -169,6 +191,9 @@ export const FormInputFile = styled.input`
   border-radius: 30px;
   padding: 12px 16px;
   width: 278px;
+  @media screen and (max-width: 767px) {
+    width: 170px;
+  }
 `;
 export const FormInput = styled.input`
   border: 1px solid #f6b83d;
@@ -232,6 +257,10 @@ export const PawDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 12px;
+  @media screen and (max-width: 767px) {
+    margin-bottom: 16px;
+    margin-top: 8px;
+  }
 `;
 export const SexDiv = styled.div`
   display: flex;

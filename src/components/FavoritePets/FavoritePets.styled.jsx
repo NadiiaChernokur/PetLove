@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const FavoritePetsContainer = styled.div`
   width: 678px;
+  @media screen and (max-width: 767px) {
+    width: 335px;
+  }
 `;
 
 export const FavoritePetsButtons = styled.div`

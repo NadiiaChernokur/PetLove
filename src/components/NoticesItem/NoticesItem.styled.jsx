@@ -15,7 +15,7 @@ export const NoticesItemContainer = styled.ul`
   @media screen and (max-width: 767px) {
     max-width: 375px;
     min-width: 375px;
-    padding: 0 20px;
+    /* padding: 0 20px; */
   }
 `;
 export const NoticesItemList = styled.li`

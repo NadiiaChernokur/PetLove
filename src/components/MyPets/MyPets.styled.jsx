@@ -22,6 +22,11 @@ export const MyPetsLi = styled.li`
     height: 149px;
     position: relative;
   }
+  @media screen and (max-width: 767px) {
+    width: 295px;
+    height: 132px;
+    padding: 16px;
+  }
 `;
 export const MyPetsImg = styled.img`
   border-radius: 100px;
@@ -29,7 +34,7 @@ export const MyPetsImg = styled.img`
   height: 90px;
   background: pink;
   margin-right: 25px;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     width: 75px;
     height: 75px;
     margin-right: 14px;
@@ -64,9 +69,12 @@ export const MyPetsInformation = styled.div`
   line-height: 117%;
   letter-spacing: -0.02em;
   color: #262626;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     gap: 10px;
     flex-wrap: wrap;
+  }
+  @media screen and (max-width: 767px) {
+    width: 153px;
   }
 `;
 export const MyPetsInformationP = styled.p`
@@ -79,4 +87,8 @@ export const MyPetsInformationP = styled.p`
 export const MyPetsBlock = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 767px) {
+    width: 153px;
+    align-items: flex-start;
+  }
 `;

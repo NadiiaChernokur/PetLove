@@ -21,9 +21,13 @@ export const ProfileFormFirstDiv = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
+  @media screen and (max-width: 1280px) {
     justify-content: space-between;
+    position: relative;
   }
+  /* @media screen and (max-width: 767px) {
+    justify-content: space-between;
+  } */
 `;
 export const ProfileFormUser = styled.div`
   border-radius: 30px;
@@ -93,6 +97,11 @@ export const UploadPhotoButton = styled.button`
 export const UploadPhotoDiv = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 767px) {
+    position: absolute;
+    left: 95px;
+    top: 36px;
+  }
 `;
 export const UploadUserButton = styled.button`
   border-radius: 30px;
@@ -108,6 +117,9 @@ export const MyInformation = styled.p`
   line-height: 133%;
   color: #2b2b2a;
   margin-bottom: 20px;
+  @media screen and (max-width: 767px) {
+    margin-top: 144px;
+  }
 `;
 export const FormInput = styled.input`
   border: 1px solid rgba(38, 38, 38, 0.15);
